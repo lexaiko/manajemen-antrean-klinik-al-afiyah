@@ -146,6 +146,67 @@
                 </li>
             </ul>
             <hr class="border-gray-200 dark:border-gray-700">
+            <button type="button"
+                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ request()->is('admin/produk*') || request()->is('admin/kategori*') ? 'bg-green-600 text-white' : '' }}"
+                aria-controls="dropdown-3"
+                aria-expanded="{{ request()->is('admin/produk*') || request()->is('admin/kategori*') ? 'true' : 'false' }}"
+                data-collapse-toggle="dropdown-3">
+                <!-- Icon SVG Produk -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/antrean*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-check-icon lucide-calendar-check"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+
+                <!-- Teks Produk -->
+                <span class="flex-1  text-base font-medium ml-3 text-left whitespace-nowrap">Manajemen Jadwal</span>
+
+                <!-- Icon Dropdown -->
+                <svg class="w-3 h-3 {{ request()->is('admin/produk*') || request()->is('admin/kategori*') ? 'text-white' : 'text-gray-800' }}"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 4 4 4-4" />
+                </svg>
+            </button>
+
+            <ul id="dropdown-3"
+                class="{{ request()->is('admin/produk*') || request()->is('admin/kategori*') ? '' : 'hidden' }} py-2 space-y-2 ">
+                <li>
+                    <a href="{{ url('admin/jadwal/filter/dokter') }}"
+                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/jadwal/filter/dokter*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/jadwal/filter/dokter*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stethoscope-icon lucide-stethoscope"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>
+                        <span class="ml-3">Dokter</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('admin/jadwal/filter/perawat') }}"
+                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/jadwal/filter/perawat*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="{{ request()->is('admin/jadwal/filter/perawat*') ? 'white' : 'black' }}"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-briefcase-medical-icon lucide-briefcase-medical">
+                            <path d="M12 11v4" />
+                            <path d="M14 13h-4" />
+                            <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            <path d="M18 6v14" />
+                            <path d="M6 6v14" />
+                            <rect width="20" height="14" x="2" y="6" rx="2" />
+                        </svg>
+                        <span class="ml-3">Perawat</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('admin/jadwal/filter/bidan') }}"
+                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/jadwal/filter/bidan*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/jadwal/filter/bidan*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-baby-icon lucide-baby"><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M15 12h.01"/><path d="M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/><path d="M9 12h.01"/></svg>
+                        <span class="ml-3">Bidan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('admin/jadwal/filter/') }}"
+                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/jadwal/filter') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/jadwal/filter') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-round-icon lucide-users-round"><path d="M18 21a8 8 0 0 0-16 0"/><circle cx="10" cy="8" r="5"/><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"/></svg>
+                        <span class="ml-3">Tenaga Medis</span>
+                    </a>
+                </li>
+            </ul>
+            <hr class="border-gray-200 dark:border-gray-700">
         </ul>
         <ul class="pt-5 mt-5 space-y-2 ">
             <li>
