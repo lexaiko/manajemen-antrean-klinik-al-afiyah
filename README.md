@@ -9,7 +9,7 @@
 
 ## Cara clone project
 
-<p align="center">
+<p align="left">
     git clone https://github.com/lexaiko/manajemen-antrean-klinik-al-afiyah <br>
     cd manajemen-antrean-klinik-al-afiyah <br>
     composer install <br>
