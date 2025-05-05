@@ -10,13 +10,13 @@
 ## Cara clone project
 
 <p align="center">
-    git clone https://github.com/lexaiko/manajemen-antrean-klinik-al-afiyah
-    cd manajemen-antrean-klinik-al-afiyah
-    composer install
-    npm install
-    cp .env.example .env
-    php artisan key:generate
-    php artisan migrate
+    git clone https://github.com/lexaiko/manajemen-antrean-klinik-al-afiyah <br>
+    cd manajemen-antrean-klinik-al-afiyah <br>
+    composer install <br>
+    npm install <br>
+    cp .env.example .env <br>
+    php artisan key:generate <br>
+    php artisan migrate <br>
 </p>
     
     
