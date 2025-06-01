@@ -22,14 +22,14 @@
             <hr class="border-gray-200 dark:border-gray-700">
 
             <button type="button"
-                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group  {{ request()->is('admin/user*') || request()->is('admin/tenagamedis*') ? 'bg-green-600 text-white' : '' }}"
+                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group {{ request()->is('admin/user*') || request()->is('admin/role*') || request()->is('admin/tenagamedis*') ? 'bg-green-600 text-white' : '' }}"
                 aria-controls="dropdown-example"
-                aria-expanded="{{ request()->is('admin/user*') || request()->is('admin/tenagamedis*') ? 'true' : 'false' }}"
+                aria-expanded="{{ request()->is('admin/user*') || request()->is('admin/role*') || request()->is('admin/tenagamedis*') ? 'true' : 'false' }}"
                 data-collapse-toggle="dropdown-example">
                 <!-- Icon SVG Produk -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="{{ request()->is('admin/user*') || request()->is('admin/tenagamedis*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="lucide lucide-file-text-icon lucide-file-text">
+                    stroke="{{ request()->is('admin/user*') || request()->is('admin/role*') || request()->is('admin/tenagamedis*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-file-text-icon lucide-file-text">
                     <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
                     <path d="M14 2v4a2 2 0 0 0 2 2h4" />
                     <path d="M10 9H8" />
@@ -41,62 +41,38 @@
                 <span class="flex-1  text-base font-medium  ml-3 text-left whitespace-nowrap">Master Data</span>
 
                 <!-- Icon Dropdown -->
-                <svg class="w-3 h-3 {{ request()->is('admin/user*') || request()->is('admin/tenagamedis*') ? 'text-white' : 'text-gray-800' }}"
-                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <svg class="w-3 h-3 {{ request()->is('admin/user*') || request()->is('admin/role*') || request()->is('admin/tenagamedis*') ? 'text-white' : 'text-gray-800' }}" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="m1 1 4 4 4-4" />
                 </svg>
             </button>
-
-            <ul id="dropdown-example" class="{{ request()->is('admin/user*') || request()->is('admin/tenagamedis*') ? '' : 'hidden' }} py-2 space-y-2">
+            <ul id="dropdown-example"
+                class="{{ request()->is('admin/user*') || request()->is('admin/role*') || request()->is('admin/tenagamedis*') ? '' : 'hidden' }} py-2 space-y-2">
                 <li>
                     <a href="{{ url('admin/user') }}"
                         class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/user*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="{{ request()->is('admin/user*') ? 'white' : 'black' }}" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user">
+                            fill="none" stroke="{{ request()->is('admin/user*') ? 'white' : 'black' }}"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-user-icon lucide-user">
                             <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                             <circle cx="12" cy="7" r="4" />
                         </svg>
-                        <span class="ml-3">User</span>
+                        <span class="ml-3">Pegawai</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('admin/tenagamedis/filter/dokter') }}"
-                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/tenagamedis/filter/dokter*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/tenagamedis/filter/dokter*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stethoscope-icon lucide-stethoscope"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>
-                        <span class="ml-3">Dokter</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('admin/tenagamedis/filter/perawat') }}"
-                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/tenagamedis/filter/perawat*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
+                    <a href="{{ url('admin/role') }}"
+                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/role*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="{{ request()->is('admin/tenagamedis/filter/perawat*') ? 'white' : 'black' }}"
+                            fill="none" stroke="{{ request()->is('admin/role*') ? 'white' : 'black' }}"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-briefcase-medical-icon lucide-briefcase-medical">
-                            <path d="M12 11v4" />
-                            <path d="M14 13h-4" />
-                            <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-                            <path d="M18 6v14" />
-                            <path d="M6 6v14" />
-                            <rect width="20" height="14" x="2" y="6" rx="2" />
+                            class="lucide lucide-user-icon lucide-user">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
                         </svg>
-                        <span class="ml-3">Perawat</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('admin/tenagamedis/filter/bidan') }}"
-                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/tenagamedis/filter/bidan*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/tenagamedis/filter/bidan*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-baby-icon lucide-baby"><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M15 12h.01"/><path d="M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/><path d="M9 12h.01"/></svg>
-                        <span class="ml-3">Bidan</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('admin/tenagamedis/filter/') }}"
-                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/tenagamedis/filter') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/tenagamedis/filter') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-round-icon lucide-users-round"><path d="M18 21a8 8 0 0 0-16 0"/><circle cx="10" cy="8" r="5"/><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"/></svg>
-                        <span class="ml-3">Tenaga Medis</span>
+                        <span class="ml-3">Role</span>
                     </a>
                 </li>
             </ul>
@@ -108,7 +84,20 @@
                 aria-expanded="{{ request()->is('admin/produk*') || request()->is('admin/kategori*') ? 'true' : 'false' }}"
                 data-collapse-toggle="dropdown-2">
                 <!-- Icon SVG Produk -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/antrean*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-logs-icon lucide-logs"><path d="M13 12h8"/><path d="M13 18h8"/><path d="M13 6h8"/><path d="M3 12h1"/><path d="M3 18h1"/><path d="M3 6h1"/><path d="M8 12h1"/><path d="M8 18h1"/><path d="M8 6h1"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="{{ request()->is('admin/antrean*') ? 'white' : 'black' }}"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-logs-icon lucide-logs">
+                    <path d="M13 12h8" />
+                    <path d="M13 18h8" />
+                    <path d="M13 6h8" />
+                    <path d="M3 12h1" />
+                    <path d="M3 18h1" />
+                    <path d="M3 6h1" />
+                    <path d="M8 12h1" />
+                    <path d="M8 18h1" />
+                    <path d="M8 6h1" />
+                </svg>
 
                 <!-- Teks Produk -->
                 <span class="flex-1  text-base font-medium ml-3 text-left whitespace-nowrap">Manajemen Antrean</span>
@@ -126,92 +115,233 @@
                 <li>
                     <a href="{{ url('admin/produk') }}"
                         class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/produk') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/antrean*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-minus-icon lucide-list-minus"><path d="M11 12H3"/><path d="M16 6H3"/><path d="M16 18H3"/><path d="M21 12h-6"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="{{ request()->is('admin/antrean*') ? 'white' : 'black' }}"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-list-minus-icon lucide-list-minus">
+                            <path d="M11 12H3" />
+                            <path d="M16 6H3" />
+                            <path d="M16 18H3" />
+                            <path d="M21 12h-6" />
+                        </svg>
                         <span class="ml-3">Monitoring Antrean</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ url('admin/produk') }}"
                         class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/produk') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/antrean*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-start-icon lucide-list-start"><path d="M16 12H3"/><path d="M16 18H3"/><path d="M10 6H3"/><path d="M21 18V8a2 2 0 0 0-2-2h-5"/><path d="m16 8-2-2 2-2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="{{ request()->is('admin/antrean*') ? 'white' : 'black' }}"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-list-start-icon lucide-list-start">
+                            <path d="M16 12H3" />
+                            <path d="M16 18H3" />
+                            <path d="M10 6H3" />
+                            <path d="M21 18V8a2 2 0 0 0-2-2h-5" />
+                            <path d="m16 8-2-2 2-2" />
+                        </svg>
                         <span class="ml-3">Antrean Online</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ url('admin/produk') }}"
                         class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/produk') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/antrean*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-end-icon lucide-list-end"><path d="M16 12H3"/><path d="M16 6H3"/><path d="M10 18H3"/><path d="M21 6v10a2 2 0 0 1-2 2h-5"/><path d="m16 16-2 2 2 2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="{{ request()->is('admin/antrean*') ? 'white' : 'black' }}"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-list-end-icon lucide-list-end">
+                            <path d="M16 12H3" />
+                            <path d="M16 6H3" />
+                            <path d="M10 18H3" />
+                            <path d="M21 6v10a2 2 0 0 1-2 2h-5" />
+                            <path d="m16 16-2 2 2 2" />
+                        </svg>
                         <span class="ml-3">Antrean Offline</span>
                     </a>
                 </li>
             </ul>
             <hr class="border-gray-200 dark:border-gray-700">
             <button type="button"
-                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ request()->is('admin/produk*') || request()->is('admin/kategori*') ? 'bg-green-600 text-white' : '' }}"
-                aria-controls="dropdown-3"
-                aria-expanded="{{ request()->is('admin/produk*') || request()->is('admin/kategori*') ? 'true' : 'false' }}"
-                data-collapse-toggle="dropdown-3">
+                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group {{ request()->is('admin/jadwal*') || request()->is('admin/kategori*') ? 'bg-green-600 text-white' : '' }}"
+                aria-controls="manajemen-jadwal"
+                aria-expanded="{{ request()->is('admin/jadwal*') || request()->is('admin/kategori*') ? 'true' : 'false' }}"
+                data-collapse-toggle="manajemen-jadwal">
                 <!-- Icon SVG Produk -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/antrean*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-check-icon lucide-calendar-check"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="{{ request()->is('admin/jadwal*') ? 'white' : 'black' }}"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-calendar-check-icon lucide-calendar-check">
+                    <path d="M8 2v4" />
+                    <path d="M16 2v4" />
+                    <rect width="18" height="18" x="3" y="4" rx="2" />
+                    <path d="M3 10h18" />
+                    <path d="m9 16 2 2 4-4" />
+                </svg>
 
                 <!-- Teks Produk -->
                 <span class="flex-1  text-base font-medium ml-3 text-left whitespace-nowrap">Manajemen Jadwal</span>
 
                 <!-- Icon Dropdown -->
-                <svg class="w-3 h-3 {{ request()->is('admin/produk*') || request()->is('admin/kategori*') ? 'text-white' : 'text-gray-800' }}"
+                <svg class="w-3 h-3 {{ request()->is('admin/jadwal*') || request()->is('admin/kategori*') ? 'text-white' : 'text-gray-800' }}"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="m1 1 4 4 4-4" />
                 </svg>
             </button>
 
-            <ul id="dropdown-3"
-                class="{{ request()->is('admin/produk*') || request()->is('admin/kategori*') ? '' : 'hidden' }} py-2 space-y-2 ">
+            <ul id="manajemen-jadwal"
+                class="{{ request()->is('admin/jadwal*') || request()->is('admin/kategori*') ? '' : 'hidden' }} py-2 space-y-2 ">
                 <li>
-                    <a href="{{ url('admin/jadwal/filter/dokter') }}"
-                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/jadwal/filter/dokter*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/jadwal/filter/dokter*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stethoscope-icon lucide-stethoscope"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>
-                        <span class="ml-3">Dokter</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('admin/jadwal/filter/perawat') }}"
-                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/jadwal/filter/perawat*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
+                    <a href="{{ url('admin/jadwal') }}"
+                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/jadwal') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="{{ request()->is('admin/jadwal/filter/perawat*') ? 'white' : 'black' }}"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-briefcase-medical-icon lucide-briefcase-medical">
-                            <path d="M12 11v4" />
-                            <path d="M14 13h-4" />
-                            <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-                            <path d="M18 6v14" />
-                            <path d="M6 6v14" />
-                            <rect width="20" height="14" x="2" y="6" rx="2" />
+                            fill="none" stroke="{{ request()->is('admin/jadwal') ? 'white' : 'black' }}"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-chart-column-stacked-icon lucide-chart-column-stacked">
+                            <path d="M11 13H7" />
+                            <path d="M19 9h-4" />
+                            <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+                            <rect x="15" y="5" width="4" height="12" rx="1" />
+                            <rect x="7" y="8" width="4" height="9" rx="1" />
                         </svg>
-                        <span class="ml-3">Perawat</span>
+                        <span class="ml-3">Kelola Jadwal</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('admin/jadwal/filter/bidan') }}"
-                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/jadwal/filter/bidan*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/jadwal/filter/bidan*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-baby-icon lucide-baby"><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M15 12h.01"/><path d="M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/><path d="M9 12h.01"/></svg>
-                        <span class="ml-3">Bidan</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('admin/jadwal/filter/') }}"
-                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/jadwal/filter') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/jadwal/filter') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-round-icon lucide-users-round"><path d="M18 21a8 8 0 0 0-16 0"/><circle cx="10" cy="8" r="5"/><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"/></svg>
-                        <span class="ml-3">Tenaga Medis</span>
+                    <a href="{{ url('admin/jadwal/kalender') }}"
+                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/jadwal/kalender*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="{{ request()->is('admin/jadwal/kalender') ? 'white' : 'black' }}"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-calendar-days-icon lucide-calendar-days">
+                            <path d="M8 2v4" />
+                            <path d="M16 2v4" />
+                            <rect width="18" height="18" x="3" y="4" rx="2" />
+                            <path d="M3 10h18" />
+                            <path d="M8 14h.01" />
+                            <path d="M12 14h.01" />
+                            <path d="M16 14h.01" />
+                            <path d="M8 18h.01" />
+                            <path d="M12 18h.01" />
+                            <path d="M16 18h.01" />
+                        </svg>
+                        <span class="ml-3">Kalender Jadwal</span>
                     </a>
                 </li>
             </ul>
             <hr class="border-gray-200 dark:border-gray-700">
+        <button type="button"
+            class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group {{ request()->is('admin/artikel*') || request()->is('admin/kategori*') ? 'bg-green-600 text-white' : '' }}"
+            aria-controls="manajemen-artikel"
+            aria-expanded="{{ request()->is('admin/artikel*') || request()->is('admin/kategori*') ? 'true' : 'false' }}"
+            data-collapse-toggle="manajemen-artikel">
+            <!-- Icon SVG Produk -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/artikel*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper-icon lucide-newspaper"><path d="M15 18h-5"/><path d="M18 14h-8"/><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="10" y="6" rx="1"/></svg>
+            <!-- Teks Produk -->
+            <span class="flex-1  text-base font-medium ml-3 text-left whitespace-nowrap">Manajemen Artikel</span>
+
+            <!-- Icon Dropdown -->
+            <svg class="w-3 h-3 {{ request()->is('admin/artikel*') || request()->is('admin/kategori*') ? 'text-white' : 'text-gray-800' }}"
+                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m1 1 4 4 4-4" />
+            </svg>
+        </button>
+        <ul id="manajemen-artikel"
+            class="{{ request()->is('admin/artikel*') || request()->is('admin/kategori*') ? '' : 'hidden' }} py-2 space-y-2 ">
+            <li>
+                <a href="{{ url('admin/artikel/kategori') }}"
+                    class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/artikel/kategori*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="{{ request()->is('admin/artikel/kategori') ? 'white' : 'black' }}"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chart-column-stacked-icon lucide-chart-column-stacked">
+                        <path d="M11 13H7" />
+                        <path d="M19 9h-4" />
+                        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+                        <rect x="15" y="5" width="4" height="12" rx="1" />
+                        <rect x="7" y="8" width="4" height="9" rx="1" />
+                    </svg>
+                    <span class="ml-3">Kelola artikel</span>
+                </a>
+            </li>
         </ul>
+        <hr class="border-gray-200 dark:border-gray-700">
+        <button type="button"
+            class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group {{ request()->is('admin/konten*') || request()->is('admin/kategori*') ? 'bg-green-600 text-white' : '' }}"
+            aria-controls="manajemen-konten"
+            aria-expanded="{{ request()->is('admin/konten*') || request()->is('admin/kategori*') ? 'true' : 'false' }}"
+            data-collapse-toggle="manajemen-konten">
+            <!-- Icon SVG Produk -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{ request()->is('admin/konten*') ? 'white' : 'black' }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette-icon lucide-palette"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+
+            <!-- Teks Produk -->
+            <span class="flex-1  text-base font-medium ml-3 text-left whitespace-nowrap">Manajemen Konten</span>
+
+            <!-- Icon Dropdown -->
+            <svg class="w-3 h-3 {{ request()->is('admin/konten*') || request()->is('admin/kategori*') ? 'text-white' : 'text-gray-800' }}"
+                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m1 1 4 4 4-4" />
+            </svg>
+        </button>
+        <ul id="manajemen-konten"
+            class="{{ request()->is('admin/konten*') || request()->is('admin/kategori*') ? '' : 'hidden' }} py-2 space-y-2 ">
+            <li>
+                <a href="{{ url('admin/konten/kategori') }}"
+                    class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/konten/kategori*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="{{ request()->is('admin/konten/kategori') ? 'white' : 'black' }}"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chart-column-stacked-icon lucide-chart-column-stacked">
+                        <path d="M11 13H7" />
+                        <path d="M19 9h-4" />
+                        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+                        <rect x="15" y="5" width="4" height="12" rx="1" />
+                        <rect x="7" y="8" width="4" height="9" rx="1" />
+                    </svg>
+                    <span class="ml-3">Konfigurasi Beranda</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('admin/konten') }}"
+                    class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/konten') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="{{ request()->is('admin/konten') ? 'white' : 'black' }}"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chart-column-stacked-icon lucide-chart-column-stacked">
+                        <path d="M11 13H7" />
+                        <path d="M19 9h-4" />
+                        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+                        <rect x="15" y="5" width="4" height="12" rx="1" />
+                        <rect x="7" y="8" width="4" height="9" rx="1" />
+                    </svg>
+                    <span class="ml-3">Kelola Galeri</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('admin/konten') }}"
+                    class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/konten') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="{{ request()->is('admin/konten') ? 'white' : 'black' }}"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chart-column-stacked-icon lucide-chart-column-stacked">
+                        <path d="M11 13H7" />
+                        <path d="M19 9h-4" />
+                        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+                        <rect x="15" y="5" width="4" height="12" rx="1" />
+                        <rect x="7" y="8" width="4" height="9" rx="1" />
+                    </svg>
+                    <span class="ml-3">Kelola Sosmed</span>
+                </a>
+            </li>
+        </ul>
+        <hr class="border-gray-200 dark:border-gray-700">
         <ul class="pt-5 mt-5 space-y-2 ">
             <li>
                 <a href="/profile"
-                    class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group {{ request()->is('staff*') ? 'active-sidebar-item' : '' }}">
+                    class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group {{ request()->is('role*') ? 'active-sidebar-item' : '' }}">
                     <svg class="w-[31px] h-[31px] text-gray-800 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                         viewBox="0 0 24 24">
@@ -224,5 +354,6 @@
                 </a>
             </li>
         </ul>
+
     </div>
 </aside>

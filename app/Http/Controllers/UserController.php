@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Log;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 
 class UserController extends Controller
@@ -30,31 +31,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        Log::debug('masuk store user', [$request->all()]);
+
         $request->validate([
-            'nik' => 'required|string|unique:users|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|string|max:1',
-            'role' => 'required|string|max:20',
-            'alamat' => 'required|string',
-            'nomor_telepon' => 'required|string|max:15',
+            'role_id' => 'required|exists:roles,id',
         ]);
 
         User::create([
-            'nik' => $request->nik,
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'tanggal_lahir' => $request->tanggal_lahir,
             'jenis_kelamin' => $request->jenis_kelamin,
-            'role' => $request->role ?? 'pasien',
-            'alamat' => $request->alamat,
-            'nomor_telepon' => $request->nomor_telepon,
+            'role_id' => $request->role_id ?? null,
         ]);
 
-        return redirect()->route('admin.user.index')->with('success', 'User berhasil ditambahkan.');
+        \Log::debug('Pegawai berhasil ditambahkan');
+
+        return redirect()->route('admin.user.index')->with('success', 'Pegawai berhasil ditambahkan.');
     }
 
     /**
@@ -77,20 +74,16 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'nik' => 'required|string|max:255|unique:users,nik,' . $id,
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|string|max:1',
-            'role' => 'required|string|max:20',
-            'alamat' => 'required|string',
-            'nomor_telepon' => 'required|string|max:15',
+            'role_id' => 'required|exists:roles,id',
         ]);
 
         $user = User::findOrFail($id);
         $user->update($validatedData);
 
-        return redirect()->route('admin.user.index')->with('success', 'User berhasil diperbarui.');
+        return redirect()->route('admin.user.index')->with('success', 'Pegawai berhasil diperbarui.');
     }
 
     /**
@@ -100,7 +93,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('admin.user.index')->with('success', 'User berhasil dihapus.');
+        return redirect()->route('admin.user.index')->with('success', 'Pegawai berhasil dihapus.');
     }
 }
 

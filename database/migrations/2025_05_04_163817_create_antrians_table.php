@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('antrians', function (Blueprint $table) {
             $table->id();
             $table->foreignId('registered_by')->constrained('users')->onDelete('cascade');
-            $table->foreignId('tenaga_medis_id')->constrained('tenaga_medis')->onDelete('cascade');
+            $table->foreignId('pegawai_id')->constrained('users')->onDelete('cascade');
             $table->date('tanggal_kunjungan');
             $table->string('nomor_antrian');
             $table->string('nama_pasien');
             $table->string('nik_pasien', 16);
             $table->text('alamat_pasien');
-            $table->char('jenis_kelamin', 1);
+            $table->char('jenis_kelamin');
             $table->date('tanggal_lahir');
-            $table->string('status', 20)->default('menunggu');
-            $table->string('pembayaran', 20)->default('reguler');
+            $table->string('status')->default('menunggu');
+            $table->string('pembayaran')->default('reguler');
             $table->timestamps();
         });
     }

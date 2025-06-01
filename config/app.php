@@ -117,7 +117,10 @@ return [
     | Supported drivers: "file", "cache"
     |
     */
-
+    'calendar' => [
+        'start_time'    => '08:00',
+        'end_time'      => '18:00',
+    ],
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),

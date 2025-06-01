@@ -21,10 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
-        'nik',
-        'alamat',
-        'tanggal_lahir',
+        'role_id',
         'jenis_kelamin',
         'nomor_telepon',
     ];
@@ -52,9 +49,14 @@ class User extends Authenticatable
         ];
     }
 
-    public function tenagaMedis()
+    public function pegawais()
     {
-        return $this->hasMany(TenagaMedis::class);
+        return $this->hasMany(JadwalPegawai::class, 'pegawai_id');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
     }
 
     public function antrians()
