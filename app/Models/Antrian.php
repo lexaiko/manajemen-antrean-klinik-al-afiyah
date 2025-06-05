@@ -10,23 +10,23 @@ class Antrian extends Model
     use HasFactory;
 
     protected $fillable = [
-        'registered_by', 'tenaga_medis_id', 'tanggal_kunjungan',
-        'nomor_antrian', 'nama_pasien', 'nik_pasien', 'alamat_pasien',
-        'jenis_kelamin', 'tanggal_lahir', 'status', 'pembayaran'
+        'nik_pasien',
+        'tanggal_kunjungan',
+        'nomor_antrian',
+        'nama_pasien',
+        'alamat_pasien',
+        'jenis_kelamin',
+        'tanggal_lahir',
+        'status',
+        'pembayaran'
     ];
-
-    public function user()
+    public function pegawais()
     {
-        return $this->belongsTo(User::class, 'registered_by');
+        return $this->belongsTo(User::class, 'pegawais_id');
     }
 
-    public function tenagaMedis()
+    public function roles()
     {
-        return $this->belongsTo(TenagaMedis::class);
-    }
-
-    public function rekamMedis()
-    {
-        return $this->hasOne(RekamMedis::class);
+        return $this->belongsTo(Role::class, 'roles_id');
     }
 }

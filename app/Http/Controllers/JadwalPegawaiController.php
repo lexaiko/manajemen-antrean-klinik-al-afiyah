@@ -44,8 +44,8 @@ class JadwalPegawaiController extends Controller
             'pegawai_id' => 'required|exists:users,id',
             'role_id' => 'required|exists:roles,id',
             'hari' => 'required|string|max:255',
-            'jam_mulai' => 'required|date_format:H:i|after_or_equal:08:00|before:18:00',
-            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai|before_or_equal:18:00',
+            'jam_mulai' => 'required|date_format:H:i|after_or_equal:07:00|before:14:59',
+            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai|before_or_equal:21:00',
         ]);
 
         JadwalPegawai::create($request->all());
@@ -74,7 +74,7 @@ class JadwalPegawaiController extends Controller
     {
         $tenagaMedis = User::all();
         $kategori = Role::all();
-        $jadwal = jadwalTenagaMedis::findOrFail($id);
+        $jadwal = jadwalPegawai::findOrFail($id);
         return view('admin.jadwal.edit', compact('jadwal', 'tenagaMedis', 'kategori'));
     }
 
@@ -91,14 +91,14 @@ class JadwalPegawaiController extends Controller
             'pegawai_id' => 'required|exists:users,id',
             'role_id' => 'required|exists:roles,id',
             'hari' => 'required|string|max:255',
-            'jam_mulai' => 'required|date_format:H:i|after_or_equal:08:00|before:18:00',
-            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai|before_or_equal:18:00',
+            'jam_mulai' => 'required|date_format:H:i|after_or_equal:07:00|before:14:00',
+            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai|before_or_equal:21:00',
         ]);
 
         $jadwalTenagaMedis = JadwalPegawai::findOrFail($id);
         $jadwalTenagaMedis->update($request->all());
 
-        return redirect()->route('admin.jadwal.index')->with('success', 'Jadwal Tenaga Medis updated successfully');
+        return redirect()->route('admin.jadwal.index')->with('success', 'jadwal pegawai berhasil di edit');
     }
 
     /**
@@ -115,4 +115,3 @@ class JadwalPegawaiController extends Controller
         return redirect()->route('admin.jadwal.index')->with('success', 'Jadwal Tenaga Medis deleted successfully');
     }
 }
-

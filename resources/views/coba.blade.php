@@ -14,8 +14,7 @@
 
         </div>
         <div class=" relative z-10 flex justify-center items-center  ">
-            <div
-                class="flex justify-center items-center p-2 bg-white shadow rounded-lg -mt-10 mb-5 w-4/5 sm:w-3/4 lg:w-4/5 ">
+            <div class="flex justify-center items-center p-2 bg-white shadow rounded-lg -mt-10 mb-5 w-4/5 sm:w-3/4 lg:w-4/5 ">
                 <div class=" w-full sm:w-3/4 lg:w-1/2">
                     <h1 class="flex text-2xl justify-center font-bold">
                         Pendaftaran Antrian
@@ -53,12 +52,6 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('name') is-invalid @enderror"
                             value="{{ old('name') }}" required>
                     </div>
-                    <div>
-                        <label for="jenis_kelamin" class='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>
-                            Jenis Kelamin
-                        </label>
-                    </div>
-
                 </div>
             </div>
         </div>

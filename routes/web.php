@@ -7,9 +7,14 @@ use App\Http\Controllers\KalenderController;
 use App\Http\Controllers\TenagaMedisController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\JadwalPegawaiController;
+use App\Http\Controllers\AntrianController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/coba', function () {
+    return view('coba');
 });
 
 Route::get('/dashboard', function () {
@@ -44,6 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('admin/jadwal/{id}', [JadwalPegawaiController::class, 'destroy'])->name('admin.jadwal.destroy');
 
     Route::get('/admin/jadwal/kalender', [KalenderController::class, 'index'])->name('admin.kalender');
+
+    Route::get('/monitoring', [AntrianController::class,'monitoring'])->name('admin.antrian');
 });
 
 require __DIR__.'/auth.php';

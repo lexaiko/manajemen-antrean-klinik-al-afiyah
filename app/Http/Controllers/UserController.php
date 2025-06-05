@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Log;
+use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
@@ -49,7 +49,7 @@ class UserController extends Controller
             'role_id' => $request->role_id ?? null,
         ]);
 
-        \Log::debug('Pegawai berhasil ditambahkan');
+        Log::debug('Pegawai berhasil ditambahkan');
 
         return redirect()->route('admin.user.index')->with('success', 'Pegawai berhasil ditambahkan.');
     }

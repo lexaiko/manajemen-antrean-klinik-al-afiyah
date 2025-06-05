@@ -113,7 +113,7 @@
             <ul id="dropdown-2"
                 class="{{ request()->is('admin/produk*') || request()->is('admin/kategori*') ? '' : 'hidden' }} py-2 space-y-2 ">
                 <li>
-                    <a href="{{ url('admin/produk') }}"
+                    <a href="{{ url('monitoring') }}"
                         class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/produk') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="{{ request()->is('admin/antrean*') ? 'white' : 'black' }}"
