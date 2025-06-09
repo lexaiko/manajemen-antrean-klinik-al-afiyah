@@ -18,7 +18,9 @@ class Antrian extends Model
         'jenis_kelamin',
         'tanggal_lahir',
         'status',
-        'pembayaran'
+        'pembayaran',
+        'nomor_whatsapp',
+        'keluhan'
     ];
     public function pegawais()
     {

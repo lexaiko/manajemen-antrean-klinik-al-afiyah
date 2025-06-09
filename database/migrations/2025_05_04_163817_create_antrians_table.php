@@ -22,8 +22,10 @@ return new class extends Migration
             $table->text('alamat_pasien');
             $table->char('jenis_kelamin');
             $table->date('tanggal_lahir');
-            $table->string('status')->default('menunggu');
-            $table->string('pembayaran')->default('reguler');
+            $table->string('nomor_whatsapp');
+            $table->string('status')->default('antri');
+            $table->string('pembayaran')->default('umum');
+            $table->string('keluhan');
             $table->timestamps();
         });
     }

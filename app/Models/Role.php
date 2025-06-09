@@ -20,6 +20,8 @@ class Role extends Model
         return $this->hasMany(JadwalPegawai::class, 'role_id');
     }
 
+    
+
     public function users()
     {
         return $this->hasMany(User::class, 'role_id');
