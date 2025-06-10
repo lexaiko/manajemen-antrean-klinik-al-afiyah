@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('antrians', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pegawais_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('roles_id')->constrained('roles')->onDelete('cascade');
             $table->string('nik_pasien', 16);
             $table->date('tanggal_kunjungan');
             $table->string('nomor_antrian');

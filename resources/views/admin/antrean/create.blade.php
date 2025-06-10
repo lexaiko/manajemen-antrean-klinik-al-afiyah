@@ -46,43 +46,45 @@
         <form action="{{ route('admin.antrian.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="grid gap-2 sm:grid-cols-2 sm:gap-2">
-                <div class=''>
+                <div>
                     @php
                         $today = \Carbon\Carbon::now()->format('Y-m-d');                            
                     @endphp
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         tanggal kunjungan
                     </label>
-                    <input type="date" name="tanggal" id="tanggal" min="{{ $today }}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('name') is-invalid @enderror"
-                        value="{{ old('name') }}" required>
+                    <input type="date" name="tanggal_kunjungan" id="tanggal_kunjungan" min="{{ $today }}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('tanggal_kunjungan') is-invalid @enderror"
+                        value="{{ old('tanggal_kunjungan') }}" required>
                 </div>
-                <div class="">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK</label>
-                    <input type="text" name="name" id="name"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('name') is-invalid @enderror"
-                        value="{{ old('name') }}" required>
-                    @error('name')
+                <div>
+                    <label for="nik_pasien"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIK</label>
+                    <input type="number" name="nik_pasien" id="nik_pasien" pattern="[0-9]{16}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('nik_pasien') is-invalid @enderror"
+                        value="{{ old('nik_pasien') }}" required>
+                    @error('nik_pasien')
                         <div class="invalid-feedback text-red-500">{{ $message }}</div>
                     @enderror
                 </div>
                 <div>
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
+                    <label for="nama_pasien" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
                         Pasien</label>
-                    <input type="text" name="name" id="name"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('name') is-invalid @enderror"
-                        value="{{ old('name') }}" required>
-                    @error('name')
+                    <input type="text" name="nama_pasien" id="nama_pasien"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('nama_pasien') is-invalid @enderror"
+                        value="{{ old('nama_pasien') }}" required>
+                    @error('nama_pasien')
                         <div class="invalid-feedback text-red-500">{{ $message }}</div>
                     @enderror
                 </div>
                 <div>
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat
+                    <label for="alamat_pasien"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat
                         Pasien</label>
-                    <input type="email" name="email" id="email"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('email') is-invalid @enderror"
-                        value="{{ old('email') }}" required>
-                    @error('email')
+                    <input type="text" name="alamat_pasien" id="alamat_pasien"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('alamat_pasien') is-invalid @enderror"
+                        value="{{ old('alamat_pasien') }}" required>
+                    @error('alamat_pasien')
                         <div class="invalid-feedback text-red-500">{{ $message }}</div>
                     @enderror
                 </div>
@@ -99,26 +101,26 @@
                         <div class="invalid-feedback text-red-500">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class=''>
+                <div>
                     @php
                         $kemarin = \Carbon\Carbon::yesterday()->format('Y-m-d');                            
                     @endphp
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Tanggal Lahir
                     </label>
-                    <input type="date" name="tanggal" id="tanggal" max="{{ $kemarin }}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('name') is-invalid @enderror"
-                        value="{{ old('name') }}" required>
+                    <input type="date" name="tanggal_lahir" id="tanggal_lahir" max="{{ $kemarin }}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('tanggal_lahir') is-invalid @enderror"
+                        value="{{ old('tanggal_lahir') }}" required>
                 </div>
                 <div>
                     <label for="status"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-                    <select id="status" name="status_id"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('role') is-invalid @enderror">
-                        <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Antri</option>
-                        <option value="2" {{ old('status') == '2' ? 'selected' : '' }}>Ditangguhkan</option>
-                        <option value="3" {{ old('status') == '3' ? 'selected' : '' }}>Sedang Dilayani</option>
-                        <option value="4" {{ old('status') == '4' ? 'selected' : '' }}>Selesai</option>
+                    <select id="status" name="status"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('status') is-invalid @enderror">
+                        <option value="antri" {{ old('status') == '1' ? 'selected' : '' }}>Antri</option>
+                        <option value="ditangguhkan" {{ old('status') == '2' ? 'selected' : '' }}>Ditangguhkan</option>
+                        <option value="dilayani" {{ old('status') == '3' ? 'selected' : '' }}>Sedang Dilayani</option>
+                        <option value="selesai" {{ old('status') == '4' ? 'selected' : '' }}>Selesai</option>
                     </select>
                     @error('status')
                         <div class="invalid-feedback text-red-500">{{ $message }}</div>
@@ -127,43 +129,64 @@
                 <div>
                     <label for="pembayaran"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pembayaran</label>
-                    <select id="pembayaran" name="pembayaran_id"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('role') is-invalid @enderror">
-                        <option value="1" {{ old('pembayaran') == '1' ? 'selected' : '' }}>umum</option>
-                        <option value="2" {{ old('pembayaran') == '2' ? 'selected' : '' }}>BPJS</option>
+                    <select id="pembayaran" name="pembayaran"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('pembayara') is-invalid @enderror">
+                        <option value="umum" {{ old('pembayaran') == '1' ? 'selected' : '' }}>umum</option>
+                        <option value="bpjs" {{ old('pembayaran') == '2' ? 'selected' : '' }}>BPJS</option>
                     </select>
                     @error('pembayaran')
                         <div class="invalid-feedback text-red-500">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="sm:col-span-2">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor
-                        Whatsapp</label>
-                    <input type="text" name="name" id="name"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('name') is-invalid @enderror"
-                        value="{{ old('name') }}" required>
-                    @error('name')
-                        <div class="invalid-feedback text-red-500">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="name"
+                    <label for="keluhan"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keluhan</label>
-                    <input type="text" name="name" id="name"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('name') is-invalid @enderror"
-                        value="{{ old('name') }}" required>
-                    @error('name')
+                    <input type="text" name="keluhan" id="keluhan"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('keluhan') is-invalid @enderror"
+                        value="{{ old('keluhan') }}" required>
+                    @error('keluhan')
                         <div class="invalid-feedback text-red-500">{{ $message }}</div>
                     @enderror
                 </div>
                 <div>
-                    <select name="dokter_id" required>
+                    <label for="nomor_whatsapp"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor
+                        Whatsapp</label>
+                    <input type="tel" name="nomor_whatsapp" id="nomor_whatsapp"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('nomor_whatsapp') is-invalid @enderror"
+                        value="{{ old('nomor_whatsapp') }}" required>
+                    @error('nomor_whatsapp')
+                        <div class="invalid-feedback text-red-500">{{ $message }}</div>
+                    @enderror
+                </div>
+                {{-- <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dokter
+                        tujuan</label>
+                    <select name="pegawais_id"
+                        class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('pegawais_id') is-invalid @enderror'
+                        required>
                         @foreach ($users as $user)
                             <option value="{{ $user->id }}">
-                                {{ $user->name }} - {{ $user->role->nama_role }}
+                                {{ $user->name }} - {{ $user->role->nama_role }}                                
+                            </option>
+                        @endforeach                     
+                    </select>
+                    @error('pegawais_id')
+                        <div class="invalid-feedback text-red-500">{{ $message }}</div>
+                    @enderror
+                </div> --}}
+                <div>
+                    <label for="users" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dokter Tujuan</label>
+                    <select id="users" name="pegawais_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('users') is-invalid @enderror">
+                        @foreach ($users as $user)
+                            <option value="{{ $user->id }}">
+                                {{ $user->id }} - {{ $user->name }} - {{ $user->role->nama_role }}                                
                             </option>
                         @endforeach
                     </select>
+                    @error('users')
+                    <div class="invalid-feedback text-red-500">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <button type="submit"

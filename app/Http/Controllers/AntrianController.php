@@ -32,7 +32,7 @@ class AntrianController extends Controller
     public function create()
     {
         $users = User::whereHas('role', function ($q) {
-            $q->whereIn('nama_role', ['dokter umum','dokter gigi']);
+            $q->whereIn('nama_role', ['dokter umum', 'dokter gigi']);
         })->with('role')->get();
 
 
@@ -49,33 +49,50 @@ class AntrianController extends Controller
         Log::debug('masuk store user', [$request->all()]);
 
         $request->validate([
-            'nik_pasien' => 'required|string|size:16',
+            'nik_pasien' => 'required|string|size:16|regex:/^3502[0-9]{12}$/',
             'nama_pasien' => 'required|string|max:255',
             'tanggal_kunjungan' => 'required|date',
             'alamat_pasien' => 'required|string',
             'jenis_kelamin' => 'required|string|in:L,P|max:1',
             'tanggal_lahir' => 'required|date',
-            'status' => 'required|string|in:ditangguhkan,diperiksa,selesai',
-            'pembayaran' => 'required|string|in:reguler,bpjs',
-            'nomor_whatsapp' => 'required|string|size:13',
+            'status' => 'required|string|in:ditangguhkan,dilayani,selesai,antri',
+            'pembayaran' => 'required|string|in:umum,bpjs',
+            'nomor_whatsapp' => 'required|string|size:15',
             'keluhan' => 'required|string|max:255',
+            'pegawais_id' => 'required|exists:users,id',
         ]);
 
-        $dokter = User::with('roles')->findOrFail($request->dokter_id);
-        $role = $dokter->roles->first()->name;
 
-        $prefix = $role === 'dokter gigi' ? 'DG' : 'DU';
 
-        $count = Antrian::whereDate('tanggal_kunjungan', $request->tanggal)
-            ->where('nomor_antrian', 'LIKE', $prefix . '%')
-            ->count();
+        $dokterId = $request->input('pegawais_id');
+        $dokter = User::with('role')->find($dokterId);
+        $tanggal = $request->tanggal_kunjungan;
 
-        $nomor_antrian = $prefix . str_pad($count + 1, 3, '0', STR_PAD_LEFT);
+        $kode = '';
+        $count = 0;
+
+        if ($dokter && $dokter->role) {
+            if ($dokter->role->nama_role === 'dokter umum') {
+                $kode = 'DU';
+            } elseif ($dokter->role->nama_role === 'dokter gigi') {
+                $kode = 'DG';
+            }
+        }
+
+        // Hitung jumlah antrean hari ini untuk jenis dokter terkait
+        $count = Antrian::where('tanggal_kunjungan', $tanggal)
+            ->whereHas('pegawais.role', function ($query) use ($dokter) {
+                $query->where('nama_role', $dokter->role->nama_role);
+            })->count();
+
+        $nomor_antrian = $kode . str_pad($count + 1, 3, '0', STR_PAD_LEFT);
+
+        Log::debug('Nomor antrian yang dihasilkan:', [$nomor_antrian]);
 
         Antrian::create([
             'nik_pasien' => $request->nik_pasien,
             'nama_pasien' => $request->nama_pasien,
-            'tanggal_kunjungan' => $request->tanggal_kunjungan,
+            'tanggal_kunjungan' => $tanggal,
             'alamat_pasien' => $request->alamat_pasien,
             'jenis_kelamin' => $request->jenis_kelamin,
             'tanggal_lahir' => $request->tanggal_lahir,
@@ -84,10 +101,12 @@ class AntrianController extends Controller
             'nomor_whatsapp' => $request->nomor_whatsapp,
             'keluhan' => $request->keluhan,
             'nomor_antrian' => $nomor_antrian,
+            'pegawais_id' => $request->pegawais_id ?? null,
+            
         ]);
 
         Log::debug('Antrean berhasil ditambahkan');
 
-        return redirect()->route('admin.antrean.index')->with('success', 'Antrean berhasil ditambahkan.');
+        return redirect()->route('admin.antrian')->with('success', 'Antrean berhasil ditambahkan.');
     }
 }

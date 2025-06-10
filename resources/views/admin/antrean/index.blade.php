@@ -80,9 +80,11 @@
 
                             <th scope="col" class="px-4 py-3">No</th>
                             <th scope="col" class="px-4 py-3">Nama_pasien</th>
-                            <th scope="col" class="px-4 py-3">Email</th>
+                            <th scope="col" class="px-4 py-3">alamat</th>
                             <th scope="col" class="px-4 py-3">Jenis Kelamin</th>
-                            <th scope="col" class="px-4 py-3">keluhan</th>
+                            <th scope="col" class="px-4 py-3">Status</th>
+                            <th scope="col" class="px-4 py-3">Keluhan</th>
+                            <th scope="col" class="px-4 py-3">Antrian</th>
                             <th scope="col" class="px-4 py-3 text-right">Aksi</th>
                         </tr>
                     </thead>
@@ -92,10 +94,12 @@
                         @foreach ($antrian as $user)
                         <tr class="border-b dark:border-gray-700">
                             <td class="px-4 py-3">{{ ($antrian->currentPage() - 1) * $antrian->perPage() + $loop->iteration }}</td>
-                            <td class="px-4 py-3">{{ $user->name }}</td>
-                            <td class="px-4 py-3">{{ $user->email }}</td>
+                            <td class="px-4 py-3">{{ $user->nama_pasien }}</td>
+                            <td class="px-4 py-3">{{ $user->alamat_pasien }}</td>
                             <td class="px-4 py-3">{{ $user->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
-                            <td class="px-4 py-3">{{ $user->role_id }}</td>
+                            <td class="px-4 py-3">{{ $user->status }}</td>
+                            <td class="px-4 py-3">{{ $user->nomor_antrian }}</td>
+                            <td class="px-4 py-3">{{ $user->keluhan }}</td>
                             <td class="px-4 py-3 flex items-center justify-end">
                                 <button id="actionsDropdownButton-{{ $user->id }}" data-dropdown-toggle="actionsDropdown-{{ $user->id }}" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700" type="button">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

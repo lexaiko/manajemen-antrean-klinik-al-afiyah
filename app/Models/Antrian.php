@@ -20,7 +20,8 @@ class Antrian extends Model
         'status',
         'pembayaran',
         'nomor_whatsapp',
-        'keluhan'
+        'keluhan',
+        'pegawais_id'
     ];
     public function pegawais()
     {

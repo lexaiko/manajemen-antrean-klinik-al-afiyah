@@ -129,7 +129,7 @@
                     <a href="{{ route('admin.antrian') }}"
                         class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/antrean') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="{{ request()->is('admin/antrean*') || request()->is('admin/antrean/create*')? 'white' : 'black' }}" stroke-width="2"
+                            stroke="{{ request()->is('admin/antrean') ? 'white' : 'black' }}" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round"
                             class="lucide lucide-list-start-icon lucide-list-start">
                             <path d="M16 12H3" />
@@ -141,7 +141,6 @@
                         <span class="ml-3">Antrean</span>
                     </a>
                 </li>
-
             </ul>
             <hr class="border-gray-200 dark:border-gray-700">
             <button type="button"
