@@ -9,12 +9,9 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\JadwalPegawaiController;
 use App\Http\Controllers\AntrianController;
 
+
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/coba', function () {
-    return view('coba');
 });
 
 Route::get('/dashboard', function () {
@@ -22,6 +19,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/', [AntrianController::class, 'welcome'])->name('welcome');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -50,15 +49,16 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/jadwal/kalender', [KalenderController::class, 'index'])->name('admin.kalender');
 
-    Route::get('/monitoring', [AntrianController::class,'monitoring'])->name('monitoring');
-    Route::get('/admin/monitoring', [AntrianController::class,'monitoring'])->name('admin.monitoring');
-    Route::get('/admin/antrean', [AntrianController::class,'index'])->name('admin.antrian');
-    Route::get('/admin/antrean/detail', [AntrianController::class,'detail'])->name('admin.antrian.detail');
-    Route::get('/admin/antrean/create', [AntrianController::class,'create'])->name('admin.antrian.create');
-    Route::get('/admin/antrean/edit', [AntrianController::class,'edit'])->name('admin.antrian.edit');
-    Route::post('/admin/antrean', [AntrianController::class,'store'])->name('admin.antrian.store');
-    Route::put('/admin/antrean/{id}/edit', [AntrianController::class,'update'])->name('admin.antrian.update');
-    Route::get('/admin/antrean/{id}', [AntrianController::class,'destroy'])->name('admin.antrian.destroy');
+    Route::get('/monitoring', [AntrianController::class, 'monitoring'])->name('monitoring');
+    Route::get('/admin/monitoring', [AntrianController::class, 'monitoring'])->name('admin.monitoring');
+    Route::get('/admin/antrean', [AntrianController::class, 'index'])->name('admin.antrian');
+    Route::get('/admin/antrean/detail', [AntrianController::class, 'detail'])->name('admin.antrian.detail');
+    Route::get('/admin/antrean/create', [AntrianController::class, 'create'])->name('admin.antrian.create');
+    Route::get('/admin/antrean/{id}/edit', [AntrianController::class, 'edit'])->name('admin.antrian.edit');
+    Route::post('/admin/antrean', [AntrianController::class, 'store'])->name('admin.antrian.store');
+    Route::post('/', [AntrianController::class, 'store'])->name('welcome.store');
+    Route::put('/admin/antrean/{id}/edit', [AntrianController::class, 'update'])->name('admin.antrian.update');
+    Route::delete('/admin/antrean/{id}', [AntrianController::class, 'destroy'])->name('admin.antrian.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

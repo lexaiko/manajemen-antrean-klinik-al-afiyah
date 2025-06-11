@@ -10,8 +10,16 @@ use Illuminate\Support\Facades\Log;
 
 class AntrianController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = Antrian::query();
+
+        if ($request->has('search')) {
+            $search = $request->query('search');
+            $query->where('nama_pasien', 'like', "%{$search}%")
+                ->orWhere('nik_pasien', 'like', "%{$search}%");
+        }
+        $antrian = $query->get();
         $antrian = Antrian::paginate(11);
         return view('admin.antrean.index', compact('antrian'));
     }
@@ -24,6 +32,17 @@ class AntrianController extends Controller
     {
         $antrian = Antrian::paginate(11);
         return view('admin.antrean.detail', compact('antrian'));
+    }
+
+    public function welcome()
+    {
+        $users = User::whereHas('role', function ($q) {
+            $q->whereIn('nama_role', ['dokter umum', 'dokter gigi']);
+        })->with('role')->get();
+
+
+        $antrians = Antrian::all();
+        return view('welcome', compact('antrians', 'users'));
     }
 
     /**
@@ -57,7 +76,7 @@ class AntrianController extends Controller
             'tanggal_lahir' => 'required|date',
             'status' => 'required|string|in:ditangguhkan,dilayani,selesai,antri',
             'pembayaran' => 'required|string|in:umum,bpjs',
-            'nomor_whatsapp' => 'required|string|size:15',
+            'nomor_whatsapp' => 'required|string|min:10|max:15',
             'keluhan' => 'required|string|max:255',
             'pegawais_id' => 'required|exists:users,id',
         ]);
@@ -102,11 +121,51 @@ class AntrianController extends Controller
             'keluhan' => $request->keluhan,
             'nomor_antrian' => $nomor_antrian,
             'pegawais_id' => $request->pegawais_id ?? null,
-            
+
         ]);
 
         Log::debug('Antrean berhasil ditambahkan');
 
-        return redirect()->route('admin.antrian')->with('success', 'Antrean berhasil ditambahkan.');
+        if ($request->is('/')) {
+            return redirect('/antreanlengkap')->with('success', 'Antrean berhasil ditambahkan.');
+        } elseif ($request->is('admin/antrean/create')) {
+            return redirect()->route('admin.antrian')->with('success', 'Antrean berhasil ditambahkan.');
+        }
+    }
+    public function edit($id)
+    {
+
+        $antrians = Antrian::findOrFail($id);
+        return view('admin.antrean.edit', compact('antrians'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
+    {
+
+        $validatedData = $request->validate([
+            'nik_pasien' => 'required|string|size:16|regex:/^3502[0-9]{12}$/',
+            'nama_pasien' => 'required|string|max:255',
+            'alamat_pasien' => 'required|string',
+            'jenis_kelamin' => 'required|string|in:L,P|max:1',
+            'tanggal_lahir' => 'required|date',
+            'status' => 'required|string|in:ditangguhkan,dilayani,selesai,antri',
+            'pembayaran' => 'required|string|in:umum,bpjs',
+            'nomor_whatsapp' => 'required|string|min:10|max:15',
+            'keluhan' => 'required|string|max:255',
+        ]);
+
+        $antrian = Antrian::findOrFail($id);
+        $antrian->update($validatedData);
+
+        return redirect()->route('admin.antrian')->with('success', 'Pegawai berhasil diperbarui.');
+    }
+    public function destroy(string $id)
+    {
+        $Antrians = Antrian::findOrFail($id);
+        $Antrians->delete();
+        return redirect()->route('admin.antrian')->with('success', 'Pegawai berhasil dihapus.');
     }
 }
