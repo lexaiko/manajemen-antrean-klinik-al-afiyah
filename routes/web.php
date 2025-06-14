@@ -17,9 +17,11 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [AntrianController::class, 'welcome'])->name('welcome');
+Route::get('/monitoring', [AntrianController::class, 'monitoring'])->name('monitoring');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [AntrianController::class, 'welcome'])->name('welcome');
+    
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -49,8 +51,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/jadwal/kalender', [KalenderController::class, 'index'])->name('admin.kalender');
 
-    Route::get('/monitoring', [AntrianController::class, 'monitoring'])->name('monitoring');
-    Route::get('/admin/monitoring', [AntrianController::class, 'monitoring'])->name('admin.monitoring');
+    
+    Route::get('/admin/monitoring', [AntrianController::class, ''])->name('admin.monitoring');
     Route::get('/admin/antrean', [AntrianController::class, 'index'])->name('admin.antrian');
     Route::get('/admin/antrean/detail', [AntrianController::class, 'detail'])->name('admin.antrian.detail');
     Route::get('/admin/antrean/create', [AntrianController::class, 'create'])->name('admin.antrian.create');

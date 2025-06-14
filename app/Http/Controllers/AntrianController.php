@@ -25,8 +25,8 @@ class AntrianController extends Controller
     }
     public function monitoring()
     {
-        $antrian = Antrian::paginate(11);
-        return view('admin.antrean.monitoring', compact('antrian'));
+
+        return view('admin.antrean.monitoring');
     }
     public function detail()
     {
@@ -106,6 +106,15 @@ class AntrianController extends Controller
 
         $nomor_antrian = $kode . str_pad($count + 1, 3, '0', STR_PAD_LEFT);
 
+        $existing = Antrian::where('nomor_antrian', $nomor_antrian)
+            ->where('tanggal_kunjungan', $tanggal)
+            ->exists();
+
+        if ($existing) {
+            return redirect()->back()->with('error', 'Nomor antrian sudah digunakan. Silakan coba lagi.');
+        }
+
+
         Log::debug('Nomor antrian yang dihasilkan:', [$nomor_antrian]);
 
         Antrian::create([
@@ -126,10 +135,10 @@ class AntrianController extends Controller
 
         Log::debug('Antrean berhasil ditambahkan');
 
-        if ($request->is('/')) {
-            return redirect('/antreanlengkap')->with('success', 'Antrean berhasil ditambahkan.');
-        } elseif ($request->is('admin/antrean/create')) {
-            return redirect()->route('admin.antrian')->with('success', 'Antrean berhasil ditambahkan.');
+        if ($request->route('/')) {
+            return redirect('admin.antrean.monitoring')->with('success', 'Antrean berhasil ditambahkan.');
+        } else if ($request->route('admin/antrean/create')) {
+            return redirect('admin.antrean.index')->with('success', 'Antrean berhasil ditambahkan.');
         }
     }
     public function edit($id)
