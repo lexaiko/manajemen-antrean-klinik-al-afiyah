@@ -42,7 +42,7 @@ class AntrianController extends Controller
 
 
         $antrians = Antrian::all();
-        return view('welcome', compact('antrians', 'users'));
+        return view('daftar', compact('antrians', 'users'));
     }
 
     /**

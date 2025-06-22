@@ -8,8 +8,11 @@
 
     <title>Klinik Al-Afiyah</title>
 
-    {{-- logo pavicon --}}
-    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
+          {{-- logo favicon --}}
+  <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/png">
+  <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
+
+    {{-- logo favicon --}}
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
