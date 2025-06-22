@@ -21,7 +21,7 @@ Route::get('/', [AntrianController::class, 'welcome'])->name('welcome');
 Route::get('/monitoring', [AntrianController::class, 'monitoring'])->name('monitoring');
 
 Route::middleware('auth')->group(function () {
-    
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -49,9 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/jadwal', [JadwalPegawaiController::class, 'store'])->name('admin.jadwal.store');
     Route::delete('admin/jadwal/{id}', [JadwalPegawaiController::class, 'destroy'])->name('admin.jadwal.destroy');
 
-    Route::get('/admin/jadwal/kalender', [KalenderController::class, 'index'])->name('admin.kalender');
 
-    
     Route::get('/admin/monitoring', [AntrianController::class, ''])->name('admin.monitoring');
     Route::get('/admin/antrean', [AntrianController::class, 'index'])->name('admin.antrian');
     Route::get('/admin/antrean/detail', [AntrianController::class, 'detail'])->name('admin.antrian.detail');

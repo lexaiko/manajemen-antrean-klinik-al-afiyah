@@ -186,28 +186,7 @@
                             <rect x="15" y="5" width="4" height="12" rx="1" />
                             <rect x="7" y="8" width="4" height="9" rx="1" />
                         </svg>
-                        <span class="ml-3">Kelola Jadwal</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('admin/jadwal/kalender') }}"
-                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/jadwal/kalender*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="{{ request()->is('admin/jadwal/kalender') ? 'white' : 'black' }}" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-calendar-days-icon lucide-calendar-days">
-                            <path d="M8 2v4" />
-                            <path d="M16 2v4" />
-                            <rect width="18" height="18" x="3" y="4" rx="2" />
-                            <path d="M3 10h18" />
-                            <path d="M8 14h.01" />
-                            <path d="M12 14h.01" />
-                            <path d="M16 14h.01" />
-                            <path d="M8 18h.01" />
-                            <path d="M12 18h.01" />
-                            <path d="M16 18h.01" />
-                        </svg>
-                        <span class="ml-3">Kalender Jadwal</span>
+                        <span class="ml-3">Jadwal Pegawai</span>
                     </a>
                 </li>
             </ul>

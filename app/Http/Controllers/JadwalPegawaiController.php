@@ -14,11 +14,21 @@ class JadwalPegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $jadwals = JadwalPegawai::paginate(5);
-        return view('admin.jadwal.index', compact('jadwals'));
-    }
+    public function index(Request $request)
+{
+    $roles = Role::all();
+    $roleId = $request->input('role_id');
+
+    $urutanHari = config('app.urutan');
+    $urutanHariString = "'" . implode("','", $urutanHari) . "'";
+
+    $jadwals = JadwalPegawai::with(['pegawai', 'role'])
+        ->when($roleId, fn($q) => $q->where('role_id', $roleId))
+        ->orderByRaw("FIELD(hari, $urutanHariString)")
+        ->get();
+
+    return view('admin.jadwal.index', compact('jadwals', 'roles', 'roleId', 'urutanHari'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -40,23 +50,31 @@ class JadwalPegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'pegawai_id' => 'required|exists:users,id',
-            'role_id' => 'required|exists:roles,id',
-            'hari' => 'required|string|max:255',
-            'jam_mulai' => 'required|date_format:H:i|after_or_equal:07:00|before:14:59',
-            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai|before_or_equal:21:00',
-        ]);
+        $validated = $request->validate([
+        'pegawai_id' => 'required|exists:users,id',
+        'hari' => 'required',
+        'jam_mulai' => 'required|date_format:H:i',
+        'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
+    ]);
 
-        JadwalPegawai::create($request->all());
+    // Ambil role_id berdasarkan pegawai
+    $pegawai = User::findOrFail($validated['pegawai_id']);
 
-        return redirect()->route('admin.jadwal.index')->with('success', 'Jadwal Tenaga Medis created successfully');
+    JadwalPegawai::create([
+        'pegawai_id' => $pegawai->id,
+        'role_id' => $pegawai->role_id, // ⬅️ otomatis diambil
+        'hari' => $validated['hari'],
+        'jam_mulai' => $validated['jam_mulai'],
+        'jam_selesai' => $validated['jam_selesai'],
+    ]);
+
+        return redirect()->route('admin.jadwal.index')->with('success', 'Jadwal Pegawai created successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\JadwalPegawai  $jadwalTenagaMedis
+     * @param  \App\Models\JadwalPegawai  $jadwalPegawai
      * @return \Illuminate\Http\Response
      */
     public function show(JadwalPegawai $jadwalTenagaMedis)

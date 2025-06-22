@@ -26,7 +26,7 @@
                         </h1>
                         <div class='flex flex-col'>
                             @php
-                                $today = \Carbon\Carbon::now()->format('Y-m-d');                            
+                                $today = \Carbon\Carbon::now()->format('Y-m-d');
                             @endphp
                             <label for="tanggalkunjungan" class="mt-5 mb-2">
                                 Tanggal Kunjungan
@@ -109,7 +109,7 @@
                         </div>
                         <div>
                             <label for="jenis_kelamin"
-                                class='block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-5 mb-2'>
+                                class='block text-sm font-medium text-gray-900 dark:text-white mt-5 mb-2'>
                                 Jenis Kelamin
                             </label>
                             <select name="jenis_kelamin" id="jenis_kelamin"
@@ -125,7 +125,7 @@
 
                         <div>
                             <label for="pembayaran"
-                                class='block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-5 mb-2'>
+                                class='block text-sm font-medium text-gray-900 dark:text-white mt-5 mb-2'>
                                 pembayaran
                             </label>
                             <select name="pembayaran" id="pembayaran"
@@ -139,7 +139,7 @@
                         </div>
                         <div>
                             <label for="users"
-                                class='block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-5 mb-2'>
+                                class='block text-sm font-medium text-gray-900 dark:text-white mt-5 mb-2'>
                                 Dokter Tujuan
                             </label>
                             <select name="pegawais_id" id="users"
