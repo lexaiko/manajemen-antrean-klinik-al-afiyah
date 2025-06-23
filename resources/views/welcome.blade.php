@@ -80,9 +80,9 @@
               d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
           </svg>
         </div>
-        <h4 class="font-bold text-lg mb-2">Poli Kandungan</h4>
+        <h4 class="font-bold text-lg mb-2">Poli Kesehatan Ibu dan Anak</h4>
         <p class="text-sm text-gray-600">
-          Layanan pemeriksaan dan pengobatan untuk kesehatan reproduksi wanita, termasuk kehamilan dan persalinan.
+          Pemeriksaan dan perawatan kesehatan ibu dan anak, termasuk kehamilan, persalinan, dan pemeriksaan bayi.
         </p>
       </div>
 
@@ -90,205 +90,181 @@
   </div>
 </section>
 
-<section class="bg-gray-50 dark:bg-gray-800">
-        <div class="max-w-screen-xl px-4 py-8 mx-auto space-y-12 lg:space-y-20 lg:py-24 lg:px-6" data-aos="fade-up">
-            <!-- Row -->
-            <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
-                <div class="text-gray-500 sm:text-lg dark:text-gray-400">
-                    <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">Layanan Kesehatan Terintegrasi</h2>
-                    <p class="mb-8 font-light lg:text-xl">
-                        Klinik Al Afiyah Banyuwangi menyediakan layanan kesehatan yang mudah diakses, mulai dari pendaftaran online, konsultasi dengan dokter, hingga pemantauan jadwal praktik dokter secara real-time.
-                    </p>
-                    <!-- List -->
-                    <ul role="list" class="pt-8 space-y-5 border-t border-gray-200 my-7 dark:border-gray-700">
-                        <li class="flex space-x-3">
-                            <!-- Icon -->
-                            <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Pendaftaran antrean secara online</span>
-                        </li>
-                        <li class="flex space-x-3">
-                            <!-- Icon -->
-                            <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Konsultasi dengan dokter profesional</span>
-                        </li>
-                        <li class="flex space-x-3">
-                            <!-- Icon -->
-                            <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Informasi jadwal dokter dan poliklinik</span>
-                        </li>
-                    </ul>
-                    <p class="mb-8 font-light lg:text-xl">
-                        Dapatkan kemudahan layanan kesehatan tanpa harus menunggu lama di klinik. Semua informasi dan layanan dapat diakses secara online.
-                    </p>
-                </div>
-                <!-- Carousel/Slider Gambar Dokter dan Jadwal Praktik -->
-                <div id="dokterCarousel" class="relative w-full mb-4 rounded-lg overflow-hidden">
-                    <!-- Slides -->
-                    <div class="carousel-slide">
-                        <img src="{{ url('images/slide1.jpg') }}" class="w-full object-cover" alt="Gambar dokter dan jadwal praktik 1">
-                    </div>
-                    <div class="carousel-slide hidden">
-                        <img src="{{ url('images/slide2.jpg') }}" class="w-full object-cover" alt="Gambar dokter dan jadwal praktik 2">
-                    </div>
-                    <div class="carousel-slide hidden">
-                        <img src="{{ url('images/slide3.jpg') }}" class="w-full object-cover" alt="Gambar dokter dan jadwal praktik 3">
-                    </div>
-                    <!-- Controls -->
-                    <button type="button" class="absolute top-1/2 left-2 -translate-y-1/2 bg-white/70 rounded-full p-2 shadow hover:bg-white" onclick="prevSlide()">
-                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-                    </button>
-                    <button type="button" class="absolute top-1/2 right-2 -translate-y-1/2 bg-white/70 rounded-full p-2 shadow hover:bg-white" onclick="nextSlide()">
-                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                    </button>
-                    <!-- Dots -->
-                    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2">
-                        <button class="carousel-dot w-3 h-3 rounded-full bg-green-500" onclick="goToSlide(0)"></button>
-                        <button class="carousel-dot w-3 h-3 rounded-full bg-gray-300" onclick="goToSlide(1)"></button>
-                        <button class="carousel-dot w-3 h-3 rounded-full bg-gray-300" onclick="goToSlide(2)"></button>
-                    </div>
-                </div>
+<section class="bg-gray-50">
+    <div class="max-w-screen-xl px-4 py-8 mx-auto space-y-12 lg:space-y-20 lg:py-24 lg:px-6" data-aos="fade-up">
+        <!-- Row -->
+        <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
+        <div class="text-gray-500 sm:text-lg">
+            <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900">Layanan Kesehatan Terintegrasi</h2>
+            <p class="mb-8 font-light lg:text-xl">
+            Klinik Al Afiyah Banyuwangi menyediakan layanan kesehatan yang mudah diakses, mulai dari pendaftaran online, konsultasi dengan dokter, hingga pemantauan jadwal praktik dokter secara real-time.
+            </p>
+            <!-- List -->
+            <ul role="list" class="pt-8 space-y-5 border-t border-gray-200 my-7">
+            <li class="flex space-x-3">
+                <!-- Icon -->
+                <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span class="text-base font-medium leading-tight text-gray-900">Pendaftaran antrean secara online</span>
+            </li>
+            <li class="flex space-x-3">
+                <!-- Icon -->
+                <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span class="text-base font-medium leading-tight text-gray-900">Konsultasi dengan dokter profesional</span>
+            </li>
+            <li class="flex space-x-3">
+                <!-- Icon -->
+                <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span class="text-base font-medium leading-tight text-gray-900">Informasi jadwal dokter dan poliklinik</span>
+            </li>
+            </ul>
+            <p class="mb-8 font-light lg:text-xl">
+            Dapatkan kemudahan layanan kesehatan tanpa harus menunggu lama di klinik. Semua informasi dan layanan dapat diakses secara online.
+            </p>
+        </div>
+        <!-- Carousel/Slider Gambar Dokter dan Jadwal Praktik -->
+        <div id="dokterCarousel" class="relative w-full mb-4 rounded-lg overflow-hidden">
+            <!-- Slides -->
+            <div class="carousel-slide">
+            <img src="{{ url('images/slide1.jpg') }}" class="w-full object-cover" alt="Gambar dokter dan jadwal praktik 1">
             </div>
-            <!-- Row -->
-            <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16" data-aos="fade-up">
-                <img class="w-full mb-4 rounded-lg lg:mb-0" src="{{ url('images/layanan.jpg') }}" alt="Fasilitas Laboratorium Klinik">
-                <div class="text-gray-500 sm:text-lg dark:text-gray-400">
-                    <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">Fasilitas Laboratorium Klinik</h2>
-                    <p class="mb-8 font-light lg:text-xl">
-                        Klinik Al Afiyah Banyuwangi menyediakan fasilitas laboratorium lengkap untuk mendukung diagnosa dan perawatan pasien secara cepat dan akurat.
-                    </p>
-                    <!-- List Fasilitas Laboratorium -->
-                    <ul role="list" class="pt-8 space-y-5 border-t border-gray-200 my-7 dark:border-gray-700">
-                        <li class="flex space-x-3">
-                            <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Pemeriksaan darah lengkap (hematologi)</span>
-                        </li>
-                        <li class="flex space-x-3">
-                            <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Pemeriksaan urine lengkap</span>
-                        </li>
-                        <li class="flex space-x-3">
-                            <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Pemeriksaan gula darah</span>
-                        </li>
-                        <li class="flex space-x-3">
-                            <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Pemeriksaan kolesterol &amp; asam urat</span>
-                        </li>
-                        <li class="flex space-x-3">
-                            <svg class="flex-shrink-0 w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span class="text-base font-medium leading-tight text-gray-900 dark:text-white">Rapid test (Anti HIV, malaria, dsb)</span>
-                        </li>
-                    </ul>
-                    <p class="font-light lg:text-xl">
-                        Didukung alat modern dan tenaga analis laboratorium berpengalaman untuk hasil yang cepat dan akurat.
-                    </p>
-                </div>
+            <div class="carousel-slide hidden">
+            <img src="{{ url('images/slide2.jpg') }}" class="w-full object-cover" alt="Gambar dokter dan jadwal praktik 2">
+            </div>
+            <div class="carousel-slide hidden">
+            <img src="{{ url('images/slide3.jpg') }}" class="w-full object-cover" alt="Gambar dokter dan jadwal praktik 3">
+            </div>
+            <!-- Controls -->
+            <button type="button" class="absolute top-1/2 left-2 -translate-y-1/2 bg-white/70 rounded-full p-2 shadow hover:bg-white" onclick="prevSlide()">
+            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button type="button" class="absolute top-1/2 right-2 -translate-y-1/2 bg-white/70 rounded-full p-2 shadow hover:bg-white" onclick="nextSlide()">
+            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+            <!-- Dots -->
+            <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2">
+            <button class="carousel-dot w-3 h-3 rounded-full bg-green-500" onclick="goToSlide(0)"></button>
+            <button class="carousel-dot w-3 h-3 rounded-full bg-gray-300" onclick="goToSlide(1)"></button>
+            <button class="carousel-dot w-3 h-3 rounded-full bg-gray-300" onclick="goToSlide(2)"></button>
             </div>
         </div>
+        </div>
+        <!-- Row -->
+        <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16" data-aos="fade-up">
+        <img class="w-full mb-4 rounded-lg lg:mb-0" src="{{ url('images/layanan.jpg') }}" alt="Fasilitas Laboratorium Klinik">
+        <div class="text-gray-500 sm:text-lg">
+            <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900">Fasilitas Laboratorium Klinik</h2>
+            <p class="mb-8 font-light lg:text-xl">
+            Klinik Al Afiyah Banyuwangi menyediakan fasilitas laboratorium lengkap untuk mendukung diagnosa dan perawatan pasien secara cepat dan akurat.
+            </p>
+            <!-- List Fasilitas Laboratorium -->
+            <ul role="list" class="pt-8 space-y-5 border-t border-gray-200 my-7">
+            <li class="flex space-x-3">
+                <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span class="text-base font-medium leading-tight text-gray-900">Pemeriksaan darah lengkap (hematologi)</span>
+            </li>
+            <li class="flex space-x-3">
+                <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span class="text-base font-medium leading-tight text-gray-900">Pemeriksaan urine lengkap</span>
+            </li>
+            <li class="flex space-x-3">
+                <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span class="text-base font-medium leading-tight text-gray-900">Pemeriksaan gula darah</span>
+            </li>
+            <li class="flex space-x-3">
+                <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span class="text-base font-medium leading-tight text-gray-900">Pemeriksaan kolesterol &amp; asam urat</span>
+            </li>
+            <li class="flex space-x-3">
+                <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span class="text-base font-medium leading-tight text-gray-900">Rapid test (Anti HIV, malaria, dsb)</span>
+            </li>
+            </ul>
+            <p class="font-light lg:text-xl">
+            Didukung alat modern dan tenaga analis laboratorium berpengalaman untuk hasil yang cepat dan akurat.
+            </p>
+        </div>
+        </div>
+    </div>
       </section>
 
     <section class="py-16 bg-white" id="berita" data-aos="fade-up">
-        <div class="max-w-screen-xl mx-auto px-4">
-            <h2 class="text-3xl font-extrabold text-gray-900 mb-8 text-center">Berita Klinik Al Afiyah</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-                    <div class="relative">
-                        <img src="{{ url('images/slide1.jpg') }}" alt="Berita 1" class="w-full h-56 object-cover">
-                        <span class="absolute top-3 right-3 bg-green-600 text-white text-xs px-3 py-1 rounded-full shadow">
-                            10 Jul 2024
-                        </span>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col">
-                        <h3 class="text-lg font-bold mb-2 text-gray-900">Klinik Al Afiyah Resmi Buka Layanan Laboratorium Baru</h3>
-                        <a href="#" class="mt-auto inline-block text-green-600 hover:underline font-medium">Baca Selengkapnya</a>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-                    <div class="relative">
-                        <img src="{{ url('images/slide2.jpg') }}" alt="Berita 2" class="w-full h-56 object-cover">
-                        <span class="absolute top-3 right-3 bg-green-600 text-white text-xs px-3 py-1 rounded-full shadow">
-                            28 Jun 2024
-                        </span>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col">
-                        <h3 class="text-lg font-bold mb-2 text-gray-900">Edukasi Kesehatan: Pentingnya Pemeriksaan Gigi Rutin</h3>
-                        <a href="#" class="mt-auto inline-block text-green-600 hover:underline font-medium">Baca Selengkapnya</a>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-                    <div class="relative">
-                        <img src="{{ url('images/slide3.jpg') }}" alt="Berita 3" class="w-full h-56 object-cover">
-                        <span class="absolute top-3 right-3 bg-green-600 text-white text-xs px-3 py-1 rounded-full shadow">
-                            15 Jun 2024
-                        </span>
-                    </div>
-                    <div class="p-5 flex-1 flex flex-col">
-                        <h3 class="text-lg font-bold mb-2 text-gray-900">Pelatihan Staf: Meningkatkan Layanan Pasien</h3>
-                        <a href="#" class="mt-auto inline-block text-green-600 hover:underline font-medium">Baca Selengkapnya</a>
-                    </div>
-                </div>
+    <div class="max-w-screen-xl mx-auto px-4">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-8 text-center">Berita Klinik Al Afiyah</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 justify-center">
+        <!-- Card 1 -->
+        @foreach ($beritas->take(3) as $berita)
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+            <div class="relative">
+            <img src="{{ asset('storage/' . $berita->gambar) }}" alt="Berita Image" class="w-full h-56 object-cover">
+            <span class="absolute top-3 right-3 bg-green-600 text-white text-xs px-3 py-1 rounded-full shadow">
+                {{ \Carbon\Carbon::parse($berita->tgl_published)->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
+            </span>
             </div>
-            <div class="mt-8 flex justify-center">
-                <a href="#" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 transition">
-                    Lihat Semua Berita
-                    <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                    </svg>
-                </a>
+            <div class="p-5 flex-1 flex flex-col">
+            <h3 class="text-lg font-bold mb-2 text-gray-900">{{ $berita->judul }}</h3>
+            <a href="{{ route('berita.detail', $berita->id) }}" class="mt-auto inline-block text-green-600 hover:underline font-medium">Baca Selengkapnya</a>
             </div>
         </div>
+        @endforeach
+        </div>
+        <div class="mt-8 flex justify-center">
+        <a href="{{ route('berita.index') }}" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 transition">
+            Lihat Semua Berita
+            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+        </a>
+        </div>
+    </div>
     </section>
     <!-- End block -->
-<section class="bg-white dark:bg-gray-900" id="faq" data-aos="fade-up">
+<section class="bg-white" id="faq" data-aos="fade-up">
     <div class="max-w-screen-xl px-4 pb-8 mx-auto lg:pb-24 lg:px-6 ">
-        <h2 class="mb-6 text-3xl font-extrabold tracking-tight text-center text-gray-900 lg:mb-8 lg:text-3xl dark:text-white">Pertanyaan yang Sering Diajukan</h2>
+        <h2 class="mb-6 text-3xl font-extrabold tracking-tight text-center text-gray-900 lg:mb-8 lg:text-3xl">Pertanyaan yang Sering Diajukan</h2>
         <div class="max-w-screen-md mx-auto">
-            <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+            <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white text-gray-900" data-inactive-classes="text-gray-500">
                 <h3 id="accordion-flush-heading-1">
-                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-900 bg-white border-b border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-white" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-900 bg-white border-b border-gray-200" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
                         <span>Bagaimana cara mendaftar antrean online di Klinik Al Afiyah?</span>
                         <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
                 </h3>
                 <div id="accordion-flush-body-1" class="" aria-labelledby="accordion-flush-heading-1">
-                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">Anda dapat mendaftar antrean secara online melalui website ini dengan mengisi data diri dan memilih poliklinik yang diinginkan. Setelah mendaftar, Anda akan mendapatkan nomor antrean yang dapat dipantau secara real-time.</p>
+                    <div class="py-5 border-b border-gray-200">
+                        <p class="mb-2 text-gray-500">Anda dapat mendaftar antrean secara online melalui website ini dengan mengisi data diri dan memilih poliklinik yang diinginkan. Setelah mendaftar, Anda akan mendapatkan nomor antrean yang dapat dipantau secara real-time.</p>
                     </div>
                 </div>
                 <h3 id="accordion-flush-heading-2">
-                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
                         <span>Apakah saya harus datang lebih awal setelah mendaftar online?</span>
                         <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
                 </h3>
                 <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
-                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">Kami menyarankan Anda datang 10-15 menit sebelum nomor antrean Anda dipanggil untuk proses verifikasi dan administrasi di klinik.</p>
+                    <div class="py-5 border-b border-gray-200">
+                        <p class="mb-2 text-gray-500">Kami menyarankan Anda datang 10-15 menit sebelum nomor antrean Anda dipanggil untuk proses verifikasi dan administrasi di klinik.</p>
                     </div>
                 </div>
                 <h3 id="accordion-flush-heading-3">
-                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-3" aria-expanded="false" aria-controls="accordion-flush-body-3">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200" data-accordion-target="#accordion-flush-body-3" aria-expanded="false" aria-controls="accordion-flush-body-3">
                         <span>Apakah bisa memilih dokter saat mendaftar antrean?</span>
                         <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
                 </h3>
                 <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
-                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">Anda dapat memilih poliklinik dan dokter yang tersedia sesuai jadwal praktik yang tertera pada sistem antrean online kami.</p>
+                    <div class="py-5 border-b border-gray-200">
+                        <p class="mb-2 text-gray-500">Anda dapat memilih poliklinik dan dokter yang tersedia sesuai jadwal praktik yang tertera pada sistem antrean online kami.</p>
                     </div>
                 </div>
                 <h3 id="accordion-flush-heading-4">
-                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-4" aria-expanded="false" aria-controls="accordion-flush-body-4">
+                    <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200" data-accordion-target="#accordion-flush-body-4" aria-expanded="false" aria-controls="accordion-flush-body-4">
                         <span>Bagaimana jika saya terlambat datang dari jadwal antrean?</span>
                         <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
                 </h3>
                 <div id="accordion-flush-body-4" class="hidden" aria-labelledby="accordion-flush-heading-4">
-                    <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                        <p class="mb-2 text-gray-500 dark:text-gray-400">Jika Anda terlambat, silakan konfirmasi ke petugas pendaftaran. Kami akan membantu menyesuaikan antrean Anda sesuai kondisi di klinik.</p>
+                    <div class="py-5 border-b border-gray-200">
+                        <p class="mb-2 text-gray-500">Jika Anda terlambat, silakan konfirmasi ke petugas pendaftaran. Kami akan membantu menyesuaikan antrean Anda sesuai kondisi di klinik.</p>
                     </div>
                 </div>
             </div>
@@ -377,18 +353,18 @@
     </div>
 </section>
 
-<section id="tentang" class="bg-white dark:bg-gray-900 py-16" data-aos="fade-up">
+<section id="tentang" class="bg-white py-16" data-aos="fade-up">
     <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <!-- Kiri: Tentang Kami -->
         <div>
-            <h2 class="mb-4 text-4xl font-extrabold text-gray-900 dark:text-white">Tentang Klinik Al Afiyah Banyuwangi</h2>
-            <p class="mb-4 text-gray-700 dark:text-gray-300">
+            <h2 class="mb-4 text-4xl font-extrabold text-gray-900">Tentang Klinik Al Afiyah Banyuwangi</h2>
+            <p class="mb-4 text-gray-700">
                 Klinik Al Afiyah Banyuwangi adalah klinik pratama yang mengutamakan fasilitas kesehatan modern yang berkomitmen memberikan pelayanan terbaik bagi masyarakat. Kami menyediakan layanan medis umum, gigi, kandungan, serta laboratorium dengan sistem antrean online yang memudahkan pasien.
             </p>
-            <p class="mb-4 text-gray-700 dark:text-gray-300">
+            <p class="mb-4 text-gray-700">
                 Didukung oleh tenaga medis profesional, fasilitas lengkap, dan teknologi terkini, Klinik Al Afiyah siap menjadi mitra kesehatan keluarga Anda. Kami selalu mengutamakan kenyamanan, keamanan, dan kepuasan pasien dalam setiap layanan.
             </p>
-            <ul class="list-disc pl-5 text-gray-700 dark:text-gray-300">
+            <ul class="list-disc pl-5 text-gray-700">
                 <li>Pelayanan ramah dan profesional</li>
                 <li>Sistem antrean online & real-time</li>
                 <li>Fasilitas laboratorium lengkap</li>
@@ -407,7 +383,7 @@
                 referrerpolicy="no-referrer-when-downgrade"
             ></iframe>
             </div>
-            <p class="mt-3 text-gray-600 dark:text-gray-400 text-sm">
+            <p class="mt-3 text-gray-600 text-sm">
             Jl. Seroja, Dusun Pacemengan, Blimbingsari, Kec. Rogojampi, Kabupaten Banyuwangi, Jawa Timur 68462
             </p>
             <a href="https://maps.app.goo.gl/B6kHviTkrH6Up8dq7" target="_blank" rel="noopener" class="text-green-600 hover:underline text-sm flex items-center mt-1">

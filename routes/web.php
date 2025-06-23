@@ -8,11 +8,13 @@ use App\Http\Controllers\TenagaMedisController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\JadwalPegawaiController;
 use App\Http\Controllers\AntrianController;
+use App\Http\Controllers\BeritaController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [BeritaController::class, 'beranda'])->name('beranda');
+Route::get('/berita/{berita}', [BeritaController::class, 'showBeranda'])->name('berita.detail');
+Route::get('/berita', [BeritaController::class, 'indexBeranda'])->name('berita.index');
+Route::get('/jadwal', [JadwalPegawaiController::class, 'jadwalBeranda'])->name('jadwal.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -59,6 +61,18 @@ Route::middleware('auth')->group(function () {
     Route::post('/', [AntrianController::class, 'store'])->name('welcome.store');
     Route::put('/admin/antrean/{id}/edit', [AntrianController::class, 'update'])->name('admin.antrian.update');
     Route::delete('/admin/antrean/{id}', [AntrianController::class, 'destroy'])->name('admin.antrian.destroy');
+
+        //berita
+    Route::get('admin/berita', [BeritaController::class, 'index'])->name('admin.berita.index');
+    Route::get('admin/berita/create', [BeritaController::class, 'create'])->name('admin.berita.create');
+    Route::post('admin/berita', [BeritaController::class, 'store'])->name('admin.berita.store');
+    Route::get('admin/berita/{berita}/edit', [BeritaController::class, 'edit'])->name('admin.berita.edit');
+    Route::put('admin/berita/{berita}', [BeritaController::class, 'update'])->name('admin.berita.update');
+    Route::delete('admin/berita/{berita}', [BeritaController::class, 'destroy'])->name('admin.berita.destroy');
+    Route::delete('admin/deleteall', [BeritaController::class, 'deleteAll'])->name('admin.berita.deleteAll');
+    Route::get('admin/berita/search', [BeritaController::class, 'search'])->name('admin.berita.search');
+    Route::post('summernote/picture/upload/{type}', [BeritaController::class, 'uploadImageSummernote']);
+    Route::post('summernote/picture/delete/{type}', [BeritaController::class, 'uploadImageSummernote']);
 });
 
 require __DIR__ . '/auth.php';

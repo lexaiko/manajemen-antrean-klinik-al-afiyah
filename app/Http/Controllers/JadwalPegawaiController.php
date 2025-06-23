@@ -30,6 +30,34 @@ class JadwalPegawaiController extends Controller
     return view('admin.jadwal.index', compact('jadwals', 'roles', 'roleId', 'urutanHari'));
 }
 
+public function jadwalBeranda(Request $request)
+{
+    // Ambil semua role kecuali Admin
+    $roles = Role::where('nama_role', 'NOT LIKE', 'Admin%')->get();
+
+    // Ambil alias dari query string (?role=dokter)
+    $roleAlias = $request->input('role');
+    $roleId = null;
+
+    if ($roleAlias) {
+        // Temukan ID berdasarkan nama_role (case insensitive)
+        $matchedRole = $roles->firstWhere('nama_role', ucfirst(strtolower($roleAlias)));
+        $roleId = $matchedRole?->id;
+    }
+
+    // Urutan hari untuk pengurutan jadwal
+    $urutanHari = config('app.urutan');
+    $urutanHariString = "'" . implode("','", $urutanHari) . "'";
+
+    $jadwals = JadwalPegawai::with(['pegawai', 'role'])
+        ->whereHas('role', fn($q) => $q->where('nama_role', '!=', 'Admin'))
+        ->when($roleId, fn($q) => $q->where('role_id', $roleId))
+        ->orderByRaw("FIELD(hari, $urutanHariString)")
+        ->get();
+
+    return view('jadwal.index', compact('jadwals', 'roles', 'roleAlias', 'urutanHari'));
+}
+
     /**
      * Show the form for creating a new resource.
      *

@@ -192,13 +192,13 @@
             </ul>
             <hr class="border-gray-200 dark:border-gray-700">
             <button type="button"
-                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group {{ request()->is('admin/artikel*') || request()->is('admin/kategori*') ? 'bg-green-600 text-white' : '' }}"
-                aria-controls="manajemen-artikel"
-                aria-expanded="{{ request()->is('admin/artikel*') || request()->is('admin/kategori*') ? 'true' : 'false' }}"
-                data-collapse-toggle="manajemen-artikel">
+                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group {{ request()->is('admin/berita*') || request()->is('admin/kategori*') ? 'bg-green-600 text-white' : '' }}"
+                aria-controls="manajemen-berita"
+                aria-expanded="{{ request()->is('admin/berita*') || request()->is('admin/kategori*') ? 'true' : 'false' }}"
+                data-collapse-toggle="manajemen-berita">
                 <!-- Icon SVG Produk -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="{{ request()->is('admin/artikel*') ? 'white' : 'black' }}" stroke-width="2"
+                    stroke="{{ request()->is('admin/berita*') ? 'white' : 'black' }}" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round"
                     class="lucide lucide-newspaper-icon lucide-newspaper">
                     <path d="M15 18h-5" />
@@ -208,22 +208,22 @@
                     <rect width="8" height="4" x="10" y="6" rx="1" />
                 </svg>
                 <!-- Teks Produk -->
-                <span class="flex-1  text-base font-medium ml-3 text-left whitespace-nowrap">Manajemen Artikel</span>
+                <span class="flex-1  text-base font-medium ml-3 text-left whitespace-nowrap">Manajemen Berita</span>
 
                 <!-- Icon Dropdown -->
-                <svg class="w-3 h-3 {{ request()->is('admin/artikel*') || request()->is('admin/kategori*') ? 'text-white' : 'text-gray-800' }}"
+                <svg class="w-3 h-3 {{ request()->is('admin/berita*') ? 'text-white' : 'text-gray-800' }}"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="m1 1 4 4 4-4" />
                 </svg>
             </button>
-            <ul id="manajemen-artikel"
-                class="{{ request()->is('admin/artikel*') || request()->is('admin/kategori*') ? '' : 'hidden' }} py-2 space-y-2 ">
+            <ul id="manajemen-berita"
+                class="{{ request()->is('admin/berita*') ? '' : 'hidden' }} py-2 space-y-2 ">
                 <li>
-                    <a href="{{ url('admin/artikel/kategori') }}"
-                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/artikel/kategori*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
+                    <a href="{{ url('admin/berita') }}"
+                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/berita*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="{{ request()->is('admin/artikel/kategori') ? 'white' : 'black' }}"
+                            stroke="{{ request()->is('admin/berita') ? 'white' : 'black' }}"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="lucide lucide-chart-column-stacked-icon lucide-chart-column-stacked">
                             <path d="M11 13H7" />
@@ -232,7 +232,7 @@
                             <rect x="15" y="5" width="4" height="12" rx="1" />
                             <rect x="7" y="8" width="4" height="9" rx="1" />
                         </svg>
-                        <span class="ml-3">Kelola artikel</span>
+                        <span class="ml-3">Kelola berita</span>
                     </a>
                 </li>
             </ul>

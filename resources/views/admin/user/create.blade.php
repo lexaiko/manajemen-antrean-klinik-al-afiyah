@@ -69,11 +69,10 @@
                 <div>
                     <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
                     <select id="role" name="role_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('role') is-invalid @enderror">
-                        <option value="1" {{ old('role') == '1' ? 'selected' : '' }}>Admin Klinik</option>
-                        <option value="2" {{ old('role') == '2' ? 'selected' : '' }}>Perawat</option>
-                        <option value="3" {{ old('role') == '3' ? 'selected' : '' }}>Bidan</option>
-                        <option value="4" {{ old('role') == '4' ? 'selected' : '' }}>Dokter Umum</option>
-                        <option value="5" {{ old('role') == '5' ? 'selected' : '' }}>Dokter Gigi</option>
+                        <option value="">-- Pilih Role --</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->id }}" {{ old('role') == $role->id ? 'selected' : '' }}>{{ $role->nama_role }}</option>
+                        @endforeach
                     </select>
                     @error('role')
                     <div class="invalid-feedback text-red-500">{{ $message }}</div>
