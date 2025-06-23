@@ -9,6 +9,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\JadwalPegawaiController;
 use App\Http\Controllers\AntrianController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\DashboardController;
 
 
 Route::get('/', [BeritaController::class, 'beranda'])->name('beranda');
@@ -16,14 +17,11 @@ Route::get('/berita/{berita}', [BeritaController::class, 'showBeranda'])->name('
 Route::get('/berita', [BeritaController::class, 'indexBeranda'])->name('berita.index');
 Route::get('/jadwal', [JadwalPegawaiController::class, 'jadwalBeranda'])->name('jadwal.index');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/daftar', [AntrianController::class, 'welcome'])->name('welcome');
 Route::get('/monitoring', [AntrianController::class, 'monitoring'])->name('monitoring');
 
 Route::middleware('auth')->group(function () {
-
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

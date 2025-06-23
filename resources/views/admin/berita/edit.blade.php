@@ -59,8 +59,9 @@
             </div>
             <div class="flex items-center justify-between">
                 <button type="submit"
-                    class="bg-amber-500 hover:bg-amber-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Memperbarui
-                    Berita</button>
+                    class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Memperbarui Berita
+                </button>
             </div>
         </form>
           <script>

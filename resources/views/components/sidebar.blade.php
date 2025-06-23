@@ -5,10 +5,10 @@
 
         <ul class="space-y-2">
             <li>
-                <a href="/dashboard"
-                    class="flex items-center p-2 text-base font-medium {{ request()->is('dashboard') || request()->is('dashboard') || request()->is('dashboard') || request()->has('query') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg dark:text-white dark:hover:bg-gray-700 group">
+                <a href="/admin/dashboard"
+                    class="flex items-center p-2 text-base font-medium {{ request()->is('admin/dashboard') || request()->is('dashboard') || request()->is('dashboard') || request()->has('query') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg dark:text-white dark:hover:bg-gray-700 group">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="{{ request()->is('dashboard') ? 'white' : 'black' }}" stroke-width="2"
+                        stroke="{{ request()->is('admin/dashboard') ? 'white' : 'black' }}" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-layout-dashboard-icon lucide-layout-dashboard">
                         <rect width="7" height="9" x="3" y="3" rx="1" />
@@ -71,7 +71,7 @@
                             <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                             <circle cx="12" cy="7" r="4" />
                         </svg>
-                        <span class="ml-3">Role</span>
+                        <span class="ml-3">Peran</span>
                     </a>
                 </li>
             </ul>
@@ -223,7 +223,7 @@
                     <a href="{{ url('admin/berita') }}"
                         class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/berita*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="{{ request()->is('admin/berita') ? 'white' : 'black' }}"
+                            stroke="{{ request()->is('admin/berita*') ? 'white' : 'black' }}"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="lucide lucide-chart-column-stacked-icon lucide-chart-column-stacked">
                             <path d="M11 13H7" />

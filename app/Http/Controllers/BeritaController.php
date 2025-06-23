@@ -52,10 +52,10 @@ class BeritaController extends Controller
         Log::info('Request data:', $request->all());
 
         $request->validate([
-            'judul' => 'required|string',
+            'judul' => 'required|string|max:255',
             'konten' => 'required|string|max:4294967295',
             'tgl_published' => 'nullable|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:11048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:11048',
         ]);
 
         $namaPublished = Auth::user()->name; // Ambil nama user yang login
