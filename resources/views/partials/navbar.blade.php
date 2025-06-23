@@ -7,7 +7,7 @@
         <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <button type="button" class="text-white bg-green-600 hover:bg-green-600 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">
                 <nav class="flex items-center justify-end gap-4">
-                    <a href="{{ url('/daftar') }}">
+                    <a href="{{ route('antrean.registrasi') }}">
                         Daftar Antrean
                     </a>
                 </nav>
@@ -22,16 +22,33 @@
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
             <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
                 <li>
-                    <a href="{{ url('/') }}" class="block py-2 px-3 text-white bg-green-600 rounded-sm md:bg-transparent md:text-green-600 md:p-0" aria-current="page">Beranda</a>
+                    <a href="{{ url('/') }}"
+                       class="block py-2 px-3 rounded-sm md:bg-transparent md:p-0
+                           {{ request()->is('/') ? 'text-green-600 bg-green-100 md:text-green-600' : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-600' }}"
+                       aria-current="{{ request()->is('/') ? 'page' : '' }}">
+                        Beranda
+                    </a>
                 </li>
                 <li>
-                    <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-600 md:p-0">List Antrean</a>
+                    <a href="{{ route('antrean.index') }}"
+                       class="block py-2 px-3 rounded-sm md:bg-transparent md:p-0
+                           {{ request()->routeIs('antrean.index') ? 'text-green-600 bg-green-100 md:text-green-600' : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-600' }}">
+                        List Antrean
+                    </a>
                 </li>
                 <li>
-                    <a href="{{ route('jadwal.index') }}" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-600 md:p-0">Jadwal Dokter</a>
+                    <a href="{{ route('jadwal.index') }}"
+                       class="block py-2 px-3 rounded-sm md:bg-transparent md:p-0
+                           {{ request()->routeIs('jadwal.index') ? 'text-green-600 bg-green-100 md:text-green-600' : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-600' }}">
+                        Jadwal Dokter
+                    </a>
                 </li>
                 <li>
-                    <a href="{{ route('berita.index') }}" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-600 md:p-0">Berita</a>
+                    <a href="{{ route('berita.index') }}"
+                       class="block py-2 px-3 rounded-sm md:bg-transparent md:p-0
+                           {{ request()->routeIs('berita.index') ? 'text-green-600 bg-green-100 md:text-green-600' : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-600' }}">
+                        Berita
+                    </a>
                 </li>
             </ul>
         </div>

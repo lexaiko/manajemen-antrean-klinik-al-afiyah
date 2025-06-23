@@ -82,7 +82,7 @@
                             <th scope="col" class="px-4 py-3">Nama</th>
                             <th scope="col" class="px-4 py-3">Email</th>
                             <th scope="col" class="px-4 py-3">Jenis Kelamin</th>
-                            <th scope="col" class="px-4 py-3">Roles</th>
+                            <th scope="col" class="px-4 py-3">Peran</th>
                             <th scope="col" class="px-4 py-3 text-right">Aksi</th>
                         </tr>
                     </thead>

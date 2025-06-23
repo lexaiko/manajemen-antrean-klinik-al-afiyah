@@ -23,7 +23,7 @@
                 {{-- Total Produk --}}
                 <div class="bg-white dark:bg-gray-800 shadow-md rounded-2xl p-6">
                     <div class="text-gray-500 dark:text-gray-300">Total Pasien Hari ini</div>
-                    <div class="text-3xl font-bold text-green-600 dark:text-green-400 mt-2">30 Pasien</div>
+                    <div class="text-3xl font-bold text-green-600 dark:text-green-400 mt-2">{{ $totalAntrianHariIni }} Pasien</div>
                 </div>
             </div>
         </div>

@@ -21,15 +21,13 @@ class Antrian extends Model
         'pembayaran',
         'nomor_whatsapp',
         'keluhan',
-        'pegawais_id'
+        'poli_id'
     ];
-    public function pegawais()
+
+    public function polis()
     {
-        return $this->belongsTo(User::class, 'pegawais_id');
+        return $this->belongsTo(Poli::class, 'poli_id');
     }
 
-    public function roles()
-    {
-        return $this->belongsTo(Role::class, 'roles_id');
-    }
+
 }

@@ -14,8 +14,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $kategoriJadwals = Role::paginate(5);
-        return view('admin.role.index', compact('kategoriJadwals'));
+        $roles = Role::paginate(5);
+        return view('admin.role.index', compact('roles'));
     }
 
     /**
@@ -66,8 +66,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $kategoriJadwal = Role::findOrFail($id);
-        return view('admin.role.edit', compact('kategoriJadwal'));
+        $role = Role::findOrFail($id);
+        return view('admin.role.edit', compact('role'));
     }
 
     /**

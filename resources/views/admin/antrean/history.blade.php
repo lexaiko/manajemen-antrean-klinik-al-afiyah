@@ -33,82 +33,68 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 9 4-4-4-4" />
                         </svg>
-                        <a href="/admin/user"
+                        <a href="/admin/antrean"
                             class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Antrean</a>
+                        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 9 4-4-4-4" />
+                        </svg>
+                        <a href="/admin/antrean"
+                            class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Riwayat</a>
                     </div>
+
                 </li>
             </ol>
         </nav>
         <div class="flex justify-between items-center mb-4">
-            <h1 class="py-2 text-xl font-bold text-gray-900 dark:text-white">Daftar Antrean</h1>
+            <h1 class="py-2 text-xl font-bold text-gray-900 dark:text-white">Riwayat Antrean</h1>
         </div>
-        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg">
-            <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 p-4">
+        <div class="bg-white  dark:bg-gray-800 relative shadow-md sm:rounded-lg">
+            <form method="GET" action="{{ route('admin.antrian.riwayat') }}"
+                class="w-full flex flex-col lg:flex-row lg:items-center justify-between gap-4 px-4 py-4">
 
-                <form method="GET" action="{{ route('admin.antrian.index') }}"
-                    class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 w-full">
+                {{-- Dropdown Poli --}}
+                <div class="w-full lg:w-1/4">
+                    <label for="poli_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih Poli</label>
+                    <select id="poli_id" name="poli_id" onchange="this.form.submit()"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Semua Poli</option>
+                        @foreach ($polis as $poli)
+                            <option value="{{ $poli->id }}" {{ request('poli_id') == $poli->id ? 'selected' : '' }}>
+                                {{ $poli->nama_poli }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-                    {{-- Dropdown Poli --}}
-                    <div class="w-full md:w-1/4">
-                        <select name="poli_id" onchange="this.form.submit()"
-                            class="flowbite-select block w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="">Semua Poli</option>
-                            @foreach ($polis as $poli)
-                                <option value="{{ $poli->id }}" {{ request('poli_id') == $poli->id ? 'selected' : '' }}>
-                                    {{ $poli->nama_poli }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    {{-- Search Input --}}
-                    <div class="relative w-full md:w-1/3">
+                {{-- Search + Button --}}
+                <div class="w-full lg:w-auto flex flex-col sm:flex-row gap-2 sm:gap-4">
+                    <div class="relative w-full sm:w-64">
+                        <label for="search" class="sr-only">Cari nama/NIK pasien...</label>
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </div>
-                        <input type="text" name="search" placeholder="Cari Antrean..."
+                        <input type="text" id="search" name="search" placeholder="Cari nama/NIK pasien..."
                             value="{{ request()->query('search') }}"
-                            class="flowbite-input block w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            autocomplete="off">
+                            class="block w-full pl-10 pr-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
 
-                    {{-- Tombol Submit --}}
                     <button type="submit"
-                        class="flowbite-btn inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition">
-                        <svg class="w-4 h-4 mr-2 -ml-1" fill="none" stroke="currentColor" stroke-width="2"
+                        class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition">
+                        <svg class="w-5 h-5 mr-2 -ml-1" fill="none" stroke="currentColor" stroke-width="2"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                         Cari
                     </button>
-                </form>
-
-                {{-- end search --}}
-                <div
-                    class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                    <div
-                        class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                        <a href="{{ route('admin.antrian.create') }}"
-                            class="flex items-center justify-center text-white bg-green-600 hover:bg-green-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                            <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path clip-rule="evenodd" fill-rule="evenodd"
-                                    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
-                            </svg>
-                            Tambah Antrean
-                        </a>
-                    </div>
                 </div>
-
-            </div>
-
-
-
+            </form>
 
 
 
@@ -123,27 +109,27 @@
                             <th scope="col" class="px-4 py-3">Tanggal Kunjungan</th>
                             <th scope="col" class="px-4 py-3">Status</th>
                             <th scope="col" class="px-4 py-3">Antrian</th>
+                            <th scope="col" class="px-4 py-3">Pembayaran</th>
                             <th scope="col" class="px-4 py-3">Keluhan</th>
                             <th scope="col" class="px-4 py-3 text-right">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($antrian as $user)
+                        @foreach ($antrian as $antrean)
                             <tr class="border-b dark:border-gray-700">
                                 <td class="px-4 py-3">
                                     {{ ($antrian->currentPage() - 1) * $antrian->perPage() + $loop->iteration }}</td>
-                                <td class="px-4 py-3">{{ $user->nama_pasien }}</td>
-                                <td class="px-4 py-3">
-                                    {{ $user->polis->nama_poli ?? 'Tidak Diketahui' }}
-                                </td>
-                                <td class="px-4 py-3">{{ $user->alamat_pasien }}</td>
-                                <td class="px-4 py-3">{{ $user->tanggal_kunjungan }}</td>
-                                <td class="px-4 py-3">{{ $user->status }}</td>
-                                <td class="px-4 py-3">{{ $user->nomor_antrian }}</td>
-                                <td class="px-4 py-3">{{ $user->keluhan }}</td>
+                                <td class="px-4 py-3">{{ $antrean->nama_pasien }}</td>
+                                <td class="px-4 py-3">{{ $antrean->poli->nama_poli }}</td>
+                                <td class="px-4 py-3">{{ $antrean->alamat_pasien }}</td>
+                                <td class="px-4 py-3">{{ $antrean->tanggal_kunjungan }}</td>
+                                <td class="px-4 py-3">{{ $antrean->status }}</td>
+                                <td class="px-4 py-3">{{ $antrean->nomor_antrian }}</td>
+                                <td class="px-4 py-3">{{ $antrean->pembayaran }}</td>
+                                <td class="px-4 py-3">{{ $antrean->keluhan }}</td>
                                 <td class="px-4 py-3 flex items-center justify-end">
-                                    <button id="actionsDropdownButton-{{ $user->id }}"
-                                        data-dropdown-toggle="actionsDropdown-{{ $user->id }}"
+                                    <button id="actionsDropdownButton-{{ $antrean->id }}"
+                                        data-dropdown-toggle="actionsDropdown-{{ $antrean->id }}"
                                         class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700"
                                         type="button">
                                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -153,17 +139,17 @@
                                         </svg>
                                     </button>
                                     <!-- Dropdown menu -->
-                                    <div id="actionsDropdown-{{ $user->id }}"
+                                    <div id="actionsDropdown-{{ $antrean->id }}"
                                         class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                         <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                            aria-labelledby="actionsDropdownButton-{{ $user->id }}">
+                                            aria-labelledby="actionsDropdownButton-{{ $antrean->id }}">
                                             <li>
-                                                <a href="{{ route('admin.antrian.edit', $user->id) }}"
+                                                <a href="{{ route('admin.antrian.edit', $antrean->id) }}"
                                                     class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                             </li>
                                         </ul>
                                         <div class="py-1">
-                                            <form action="{{ route('admin.antrian.destroy', $user->id) }}"
+                                            <form action="{{ route('admin.antrian.destroy', $antrean->id) }}"
                                                 method="POST"
                                                 onsubmit="return confirm('Apakah anda yakin ingin menghapus Antrean ini?');">
                                                 @csrf
@@ -200,6 +186,5 @@
             </nav>
 
         </div>
-
     </x-layout>
 </x-app-layout>

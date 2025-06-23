@@ -10,17 +10,52 @@ use App\Http\Controllers\JadwalPegawaiController;
 use App\Http\Controllers\AntrianController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PoliController;
 
-
+Route::get('/antrean/list', [AntrianController::class, 'antreanIndex'])->name('antrean.index');
 Route::get('/', [BeritaController::class, 'beranda'])->name('beranda');
 Route::get('/berita/{slug}', [BeritaController::class, 'showBeranda'])->name('berita.detail');
 Route::get('/berita', [BeritaController::class, 'indexBeranda'])->name('berita.index');
 Route::get('/jadwal', [JadwalPegawaiController::class, 'jadwalBeranda'])->name('jadwal.index');
 
-Route::get('/daftar', [AntrianController::class, 'welcome'])->name('welcome');
-Route::get('/monitoring', [AntrianController::class, 'monitoring'])->name('monitoring');
-
+Route::get('/antrean/daftar', [AntrianController::class, 'registrasi'])->name('antrean.registrasi');
+Route::post('/antrean/daftar', [AntrianController::class, 'registrasiStore'])->name('antrean.storeRegistrasi');
+Route::get('/antrean/monitoring', [AntrianController::class, 'monitoring'])->name('monitoring');
+Route::get('/admin/antrean/monitoring/data', [AntrianController::class, 'adminMonitoringData'])->name('admin.antrean.monitoring.data');
 Route::middleware('auth')->group(function () {
+
+    Route::get('/admin/antrean/detail/{id}', [AntrianController::class, 'showDetail'])->name('admin.antrean.show');
+
+Route::prefix('admin/antrean/control')->name('admin.antrean.control.')->group(function () {
+    Route::get('/', [AntrianController::class, 'controlIndex'])->name('index');
+    Route::post('/next/{poli}', [AntrianController::class, 'next'])->name('next');
+});
+
+
+
+
+Route::get('/admin/monitoring', [AntrianController::class, 'adminMonitoring'])->name('admin.monitoring');
+
+    Route::get('/admin/antrean', [AntrianController::class, 'index'])->name('admin.antrian.index');
+    Route::get('/admin/antrean/riwayat', [AntrianController::class, 'riwayat'])->name('admin.antrian.riwayat');
+    Route::get('/admin/antrean/detail', [AntrianController::class, 'detail'])->name('admin.antrian.detail');
+    Route::get('/admin/antrean/create', [AntrianController::class, 'create'])->name('admin.antrian.create');
+    Route::get('/admin/antrean/{id}/edit', [AntrianController::class, 'edit'])->name('admin.antrian.edit');
+    Route::post('/admin/antrean', [AntrianController::class, 'store'])->name('admin.antrian.store');
+
+    Route::put('/admin/antrean/{id}/edit', [AntrianController::class, 'update'])->name('admin.antrian.update');
+    Route::delete('/admin/antrean/{id}', [AntrianController::class, 'destroy'])->name('admin.antrian.destroy');
+
+    Route::get('/admin/poli', [PoliController::class, 'index'])->name('admin.poli');
+    Route::get('/admin/poli/create', [PoliController::class, 'create'])->name('admin.poli.create');
+    Route::post('/admin/poli', [PoliController::class, 'store'])->name('admin.poli.store');
+    Route::get('/admin/poli/{id}/edit', [PoliController::class, 'edit'])->name('admin.poli.edit');
+    Route::put('/admin/poli/{id}', [PoliController::class, 'update'])->name('admin.poli.update');
+    Route::delete('/admin/poli/{id}', [PoliController::class, 'destroy'])->name('admin.poli.destroy');
+
+
+
+
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -48,18 +83,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/jadwal/{id}/edit', [JadwalPegawaiController::class, 'edit'])->name('admin.jadwal.edit');
     Route::post('admin/jadwal', [JadwalPegawaiController::class, 'store'])->name('admin.jadwal.store');
     Route::delete('admin/jadwal/{id}', [JadwalPegawaiController::class, 'destroy'])->name('admin.jadwal.destroy');
-
-
-    Route::get('/admin/monitoring', [AntrianController::class, ''])->name('admin.monitoring');
-    Route::get('/admin/antrean', [AntrianController::class, 'index'])->name('admin.antrian');
-    Route::get('/admin/antrean/detail', [AntrianController::class, 'detail'])->name('admin.antrian.detail');
-    Route::get('/admin/antrean/create', [AntrianController::class, 'create'])->name('admin.antrian.create');
-    Route::get('/admin/antrean/{id}/edit', [AntrianController::class, 'edit'])->name('admin.antrian.edit');
-    Route::post('/admin/antrean', [AntrianController::class, 'store'])->name('admin.antrian.store');
-    Route::post('/', [AntrianController::class, 'store'])->name('welcome.store');
-    Route::put('/admin/antrean/{id}/edit', [AntrianController::class, 'update'])->name('admin.antrian.update');
-    Route::delete('/admin/antrean/{id}', [AntrianController::class, 'destroy'])->name('admin.antrian.destroy');
-
         //berita
     Route::get('admin/berita', [BeritaController::class, 'index'])->name('admin.berita.index');
     Route::get('admin/berita/create', [BeritaController::class, 'create'])->name('admin.berita.create');
