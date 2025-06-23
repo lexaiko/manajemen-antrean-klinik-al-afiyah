@@ -202,7 +202,7 @@
             </div>
             <div class="p-5 flex-1 flex flex-col">
             <h3 class="text-lg font-bold mb-2 text-gray-900">{{ $berita->judul }}</h3>
-            <a href="{{ route('berita.detail', $berita->id) }}" class="mt-auto inline-block text-green-600 hover:underline font-medium">Baca Selengkapnya</a>
+            <a href="{{ route('berita.detail', $berita->slug) }}" class="mt-auto inline-block text-green-600 hover:underline font-medium">Baca Selengkapnya</a>
             </div>
         </div>
         @endforeach

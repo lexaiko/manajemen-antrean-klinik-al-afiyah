@@ -2,20 +2,20 @@
     <x-layout>
         <div class="max-w-6xl mx-auto py-10 px-4">
             <h2 class="text-2xl font-bold mb-6">
-                Jadwal {{ $roleId ? $roles->find($roleId)->nama_role : 'Semua Pegawai' }}
+                Jadwal {{ $roleId ? $roles->find($roleId)->nama_role : 'Semua Jadwal' }}
             </h2>
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
     {{-- Filter Role --}}
    <form method="GET" action="{{ route('admin.jadwal.index') }}" class="w-full md:w-auto max-w-md">
     <label for="role_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-        Filter Pegawai
+        Filter Jadwal
     </label>
     <div class="relative">
         <select id="role_id" name="role_id" onchange="this.form.submit()"
             class="appearance-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
                focus:border-blue-500 block w-full p-2.5 pr-10 dark:bg-gray-700 dark:border-gray-600
                dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option value="">Semua Pegawai</option>
+            <option value="">Semua Jadwal</option>
             @foreach ($roles as $role)
                 <option value="{{ $role->id }}" {{ $roleId == $role->id ? 'selected' : '' }}>
                     {{ $role->nama_role }}

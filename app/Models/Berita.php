@@ -14,6 +14,7 @@ class Berita extends Model
     protected $primaryKey = "id";
     protected $fillable = [
         'judul',
+        'slug',
         'konten',
         'tgl_published',
         'nama_published',

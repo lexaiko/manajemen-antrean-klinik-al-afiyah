@@ -13,7 +13,7 @@ use App\Http\Controllers\DashboardController;
 
 
 Route::get('/', [BeritaController::class, 'beranda'])->name('beranda');
-Route::get('/berita/{berita}', [BeritaController::class, 'showBeranda'])->name('berita.detail');
+Route::get('/berita/{slug}', [BeritaController::class, 'showBeranda'])->name('berita.detail');
 Route::get('/berita', [BeritaController::class, 'indexBeranda'])->name('berita.index');
 Route::get('/jadwal', [JadwalPegawaiController::class, 'jadwalBeranda'])->name('jadwal.index');
 
@@ -23,9 +23,9 @@ Route::get('/monitoring', [AntrianController::class, 'monitoring'])->name('monit
 Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/admin/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/admin/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user.index');
     Route::get('/admin/staff', [UserController::class, 'staff'])->name('admin.user.staff');

@@ -33,7 +33,7 @@
                             </svg>
                             <span class="self-center text-sm text-gray-700">Oleh - {{ $berita->nama_published }}</span>
                         </div>
-                        <a href="{{ route('berita.detail', $berita->id) }}" class="mt-auto inline-block text-green-600 hover:underline font-medium">Baca Selengkapnya</a>
+                        <a href="{{ route('berita.detail', $berita->slug) }}" class="mt-auto inline-block text-green-600 hover:underline font-medium">Baca Selengkapnya</a>
                     </div>
                 </div>
       @endforeach

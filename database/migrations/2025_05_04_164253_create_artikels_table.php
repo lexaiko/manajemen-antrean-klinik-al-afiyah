@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('beritas', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
+            $table->string('slug')->unique()->nullable();
             $table->longText('konten');
             $table->date('tgl_published');
             $table->string('nama_published');

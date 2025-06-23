@@ -36,9 +36,9 @@ class BeritaController extends Controller
         return view('welcome', compact('beritas'));
     }
 
-    public function showBeranda($id)
+    public function showBeranda($slug)
     {
-        $berita = Berita::findOrFail($id);
+        $berita = Berita::where('slug', $slug)->firstOrFail();
         return view('berita.detail', compact('berita'));
     }
     public function indexBeranda()
@@ -125,14 +125,20 @@ class BeritaController extends Controller
 
 
         $berita = new Berita;
-        $berita->judul = $request->input('judul');
-        $berita->konten = $request->input('konten');
-        $berita->tgl_published = $tgl_published;
-        $berita->nama_published = $namaPublished;
-        $berita->gambar = $path;
+$berita->judul = $request->input('judul');
+$berita->konten = $request->input('konten');
+$berita->tgl_published = $tgl_published;
+$berita->nama_published = $namaPublished;
+$berita->gambar = $path;
 
-        $berita->save();
-        Log::info('Berita saved:', ['judul' => $berita->judul, 'id' => $berita->id]);
+// Simpan dulu agar dapat ID
+$berita->save();
+Log::info('Berita saved:', ['judul' => $berita->judul, 'id' => $berita->id]);
+// Sekarang buat slug dengan ID yang sudah ada
+$berita->slug = Str::slug($berita->judul) . '-' . now()->format('Ymd') . '-' . $berita->id;
+$berita->save();
+
+        Log::info('Berita slug updated:', ['slug' => $berita->slug]);
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil ditambahkan');
     }
