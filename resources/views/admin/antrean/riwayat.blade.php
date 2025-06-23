@@ -35,12 +35,20 @@
                         </svg>
                         <a href="/admin/user"
                             class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Antrean</a>
+                        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 9 4-4-4-4" />
+                        </svg>
+                        <a href="/admin/user"
+                            class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Riwayat</a>
                     </div>
+
                 </li>
             </ol>
         </nav>
         <div class="flex justify-between items-center mb-4">
-            <h1 class="py-2 text-xl font-bold text-gray-900 dark:text-white">Daftar Antrean</h1>
+            <h1 class="py-2 text-xl font-bold text-gray-900 dark:text-white">Riwayat Antrean</h1>
         </div>
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg">
             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 p-4">
@@ -86,19 +94,17 @@
 
             </div>
             <form method="GET" action="{{ route('admin.antrian') }}" class="mb-4 flex justify-start mx-4">
-                <select name="poli_id" onchange="this.form.submit()"
+                <select name="filter" onchange="this.form.submit()"
                     class="border border-gray-600 dark:border-gray-400 text-gray-600 dark:text-gray-400 rounded-lg w-2/5 border-gray-">
                     <option value="">Semua Poli</option>
-                    @foreach ($polis as $poli)
-                        <option value="{{ $poli->id }}" {{ $poli->nama_poli ? 'selected' : '' }}>
-                            {{ $poli->nama_poli }}
-                        </option>
-                    @endforeach
+                    <option value="poli_umum" {{ request('filter') == 'poli_umum' ? 'selected' : '' }}>Poli
+                        Umum</option>
+                    <option value="poli_gigi" {{ request('filter') == 'poli_gigi' ? 'selected' : '' }}>Poli
+                        Gigi</option>
+                    <option value="poli_kia" {{ request('filter') == 'poli_kia' ? 'selected' : '' }}>Poli
+                        KIA</option>
                 </select>
             </form>
-
-
-
 
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
@@ -115,7 +121,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($antrian as $user)
+                        @foreach ($antrian->where('status', 'selesai') as $user)
                             <tr class="border-b dark:border-gray-700">
                                 <td class="px-4 py-3">
                                     {{ ($antrian->currentPage() - 1) * $antrian->perPage() + $loop->iteration }}</td>
@@ -184,6 +190,5 @@
             </nav>
 
         </div>
-
     </x-layout>
 </x-app-layout>

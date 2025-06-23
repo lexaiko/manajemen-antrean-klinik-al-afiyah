@@ -7,7 +7,7 @@ use App\Http\Controllers\KalenderController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\JadwalPegawaiController;
 use App\Http\Controllers\AntrianController;
-
+use App\Http\Controllers\PoliController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,11 +18,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/', [AntrianController::class, 'welcome'])->name('welcome');
 Route::get('/monitoring', [AntrianController::class, 'monitoring'])->name('monitoring');
-Route::get('/monitoring/lengkap', [AntrianController::class, 'monitoringlengkap'])->name('monitoring');
+Route::get('/monitoring/lengkap', [AntrianController::class, 'monitoringlengkap'])->name('monitoringlengkap');
 Route::post('/', [AntrianController::class, 'store'])->name('welcome.store');
 
-Route::middleware('auth')->group(function () {
-    
+Route::middleware('auth')->group(function () {   
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -55,6 +54,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/admin/monitoring', [AntrianController::class, 'adminmonitoring'])->name('admin.monitoring');
     Route::get('/admin/antrean', [AntrianController::class, 'index'])->name('admin.antrian');
+    Route::get('/admin/antrean/riwayat', [AntrianController::class, 'riwayat'])->name('admin.antrian.riwayat');
     Route::get('/admin/antrean/detail', [AntrianController::class, 'detail'])->name('admin.antrian.detail');
     Route::get('/admin/antrean/create', [AntrianController::class, 'create'])->name('admin.antrian.create');
     Route::get('/admin/antrean/{id}/edit', [AntrianController::class, 'edit'])->name('admin.antrian.edit');
@@ -62,6 +62,15 @@ Route::middleware('auth')->group(function () {
     
     Route::put('/admin/antrean/{id}/edit', [AntrianController::class, 'update'])->name('admin.antrian.update');
     Route::delete('/admin/antrean/{id}', [AntrianController::class, 'destroy'])->name('admin.antrian.destroy');
+
+    Route::get('/admin/poli', [PoliController::class, 'index'])->name('admin.poli');
+    Route::get('/admin/poli/create', [PoliController::class, 'create'])->name('admin.poli.create');
+    Route::post('/admin/poli', [PoliController::class, 'store'])->name('admin.poli.store');
+    Route::get('/admin/poli/{id}/edit', [PoliController::class, 'edit'])->name('admin.poli.edit');
+    Route::put('/admin/poli/{id}', [PoliController::class, 'update'])->name('admin.poli.update');
+    Route::delete('/admin/poli/{id}', [PoliController::class, 'destroy'])->name('admin.poli.destroy');
+
+
 });
 
 require __DIR__ . '/auth.php';
