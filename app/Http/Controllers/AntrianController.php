@@ -10,9 +10,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AntrianController extends Controller
 {
+
+    public function downloadPdf($id)
+{
+    $antrean = \App\Models\Antrian::with('polis')->findOrFail($id);
+    $pdf = Pdf::loadView('antrean.detail_pdf', compact('antrean'));
+    return $pdf->download('antrean-'.$antrean->nomor_antrian.'.pdf');
+}
 public function next($poli_id)
 {
     // Ubah status yang sedang dilayani jadi selesai
@@ -142,6 +150,13 @@ public function antreanIndex(Request $request)
     $antrean = Antrian::with('polis')->findOrFail($id);
     return view('admin.antrean.show', compact('antrean'));
 }
+public function berandaDetail($id)
+{
+    $antrean = Antrian::with('polis')->findOrFail($id);
+
+    return view('antrean.detail', compact('antrean'));
+}
+
 
 
     public function registrasi()
@@ -294,22 +309,23 @@ public function antreanIndex(Request $request)
         }
 
         Log::debug('Nomor antrian yang dihasilkan:', [$nomor_antrian]);
-        Antrian::create([
-            'nik_pasien' => $request->nik_pasien,
-            'nama_pasien' => $request->nama_pasien,
-            'tanggal_kunjungan' => $tanggal,
-            'alamat_pasien' => $request->alamat_pasien,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'status' => 'antri',
-            'pembayaran' => $request->pembayaran,
-            'nomor_whatsapp' => $request->nomor_whatsapp,
-            'keluhan' => $request->keluhan,
-            'nomor_antrian' => $nomor_antrian,
-            'poli_id' => $request->polis_id,
-        ]);
+        $antrian = Antrian::create([
+    'nik_pasien' => $request->nik_pasien,
+    'nama_pasien' => $request->nama_pasien,
+    'tanggal_kunjungan' => $tanggal,
+    'alamat_pasien' => $request->alamat_pasien,
+    'jenis_kelamin' => $request->jenis_kelamin,
+    'tanggal_lahir' => $request->tanggal_lahir,
+    'status' => 'antri',
+    'pembayaran' => $request->pembayaran,
+    'nomor_whatsapp' => $request->nomor_whatsapp,
+    'keluhan' => $request->keluhan,
+    'nomor_antrian' => $nomor_antrian,
+    'poli_id' => $request->polis_id,
+]);
 
-      return redirect()->route('antrean.index')->with('success', 'Antrean berhasil ditambahkan.');
+return redirect()->route('antrean.detail', $antrian->id)
+    ->with('success', 'Pendaftaran berhasil. Berikut detail antrean Anda.');
     }
 
     public function edit($id)

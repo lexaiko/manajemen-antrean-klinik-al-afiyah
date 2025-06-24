@@ -17,6 +17,8 @@ Route::get('/', [BeritaController::class, 'beranda'])->name('beranda');
 Route::get('/berita/{slug}', [BeritaController::class, 'showBeranda'])->name('berita.detail');
 Route::get('/berita', [BeritaController::class, 'indexBeranda'])->name('berita.index');
 Route::get('/jadwal', [JadwalPegawaiController::class, 'jadwalBeranda'])->name('jadwal.index');
+Route::get('/antrean/detail/{id}', [AntrianController::class, 'berandaDetail'])->name('antrean.detail');
+Route::get('/antrean/{id}/pdf', [AntrianController::class, 'downloadPdf'])->name('antrean.downloadPdf');
 
 Route::get('/antrean/daftar', [AntrianController::class, 'registrasi'])->name('antrean.registrasi');
 Route::post('/antrean/daftar', [AntrianController::class, 'registrasiStore'])->name('antrean.storeRegistrasi');
