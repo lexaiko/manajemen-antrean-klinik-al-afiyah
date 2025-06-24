@@ -1,7 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-    @include('partials.navbar')
 
     <section class="container mx-auto px-10 py-0 mt-16">
         <div class="flex justify-center py-5">

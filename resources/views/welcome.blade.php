@@ -1,7 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-    @include('partials.navbar')
    <section style="background-image: url('{{ url('images/hero-bg.jpg') }}');" class="bg-center bg-no-repeat bg-gray-400 bg-blend-multiply bg-cover mt-6" data-aos="fade-down">
     <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
         <h1 class="mb-4 text-2xl font-bold tracking-tight leading-none text-white md:text-5xl lg:text-5xl">
