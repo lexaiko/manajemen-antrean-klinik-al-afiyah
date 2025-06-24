@@ -23,7 +23,6 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('admin123'), // ganti dengan password aman
                 'remember_token' => Str::random(10),
                 'jenis_kelamin' => 'L', // atau 'P'
-                'role_id' => 1, // pastikan sudah ada di tabel roles
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -34,7 +33,6 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('admin123'), // ganti dengan password aman
                 'remember_token' => Str::random(10),
                 'jenis_kelamin' => 'L', // atau 'P'
-                'role_id' => 1, // pastikan sudah ada di tabel roles
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -45,7 +43,6 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('admin123'), // ganti dengan password aman
                 'remember_token' => Str::random(10),
                 'jenis_kelamin' => 'L', // atau 'P'
-                'role_id' => 1, // pastikan sudah ada di tabel roles
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -56,7 +53,6 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('admin123'), // ganti dengan password aman
                 'remember_token' => Str::random(10),
                 'jenis_kelamin' => 'P', // atau 'L'
-                'role_id' => 1, // pastikan sudah ada di tabel roles
                 'created_at' => now(),
                 'updated_at' => now(),
             ]

@@ -14,33 +14,28 @@ class JadwalPegawai extends Model
 
     protected $fillable = [
         'pegawai_id',
-        'role_id',
         'hari',
         'jam_mulai',
-        'jam_selesai'
+        'jam_selesai',
     ];
 
     protected $appends = ['difference'];
 
-public function getJamMulaiAttribute($value)
-{
-    return \Carbon\Carbon::parse($value)->format('H:i');
-}
+    public function getJamMulaiAttribute($value)
+    {
+        return Carbon::parse($value)->format('H:i');
+    }
 
-public function getJamSelesaiAttribute($value)
-{
-    return \Carbon\Carbon::parse($value)->format('H:i');
-}
-
+    public function getJamSelesaiAttribute($value)
+    {
+        return Carbon::parse($value)->format('H:i');
+    }
 
     public function pegawai()
     {
         return $this->belongsTo(User::class, 'pegawai_id');
     }
 
-    public function role()
-    {
-        return $this->belongsTo(Role::class, 'role_id');
-    }
+    // Hapus relasi role karena tidak lagi dipakai
+    // public function role() { ... }
 }
-

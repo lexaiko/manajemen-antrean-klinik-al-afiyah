@@ -2,105 +2,56 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $roles = Role::paginate(5);
         return view('admin.role.index', compact('roles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.role.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'nama_role' => 'required|unique:roles|max:255',
+            'name' => 'required|unique:roles|max:255',
         ]);
 
-        \Log::debug('masuk store role', [$request->all()]);
+        Role::create(['name' => $request->name]);
 
-        $role = Role::create($request->all());
-
-        return redirect()->route('admin.role.index')->with('success', 'Kategori Jadwal created successfully');
+        return redirect()->route('admin.role.index')->with('success', 'Role berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Role  $kategoriJadwal
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Role $kategoriJadwal)
-    {
-        return view('admin.role.show', compact('kategoriJadwal'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Role  $kategoriJadwal
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $role = Role::findOrFail($id);
         return view('admin.role.edit', compact('role'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $kategoriJadwal
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_role' => 'required|unique:roles|max:255',
+            'name' => 'required|unique:roles,name,' . $id,
         ]);
 
-        $kategoriJadwal = Role::findOrFail($id);
-        $kategoriJadwal->update($request->all());
+        $role = Role::findOrFail($id);
+        $role->update(['name' => $request->name]);
 
-        return redirect()->route('admin.role.index')->with('success', 'Kategori Jadwal updated successfully');
+        return redirect()->route('admin.role.index')->with('success', 'Role berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Role  $kategoriJadwal
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $kategoriJadwal = Role::findOrFail($id);
-        $kategoriJadwal->delete();
+        $role = Role::findOrFail($id);
+        $role->delete();
 
-        return redirect()->route('admin.role.index')->with('success', 'Kategori Jadwal deleted successfully');
+        return redirect()->route('admin.role.index')->with('success', 'Role berhasil dihapus.');
     }
 }
-

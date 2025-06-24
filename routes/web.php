@@ -20,9 +20,22 @@ Route::get('/jadwal', [JadwalPegawaiController::class, 'jadwalBeranda'])->name('
 
 Route::get('/antrean/daftar', [AntrianController::class, 'registrasi'])->name('antrean.registrasi');
 Route::post('/antrean/daftar', [AntrianController::class, 'registrasiStore'])->name('antrean.storeRegistrasi');
-Route::get('/antrean/monitoring', [AntrianController::class, 'monitoring'])->name('monitoring');
-Route::get('/admin/antrean/monitoring/data', [AntrianController::class, 'adminMonitoringData'])->name('admin.antrean.monitoring.data');
-Route::middleware('auth')->group(function () {
+
+Route::group(['middleware' => ['role:admin klinik|dokter umum|dokter gigi|bidan|perawat']], function () {
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/admin/antrean', [AntrianController::class, 'index'])->name('admin.antrian.index');
+Route::get('/admin/antrean/riwayat', [AntrianController::class, 'riwayat'])->name('admin.antrian.riwayat');
+Route::get('/admin/antrean/detail', [AntrianController::class, 'detail'])->name('admin.antrian.detail');
+    Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/admin/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/admin/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user.index');
+Route::get('/admin/jadwal', [JadwalPegawaiController::class, 'index'])->name('admin.jadwal.index');
+Route::get('/admin/poli', [PoliController::class, 'index'])->name('admin.poli');
+    // + semua route create/update/delete lainnya
+});
+
+Route::group(['middleware' => ['role:admin klinik']], function () {
 
     Route::get('/admin/antrean/detail/{id}', [AntrianController::class, 'showDetail'])->name('admin.antrean.show');
 
@@ -32,13 +45,13 @@ Route::prefix('admin/antrean/control')->name('admin.antrean.control.')->group(fu
 });
 
 
+    Route::get('/admin/antrean/monitoring/data', [AntrianController::class, 'adminMonitoringData'])->name('admin.antrean.monitoring.data');
+
+    Route::get('/admin/monitoring', [AntrianController::class, 'adminMonitoring'])->name('admin.monitoring');
 
 
-Route::get('/admin/monitoring', [AntrianController::class, 'adminMonitoring'])->name('admin.monitoring');
 
-    Route::get('/admin/antrean', [AntrianController::class, 'index'])->name('admin.antrian.index');
-    Route::get('/admin/antrean/riwayat', [AntrianController::class, 'riwayat'])->name('admin.antrian.riwayat');
-    Route::get('/admin/antrean/detail', [AntrianController::class, 'detail'])->name('admin.antrian.detail');
+
     Route::get('/admin/antrean/create', [AntrianController::class, 'create'])->name('admin.antrian.create');
     Route::get('/admin/antrean/{id}/edit', [AntrianController::class, 'edit'])->name('admin.antrian.edit');
     Route::post('/admin/antrean', [AntrianController::class, 'store'])->name('admin.antrian.store');
@@ -46,7 +59,7 @@ Route::get('/admin/monitoring', [AntrianController::class, 'adminMonitoring'])->
     Route::put('/admin/antrean/{id}/edit', [AntrianController::class, 'update'])->name('admin.antrian.update');
     Route::delete('/admin/antrean/{id}', [AntrianController::class, 'destroy'])->name('admin.antrian.destroy');
 
-    Route::get('/admin/poli', [PoliController::class, 'index'])->name('admin.poli');
+
     Route::get('/admin/poli/create', [PoliController::class, 'create'])->name('admin.poli.create');
     Route::post('/admin/poli', [PoliController::class, 'store'])->name('admin.poli.store');
     Route::get('/admin/poli/{id}/edit', [PoliController::class, 'edit'])->name('admin.poli.edit');
@@ -56,13 +69,7 @@ Route::get('/admin/monitoring', [AntrianController::class, 'adminMonitoring'])->
 
 
 
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/admin/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/admin/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user.index');
     Route::get('/admin/staff', [UserController::class, 'staff'])->name('admin.user.staff');
     Route::get('/admin/user/tambah', [UserController::class, 'create'])->name('admin.user.create');
     Route::put('admin/user/{id}', [UserController::class, 'update'])->name('admin.user.update');
@@ -77,7 +84,7 @@ Route::get('/admin/monitoring', [AntrianController::class, 'adminMonitoring'])->
     Route::post('admin/role', [RoleController::class, 'store'])->name('admin.role.store');
     Route::delete('admin/role/{id}', [RoleController::class, 'destroy'])->name('admin.role.destroy');
 
-    Route::get('/admin/jadwal', [JadwalPegawaiController::class, 'index'])->name('admin.jadwal.index');
+
     Route::get('/admin/jadwal/tambah', [JadwalPegawaiController::class, 'create'])->name('admin.jadwal.create');
     Route::put('admin/jadwal/{id}', [JadwalPegawaiController::class, 'update'])->name('admin.jadwal.update');
     Route::get('/admin/jadwal/{id}/edit', [JadwalPegawaiController::class, 'edit'])->name('admin.jadwal.edit');

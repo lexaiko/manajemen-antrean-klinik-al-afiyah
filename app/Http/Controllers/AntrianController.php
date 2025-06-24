@@ -145,16 +145,17 @@ public function antreanIndex(Request $request)
 
 
     public function registrasi()
-    {
-        $polis = Poli::all();
-        $users = User::whereHas('role', function ($q) {
-            $q->whereIn('nama_role', ['dokter umum', 'dokter gigi']);
-        })->with('role')->get();
+{
+    $polis = Poli::all();
 
+    // Ambil user yang memiliki role 'dokter umum' atau 'dokter gigi'
+    $users = User::role(['dokter umum', 'dokter gigi'])->get();
 
-        $antrians = Antrian::all();
-        return view('antrean.registrasi', compact('antrians', 'users', 'polis'));
-    }
+    $antrians = Antrian::all();
+
+    return view('antrean.registrasi', compact('antrians', 'users', 'polis'));
+}
+
 
     /**
      * Show the form for creating a new resource.

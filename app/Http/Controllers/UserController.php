@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Log;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::all(); // Spatie Role
         return view('admin.user.create', compact('roles'));
     }
 
@@ -40,16 +40,18 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'jenis_kelamin' => 'required|string|max:1',
-            'role_id' => 'required|exists:roles,id',
+            'role' => 'required|exists:roles,name', // pakai role name dari Spatie
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'jenis_kelamin' => $request->jenis_kelamin,
-            'role_id' => $request->role_id ?? null,
         ]);
+
+        // Assign role (profesi)
+        $user->assignRole($request->role);
 
         Log::debug('Pegawai berhasil ditambahkan');
 
@@ -57,17 +59,12 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id) {}
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
     {
-        $roles = Role::all();
         $user = User::findOrFail($id);
+        $roles = Role::all();
         return view('admin.user.edit', compact('user', 'roles'));
     }
 
@@ -76,15 +73,22 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'jenis_kelamin' => 'required|string|max:1',
-            'role_id' => 'required|exists:roles,id',
+            'role' => 'required|exists:roles,name',
         ]);
 
         $user = User::findOrFail($id);
-        $user->update($validatedData);
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'jenis_kelamin' => $request->jenis_kelamin,
+        ]);
+
+        // Ganti role-nya
+        $user->syncRoles([$request->role]);
 
         return redirect()->route('admin.user.index')->with('success', 'Pegawai berhasil diperbarui.');
     }
@@ -96,7 +100,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
+
         return redirect()->route('admin.user.index')->with('success', 'Pegawai berhasil dihapus.');
     }
 }
-

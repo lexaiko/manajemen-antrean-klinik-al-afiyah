@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('jadwal_pegawais', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pegawai_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
             $table->string('hari');
             $table->time('jam_mulai');
             $table->time('jam_selesai');

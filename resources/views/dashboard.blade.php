@@ -7,7 +7,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-white dark:bg-gray-800 shadow-md rounded-2xl p-6 col-span-1 md:col-span-3">
-                    <div class="text-gray-500 dark:text-gray-300">Anda masuk sebagai {{ Auth::user()->name }} dengan role {{ Auth::user()->role->nama_role }}!</div>
+                    <div class="text-gray-500 dark:text-gray-300">Anda masuk sebagai {{ Auth::user()->name }} dengan role
+                    {{ Auth::user()->getRoleNames()->first() ?? '-' }}!</div>
                 </div>
                 {{-- Total User --}}
                 <div class="bg-white dark:bg-gray-800 shadow-md rounded-2xl p-6">

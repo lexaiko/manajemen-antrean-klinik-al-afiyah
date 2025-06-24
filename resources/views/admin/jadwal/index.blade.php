@@ -2,40 +2,39 @@
     <x-layout>
         <div class="max-w-6xl mx-auto py-10 px-4">
             <h2 class="text-2xl font-bold mb-6">
-                Jadwal {{ $roleId ? $roles->find($roleId)->nama_role : 'Semua Jadwal' }}
+                Jadwal {{ $roleFilter ? ucfirst($roleFilter) : 'Semua Jadwal' }}
             </h2>
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-    {{-- Filter Role --}}
-   <form method="GET" action="{{ route('admin.jadwal.index') }}" class="w-full md:w-auto max-w-md">
-    <label for="role_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-        Filter Jadwal
-    </label>
-    <div class="relative">
-        <select id="role_id" name="role_id" onchange="this.form.submit()"
-            class="appearance-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
-               focus:border-blue-500 block w-full p-2.5 pr-10 dark:bg-gray-700 dark:border-gray-600
-               dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option value="">Semua Jadwal</option>
-            @foreach ($roles as $role)
-                <option value="{{ $role->id }}" {{ $roleId == $role->id ? 'selected' : '' }}>
-                    {{ $role->nama_role }}
-                </option>
-            @endforeach
-        </select>
-
-        <!-- Icon panah -->
-        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            <svg class="w-4 h-4 text-gray-400 dark:text-gray-300" fill="none" stroke="currentColor" stroke-width="2"
-                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-        </div>
-    </div>
-</form>
+                {{-- Filter Role --}}
+                <form method="GET" action="{{ route('admin.jadwal.index') }}" class="w-full md:w-auto max-w-md">
+                    <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Filter Jadwal
+                    </label>
+                    <div class="relative">
+                        <select id="role" name="role" onchange="this.form.submit()"
+                            class="appearance-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+            focus:border-blue-500 block w-full p-2.5 pr-10 dark:bg-gray-700 dark:border-gray-600
+            dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">Semua Jadwal</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->name }}" {{ $roleFilter == $role->name ? 'selected' : '' }}>
+                                    {{ ucfirst($role->name) }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <svg class="w-4 h-4 text-gray-400 dark:text-gray-300" fill="none" stroke="currentColor"
+                                stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                </form>
 
 
-    {{-- Tombol Tambah Jadwal --}}
-    <div
+@role('admin klinik')
+                {{-- Tombol Tambah Jadwal --}}
+                <div
                     class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                     <a href="{{ route('admin.jadwal.create') }}"
                         class="flex items-center justify-center text-white bg-green-600 hover:bg-green-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
@@ -47,7 +46,8 @@
                         Tambah Jadwal
                     </a>
                 </div>
-</div>
+                @endrole
+            </div>
 
             {{-- Mobile View --}}
             <div class="md:hidden space-y-6">
@@ -70,8 +70,10 @@
                                     <div
                                         class="bg-white border border-gray-200 rounded-lg shadow p-4 mb-3 dark:bg-gray-800 dark:border-gray-700">
                                         <div class="font-medium text-gray-900 dark:text-white">
-                                            👨‍⚕️ {{ $jadwal->pegawai->name }} ({{ $jadwal->role->nama_role }})
+                                            👨‍⚕️ {{ $jadwal->pegawai->name }}
+                                            ({{ $jadwal->pegawai->getRoleNames()->first() ?? '-' }})
                                         </div>
+
                                         <div class="text-sm text-gray-500 dark:text-gray-300">
                                             ⏰ {{ $jadwal->jam_mulai }} - {{ $jadwal->jam_selesai }}
                                         </div>
@@ -109,7 +111,10 @@
                             <tr class="border-b dark:border-gray-700">
                                 <td class="px-4 py-3">{{ $loop->iteration }}</td>
                                 <td class="px-4 py-3">{{ $jadwal->pegawai->name }}</td>
-                                <td class="px-4 py-3">{{ $jadwal->role->nama_role }}</td>
+                                <td class="px-4 py-3">
+    {{ $jadwal->pegawai->getRoleNames()->first() ?? '-' }}
+</td>
+
                                 <td class="px-4 py-3">{{ $jadwal->hari }}</td>
                                 <td class="px-4 py-3">{{ $jadwal->jam_mulai }}</td>
                                 <td class="px-4 py-3">{{ $jadwal->jam_selesai }}</td>
