@@ -1,15 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-    <section class="jumbotron w-full">
-        <div class="relative w-full overflow-hidden">
-            <img class="w-full h-full object-cover" src="{{ url('images/hero-bg.jpg') }}" alt="">
-            <div
-                class="absolute inset-0 flex flex-col justify-center items-start bg-black/30 bg-opacity-30 text-white text-left pl-[300px]">
-                <h1 class="text-2xl md:text-4xl font-bold mb-2">Selamat Datang</h1>
-                <p class="text-sm md:text-lg mb-3">di Klinik Al Afiyah Blimbingsari</p>
-            </div>
-
+    <section class="jumbotron h-1/3 md:h-1/3 w-full">
+        <div class="relative w-full overflow-hidden" style="height: 33vh; min-height: 180px;">
+            <img class="w-full h-full object-cover" src="{{ url('images/hero-bg.jpg') }}" alt="" style="height: 100%; object-fit: cover;">
         </div>
         @if ($errors->any())
             <div class="mb-4">

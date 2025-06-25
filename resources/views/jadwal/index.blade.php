@@ -2,7 +2,10 @@
 
 @section('content')
     @include('partials.navbar')
-
+<section class="jumbotron h-1/3 md:h-1/3 w-full">
+        <div class="relative w-full overflow-hidden" style="height: 33vh; min-height: 180px;">
+            <img class="w-full h-full object-cover" src="{{ url('images/hero-bg.jpg') }}" alt="" style="height: 100%; object-fit: cover;">
+        </div>
     <div class="max-w-6xl mx-auto py-10 px-4 md:mt-0 mt-16">
         <h2 class="text-2xl font-bold mb-6">
             Jadwal {{ $selectedRole?->name ? ucfirst($selectedRole->name) : 'Semua Jadwal' }}
@@ -100,4 +103,5 @@
             </table>
         </div>
     </div>
+    </section>
 @endsection

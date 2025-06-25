@@ -344,7 +344,7 @@
             <h2 class="mb-4 text-4xl font-bold text-gray-900">Dipercaya oleh Ribuan Pasien</h2>
             <p class="mb-4 font-light">Ribuan pasien telah merasakan kemudahan layanan di Klinik Al Afiyah Banyuwangi. Sistem antrean online kami membantu mengurangi waktu tunggu dan meningkatkan kepuasan pasien.</p>
             <p class="mb-4 font-medium">Dapatkan pengalaman berobat yang lebih cepat, nyaman, dan modern bersama kami.</p>
-            <a href="#daftar" class="inline-flex items-center font-medium text-green-600 hover:text-green-800">
+            <a href="{{ route('antrean.registrasi') }}" class="inline-flex items-center font-medium text-green-600 hover:text-green-800">
                 Daftar Sekarang
                 <svg class="ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
             </a>

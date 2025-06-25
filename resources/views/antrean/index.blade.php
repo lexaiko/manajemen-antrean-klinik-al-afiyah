@@ -1,14 +1,11 @@
 @extends('layouts.main')
 
 @section('content')
-    <section class="jumbotron w-full min-h-[70vh] md:min-h-screen flex flex-col justify-center">
-        <div class="relative w-full h-56 md:h-96 overflow-hidden">
-            <img class="w-full h-full object-cover" src="{{ url('images/hero-bg.jpg') }}" alt="">
-            <div class="absolute inset-0 flex flex-col justify-center items-start bg-black/40 text-white px-6 md:px-24">
-                <h1 class="text-xl md:text-4xl font-bold mb-2 drop-shadow">Selamat Datang</h1>
-                <p class="text-sm md:text-lg mb-3 drop-shadow">di Klinik Al Afiyah Blimbingsari</p>
-            </div>
+    <section class="jumbotron w-full" style="height: 33vh; min-height: 180px;">
+        <div class="relative w-full h-full overflow-hidden">
+            <img class="w-full h-full object-cover" src="{{ url('images/hero-bg.jpg') }}" alt="" style="height: 100%; object-fit: cover;">
         </div>
+    </section>
         <div class="relative z-10 flex justify-center items-center w-full">
             <div
                 class="flex flex-col justify-center items-center p-4 bg-white shadow-lg rounded-lg -mt-8 mb-5 w-[95%] max-w-4xl">
@@ -75,5 +72,4 @@
                 </div>
             </div>
         </div>
-    </section>
 @endsection
