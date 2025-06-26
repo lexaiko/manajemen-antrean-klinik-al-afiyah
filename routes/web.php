@@ -44,6 +44,9 @@ Route::group(['middleware' => ['role:admin klinik']], function () {
 Route::prefix('admin/antrean/control')->name('admin.antrean.control.')->group(function () {
     Route::get('/', [AntrianController::class, 'controlIndex'])->name('index');
     Route::post('/next/{poli}', [AntrianController::class, 'next'])->name('next');
+    Route::post('/{poli}/skip', [AntrianController::class, 'controlSkip'])->name('skip');
+    Route::post('/restore/{id}', [AntrianController::class, 'controlRestore'])->name('restore');
+    Route::post('/tangguhkan/{id}', [AntrianController::class, 'controlTangguhkan'])->name('tangguhkan');
 });
 
 

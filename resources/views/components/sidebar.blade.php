@@ -172,7 +172,7 @@
                             <path d="M21 18V8a2 2 0 0 0-2-2h-5" />
                             <path d="m16 8-2-2 2-2" />
                         </svg>
-                        <span class="ml-3">Antrean Hari Ini</span>
+                        <span class="ml-3">List Antrean</span>
                     </a>
                 </li>
                 <li>

@@ -39,7 +39,7 @@
                 </li>
             </ol>
         </nav>
-        <h3 class="text-3xl font-bold dark:text-white px-4 lg:px-12">Daftar Berita</h3>
+        <h3 class="text-xl font-bold dark:text-white px-4 lg:px-12">Daftar Berita</h3>
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg">
             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 p-4">
 

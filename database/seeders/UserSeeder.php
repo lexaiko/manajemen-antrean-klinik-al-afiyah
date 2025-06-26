@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Eko Bagus Susanto',
                 'email' => 'kaguyachi@outlook.com',
+                'role' => 'admin klinik',
                 'email_verified_at' => now(),
                 'password' => Hash::make('admin123'), // ganti dengan password aman
                 'remember_token' => Str::random(10),
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Farhan',
                 'email' => 'farhan@gmail.com',
+                'role' => 'dokter umum',
                 'email_verified_at' => now(),
                 'password' => Hash::make('admin123'), // ganti dengan password aman
                 'remember_token' => Str::random(10),
@@ -39,6 +41,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Ilham',
                 'email' => 'ilham@gmail.com',
+                'role' => 'dokter gigi',
                 'email_verified_at' => now(),
                 'password' => Hash::make('admin123'), // ganti dengan password aman
                 'remember_token' => Str::random(10),
@@ -49,6 +52,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Zila',
                 'email' => 'zila@gmail.com',
+                'role' => 'perawat',
                 'email_verified_at' => now(),
                 'password' => Hash::make('admin123'), // ganti dengan password aman
                 'remember_token' => Str::random(10),

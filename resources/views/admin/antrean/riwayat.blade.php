@@ -50,24 +50,43 @@
         <div class="flex justify-between items-center mb-4">
             <h1 class="py-2 text-xl font-bold text-gray-900 dark:text-white">Riwayat Antrean</h1>
         </div>
+        <p class="mt-4 text-sm text-gray-600 dark:text-gray-300">
+            Menampilkan antrean untuk tanggal:
+            <b>{{ \Carbon\Carbon::parse(request('tanggal'))->translatedFormat('l, d F Y') }}</b>
+        </p>
         <div class="bg-white  dark:bg-gray-800 relative shadow-md sm:rounded-lg">
             <form method="GET" action="{{ route('admin.antrian.riwayat') }}"
                 class="w-full flex flex-col lg:flex-row lg:items-center justify-between gap-4 px-4 py-4">
 
-                {{-- Dropdown Poli --}}
-                <div class="w-full lg:w-1/4">
-                    <label for="poli_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih Poli</label>
-                    <select id="poli_id" name="poli_id" onchange="this.form.submit()"
-                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value="">Semua Poli</option>
-                        @foreach ($polis as $poli)
-                            <option value="{{ $poli->id }}" {{ request('poli_id') == $poli->id ? 'selected' : '' }}>
-                                {{ $poli->nama_poli }}
-                            </option>
-                        @endforeach
-                    </select>
+                {{-- Filter Tanggal --}}
+                <div class="bungkus flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                    <div class="w-full md:w-auto">
+                        <label for="tanggal"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal
+                            Kunjungan</label>
+                        <input type="date" id="tanggal" name="tanggal" value="{{ request('tanggal') }}"
+                            onchange="this.form.submit()"
+                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    {{-- Dropdown Poli --}}
+                    <div class="w-full md:w-auto md:ml-4 flex md:block justify-end">
+                        <div class="w-full md:w-auto">
+                            <label for="poli_id"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih
+                                Poli</label>
+                            <select id="poli_id" name="poli_id" onchange="this.form.submit()"
+                                class="w-full min-w-[150px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="">Semua Poli</option>
+                                @foreach ($polis as $poli)
+                                    <option value="{{ $poli->id }}"
+                                        {{ request('poli_id') == $poli->id ? 'selected' : '' }}>
+                                        {{ $poli->nama_poli }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
-
                 {{-- Search + Button --}}
                 <div class="w-full lg:w-auto flex flex-col sm:flex-row gap-2 sm:gap-4">
                     <div class="relative w-full sm:w-64">
@@ -98,6 +117,7 @@
 
 
 
+
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -115,7 +135,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($antrian as $antrean)
+                        @forelse ($antrian as $antrean)
                             <tr onclick="window.location='{{ route('admin.antrean.show', $antrean->id) }}'"
                                 class="border-b dark:border-gray-700">
                                 <td class="px-4 py-3">
@@ -162,7 +182,13 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="9" class="text-center py-8 text-gray-500 dark:text-gray-400">
+                                    Tidak ada data antrean.
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
 
                 </table>

@@ -41,28 +41,64 @@ public function next($poli_id)
 
     public function controlIndex()
 {
-    $polis = Poli::with(['antrians' => function ($query) {
-        $query->whereIn('status', ['antri', 'dilayani'])
+    $today = Carbon::today()->toDateString();
+    $polis = Poli::with(['antrians' => function ($query) use ($today) {
+        $query->whereIn('status', ['antri', 'dilayani', 'skip'])
+              ->where('tanggal_kunjungan', $today)
               ->orderByRaw("FIELD(status, 'dilayani', 'antri')")
               ->orderBy('created_at');
     }])->get();
 
     return view('admin.antrean.control.index', compact('polis'));
 }
+public function controlSkip($poliId)
+{
+    $today = Carbon::today()->toDateString();
+    $antrian = Antrian::where('poli_id', $poliId)
+        ->where('tanggal_kunjungan', $today)
+        ->where('status', 'dilayani')
+        ->orderBy('created_at')
+        ->first();
 
-    public function index(Request $request)
+    if ($antrian) {
+        $antrian->status = 'skip'; // atau 'dilewati'
+        $antrian->save();
+    }
+
+    return redirect()->back()->with('success', 'Pasien berhasil dilewati.');
+}
+public function controlRestore($id)
+{
+    $antrian = Antrian::findOrFail($id);
+    if ($antrian->status === 'skip') {
+        $antrian->status = 'antri';
+        $antrian->save();
+    }
+    return back()->with('success', 'Antrean dikembalikan ke daftar antrian.');
+}
+
+public function controlTangguhkan($id)
+{
+    $antrian = Antrian::findOrFail($id);
+    if ($antrian->status === 'skip') {
+        $antrian->status = 'ditangguhkan';
+        $antrian->save();
+    }
+    return back()->with('success', 'Antrean ditangguhkan.');
+}
+public function index(Request $request)
 {
     $polis = Poli::all();
     $search = $request->input('search');
     $poli_id = $request->input('poli_id');
-    $today = Carbon::today()->toDateString();
+    $tanggal = $request->input('tanggal') ?? Carbon::today()->toDateString();
 
     $antrian = Antrian::query()
         ->where(function ($query) {
             $query->where('status', 'not like', '%selesai%')
                   ->where('status', 'not like', '%ditangguhkan%');
         })
-        ->where('tanggal_kunjungan', $today)
+        ->where('tanggal_kunjungan', $tanggal)
         ->when($poli_id, function ($query, $poli_id) {
             return $query->where('poli_id', $poli_id);
         })
@@ -72,9 +108,10 @@ public function next($poli_id)
                   ->orWhere('nama_pasien', 'like', "%$search%");
             });
         })
-        ->paginate(10);
+        ->paginate(10)
+        ->appends($request->only('search', 'poli_id', 'tanggal'));
 
-    return view('admin.antrean.index', compact('antrian', 'search', 'polis', 'poli_id'));
+    return view('admin.antrean.index', compact('antrian', 'search', 'polis', 'poli_id', 'tanggal'));
 }
 
 public function riwayat(Request $request)
@@ -82,11 +119,15 @@ public function riwayat(Request $request)
     $polis = Poli::all();
     $search = $request->input('search');
     $poli_id = $request->input('poli_id');
+    $tanggal = $request->input('tanggal');
 
     $antrian = Antrian::query()
         ->whereIn('status', ['selesai', 'ditangguhkan'])
         ->when($poli_id, function ($query, $poli_id) {
             $query->where('poli_id', $poli_id);
+        })
+        ->when($tanggal, function ($query, $tanggal) {
+            $query->where('tanggal_kunjungan', $tanggal);
         })
         ->when($search, function ($query, $search) {
             $query->where(function ($q) use ($search) {
@@ -96,9 +137,9 @@ public function riwayat(Request $request)
         })
         ->latest()
         ->paginate(10)
-        ->appends($request->only('search', 'poli_id'));
+        ->appends($request->only('search', 'poli_id', 'tanggal'));
 
-    return view('admin.antrean.riwayat', compact('antrian', 'search', 'polis', 'poli_id'));
+    return view('admin.antrean.riwayat', compact('antrian', 'search', 'polis', 'poli_id', 'tanggal'));
 }
     public function adminMonitoring()
 {
