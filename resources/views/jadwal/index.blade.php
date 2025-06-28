@@ -15,7 +15,7 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
             <form method="GET" action="{{ route('jadwal.index') }}" class="w-full md:w-auto max-w-md">
                 <label for="role" class="block mb-2 text-sm font-medium text-gray-900">
-                    Filter Pegawai
+                    Filter Jadwal
                 </label>
                 <div class="relative">
                     <select id="role" name="role" onchange="this.form.submit()"
@@ -77,7 +77,7 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th class="px-4 py-3">No</th>
-                        <th class="px-4 py-3">Nama Pegawai</th>
+                        <th class="px-4 py-3">Nama</th>
                         <th class="px-4 py-3">Profesi</th>
                         <th class="px-4 py-3">Hari</th>
                         <th class="px-4 py-3">Jam Mulai</th>
