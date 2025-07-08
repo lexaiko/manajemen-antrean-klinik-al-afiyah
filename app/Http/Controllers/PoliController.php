@@ -8,11 +8,14 @@ use Illuminate\Support\Facades\Log;
 
 class PoliController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $polis = Poli::paginate(10);
+        $search = $request->input('search');
+        $polis = Poli::where('nama_poli', 'like', "%$search%")
+            ->paginate(10)
+            ->appends(['search' => $search]);
 
-        return view('admin.poli.index', compact('polis'));
+        return view('admin.poli.index', compact('polis', 'search'));
     }
 
     public function create()

@@ -14,10 +14,15 @@ use Carbon\Carbon;
 
 class BeritaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $beritas = Berita::paginate(5);
-        return view('admin.berita.index', compact('beritas'));
+        $query = $request->input('query');
+
+        $beritas = Berita::when($query, function ($queryBuilder) use ($query) {
+            $queryBuilder->where('judul', 'like', "%$query%");
+        })->paginate(5);
+
+        return view('admin.berita.index', compact('beritas', 'query'));
     }
 
     public function create()
@@ -32,7 +37,7 @@ class BeritaController extends Controller
     }
     public function beranda()
     {
-        $beritas = Berita::all();
+        $beritas = Berita::orderBy('created_at', 'desc')->get();
         return view('welcome', compact('beritas'));
     }
 
