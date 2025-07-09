@@ -36,7 +36,7 @@
             <!-- Logo -->
             <a href="{{ route('dashboard') }}" class="flex items-center space-x-2">
                 <img src="{{ url('images/logo.png') }}" class="w-10 h-10" alt="Logo">
-                <span class="font-bold text-green-700 text-lg hidden sm:inline">Klinik Al-Afiyah</span>
+                <span class="font-bold text-green-600 text-lg hidden sm:inline">Klinik Al-Afiyah</span>
             </a>
             <!-- Jam -->
             <span id="jam" class="font-mono text-xl font-semibold text-gray-700"></span>
@@ -80,13 +80,13 @@
             </div>
             <!-- Antrian Selanjutnya -->
             <div id="monitoring-selanjutnya" class="space-y-4">
-                <h2 class="text-lg font-bold text-green-700 mb-2">Antrian Selanjutnya</h2>
+                <h2 class="text-lg font-bold text-green-600 mb-2">Antrian Selanjutnya</h2>
                 @foreach ($polis as $poli)
                     @php
                         $selanjutnya = $poli->antrians->where('status', 'antri')->first();
                     @endphp
                     <div class="bg-white border border-green-200 rounded-lg shadow p-5 flex flex-col items-center">
-                        <span class="text-green-700 font-semibold mb-1">Poli {{ $poli->nama_poli }}</span>
+                        <span class="text-green-600 font-semibold mb-1">Poli {{ $poli->nama_poli }}</span>
                         <hr class="w-1/2 border-green-300 my-2">
                         <span class="font-bold text-2xl text-gray-800">
                             {{ $selanjutnya->nomor_antrian ?? 'Selesai' }}
@@ -98,12 +98,12 @@
     </main>
     <script>
 function renderSelanjutnya(polis) {
-    let html = '<h2 class="text-lg font-bold text-green-700 mb-2">Antrian Selanjutnya</h2>';
+    let html = '<h2 class="text-lg font-bold text-green-600 mb-2">Antrian Selanjutnya</h2>';
     polis.forEach(function(poli) {
         let selanjutnya = poli.antrians.find(a => a.status === 'antri');
         html += `
         <div class="bg-white border border-green-200 rounded-lg shadow p-5 flex flex-col items-center">
-            <span class="text-green-700 font-semibold mb-1">Poli ${poli.nama_poli}</span>
+            <span class="text-green-600 font-semibold mb-1">Poli ${poli.nama_poli}</span>
             <hr class="w-1/2 border-green-300 my-2">
             <span class="font-bold text-2xl text-gray-800">
                 ${(selanjutnya && selanjutnya.nomor_antrian) ? selanjutnya.nomor_antrian : 'Selesai'}

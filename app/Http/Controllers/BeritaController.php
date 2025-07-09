@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use HTMLPurifier;
+use HTMLPurifier_Config;
 use App\Models\Berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -130,11 +132,18 @@ class BeritaController extends Controller
 
 
         $berita = new Berita;
-$berita->judul = $request->input('judul');
-$berita->konten = $request->input('konten');
-$berita->tgl_published = $tgl_published;
-$berita->nama_published = $namaPublished;
-$berita->gambar = $path;
+        $config = HTMLPurifier_Config::createDefault();
+        $config->set('HTML.Allowed', 'p,b,i,u,strong,em,ul,ol,li,a[href|title|target],img[src|alt|width|height|style],br,span[style],h1,h2,h3,h4,h5,h6,blockquote');
+
+        $purifier = new HTMLPurifier($config);
+        $kontenAman = $purifier->purify($request->input('konten'));
+
+        $berita->konten = $kontenAman;
+
+        $berita->judul = $request->input('judul');
+        $berita->tgl_published = $tgl_published;
+        $berita->nama_published = $namaPublished;
+        $berita->gambar = $path;
 
 // Simpan dulu agar dapat ID
 $berita->save();
@@ -188,14 +197,22 @@ $berita->save();
         Log::info('Gambar baru diunggah:', ['filename' => $filename]);
     }
 
+    $config = HTMLPurifier_Config::createDefault();
+    $config->set('HTML.Allowed', 'p,b,i,u,strong,em,ul,ol,li,a[href|title|target],img[src|alt|width|height|style],br,span[style],h1,h2,h3,h4,h5,h6,blockquote');
+
+    $purifier = new HTMLPurifier($config);
+    $kontenAman = $purifier->purify($request->input('konten'));
+
     // Update data
     $berita->update([
         'judul' => $request->input('judul'),
-        'konten' => $request->input('konten'),
+        'konten' => $kontenAman,
         'tgl_published' => $tgl_published,
         'nama_published' => Auth::user()->name,
         'gambar' => $path,
     ]);
+    Log::info('Konten sebelum disanitasi:', ['konten' => $request->input('konten')]);
+    Log::info('Konten sesudah disanitasi:', ['konten' => $kontenAman]);
 
     Log::info('Berita diperbarui:', ['id' => $berita->id]);
 

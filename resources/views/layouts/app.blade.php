@@ -20,7 +20,11 @@
 
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        @include('layouts.navigation')
+        @if (empty($hideNavbar) || !$hideNavbar)
+            @include('layouts.navigation')
+        @endif
+
+
 
         <!-- Page Heading -->
         @isset($header)
@@ -37,6 +41,7 @@
         </main>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    @stack('scripts')
 </body>
 
 </html>

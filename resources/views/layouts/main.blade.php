@@ -19,7 +19,10 @@
 
 <body class="font-sans antialiased min-h-screen flex flex-col">
     {{-- Navbar --}}
+    @if (!isset($hideNavbar))
     @include('partials.navbar')
+@endif
+
 
     {{-- Konten utama --}}
     <main class="flex-1">

@@ -23,30 +23,43 @@ class JadwalPegawaiController extends Controller
                 $query->whereIn('pegawai_id', $userIds);
             })
             ->orderByRaw("FIELD(hari, $urutanHariString)")
-            ->get();
+            ->paginate(20);
 
         return view('admin.jadwal.index', compact('jadwals', 'roles', 'roleFilter', 'urutanHari'));
     }
 
     public function jadwalBeranda(Request $request)
-    {
-        $roles = Role::where('name', '!=', 'admin klinik')->get();
-        $roleAlias = $request->input('role');
-        $selectedRole = $roles->firstWhere('name', $roleAlias);
+{
+    // Ambil semua role yang diizinkan ditampilkan (tanpa 'admin klinik')
+    $roles = Role::where('name', '!=', 'admin klinik')->get();
 
-        $urutanHari = config('app.urutan');
-        $urutanHariString = "'" . implode("','", $urutanHari) . "'";
+    // Ambil input role dari query
+    $roleAlias = $request->input('role');
 
-        $jadwals = JadwalPegawai::with('pegawai.roles')
-            ->when($roleAlias, function ($query) use ($roleAlias) {
-                $userIds = User::role($roleAlias)->pluck('id');
-                $query->whereIn('pegawai_id', $userIds);
-            })
-            ->orderByRaw("FIELD(hari, $urutanHariString)")
-            ->get();
+    // Cek role valid dari list yang sudah diambil
+    $roleNames = $roles->pluck('name')->toArray();
 
-        return view('jadwal.index', compact('jadwals', 'roles', 'roleAlias', 'selectedRole', 'urutanHari'));
+    // Jika role tidak valid, bisa abort atau kosongkan
+    if ($roleAlias && !in_array($roleAlias, $roleNames)) {
+        abort(404);
     }
+
+    $selectedRole = $roles->firstWhere('name', $roleAlias);
+
+    $urutanHari = config('app.urutan');
+    $urutanHariString = "'" . implode("','", $urutanHari) . "'";
+
+    $jadwals = JadwalPegawai::with('pegawai.roles')
+        ->when($roleAlias, function ($query) use ($roleAlias) {
+            $userIds = User::role($roleAlias)->pluck('id');
+            $query->whereIn('pegawai_id', $userIds);
+        })
+        ->orderByRaw("FIELD(hari, $urutanHariString)")
+        ->get();
+
+    return view('jadwal.index', compact('jadwals', 'roles', 'roleAlias', 'selectedRole', 'urutanHari'));
+}
+
 
     public function create()
     {

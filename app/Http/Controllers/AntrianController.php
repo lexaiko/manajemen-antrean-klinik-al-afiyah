@@ -150,7 +150,10 @@ public function riwayat(Request $request)
               ->orderBy('created_at');
     }])->get();
 
-    return view('admin.antrean.monitoring', compact('polis'));
+    return view('admin.antrean.monitoring', [
+        'polis' => $polis,
+        'hideNavbar' => true, // << ini kuncinya bro
+    ]);
 }
 public function adminMonitoringData()
 {
