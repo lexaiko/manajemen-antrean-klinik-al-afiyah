@@ -8,9 +8,10 @@ use App\Models\User;
 use App\Models\Antrian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Http;
 
 class AntrianController extends Controller
 {
@@ -323,7 +324,18 @@ public function berandaDetail($id)
             'nomor_whatsapp' => 'required|string|min:10|max:15',
             'keluhan' => 'required|string|max:255',
             'polis_id' => 'required|exists:polis,id',
+            'cf-turnstile-response' => 'required',
         ]);
+
+        $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+    'secret' => '0x4AAAAAABkhqXT6UOYcb2o6R-hRnpEEpto', // Ganti dengan Secret Key kamu
+    'response' => $request->input('cf-turnstile-response'),
+    'remoteip' => $request->ip(),
+]);
+
+if (!optional($response->object())->success) {
+    return redirect()->back()->withErrors(['turnstile' => 'Verifikasi captcha gagal. Silakan coba lagi.'])->withInput();
+}
 
         $polis = Poli::find($request->polis_id);
         $tanggal = $request->tanggal_kunjungan;

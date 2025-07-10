@@ -3,7 +3,8 @@
 @section('content')
     <section class="jumbotron h-1/3 md:h-1/3 w-full">
         <div class="relative w-full overflow-hidden" style="height: 33vh; min-height: 180px;">
-            <img class="w-full h-full object-cover" src="{{ url('images/hero-bg.jpg') }}" alt="" style="height: 100%; object-fit: cover;">
+            <img class="w-full h-full object-cover" src="{{ url('images/hero-bg.jpg') }}" alt=""
+                style="height: 100%; object-fit: cover;">
         </div>
         @if ($errors->any())
             <div class="mb-4">
@@ -174,6 +175,14 @@
                                     <div class="invalid-feedback text-red-500">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="col-span-2 flex mt-5">
+                                    <div class="cf-turnstile w-full" data-sitekey="0x4AAAAAABkhqYA8xDomwo8_"
+                                        data-theme="light" data-size="flexible"></div>
+                            </div>
+
+                            @error('turnstile')
+                                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                            @enderror
 
                             <div class="col-span-2 mt-6">
                                 <button type="submit"

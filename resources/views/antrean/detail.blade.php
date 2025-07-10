@@ -37,38 +37,6 @@
     </a>
 </div>
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <!-- Data Pasien -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
-            <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Data Pasien</h2>
-            <dl class="divide-y divide-gray-200 dark:divide-gray-700">
-                <div class="py-3 flex flex-col sm:flex-row sm:justify-between">
-                    <dt class="font-medium text-gray-600 dark:text-gray-400">NIK Pasien</dt>
-                    <dd class="text-gray-900 dark:text-white">{{ $antrean->nik_pasien }}</dd>
-                </div>
-                <div class="py-3 flex flex-col sm:flex-row sm:justify-between">
-                    <dt class="font-medium text-gray-600 dark:text-gray-400">Nama Pasien</dt>
-                    <dd class="text-gray-900 dark:text-white">{{ $antrean->nama_pasien }}</dd>
-                </div>
-                <div class="py-3 flex flex-col sm:flex-row sm:justify-between">
-                    <dt class="font-medium text-gray-600 dark:text-gray-400">Alamat</dt>
-                    <dd class="text-gray-900 dark:text-white">{{ $antrean->alamat_pasien }}</dd>
-                </div>
-                <div class="py-3 flex flex-col sm:flex-row sm:justify-between">
-                    <dt class="font-medium text-gray-600 dark:text-gray-400">Jenis Kelamin</dt>
-                    <dd class="text-gray-900 dark:text-white">
-                        {{ $antrean->jenis_kelamin === 'L' ? 'Laki-laki' : ($antrean->jenis_kelamin === 'P' ? 'Perempuan' : '-') }}
-                    </dd>
-                </div>
-                <div class="py-3 flex flex-col sm:flex-row sm:justify-between">
-                    <dt class="font-medium text-gray-600 dark:text-gray-400">Tanggal Lahir</dt>
-                    <dd class="text-gray-900 dark:text-white">{{ \Carbon\Carbon::parse($antrean->tanggal_lahir)->format('d M Y') }}</dd>
-                </div>
-                <div class="py-3 flex flex-col sm:flex-row sm:justify-between">
-                    <dt class="font-medium text-gray-600 dark:text-gray-400">Nomor WhatsApp</dt>
-                    <dd class="text-gray-900 dark:text-white">{{ $antrean->nomor_whatsapp }}</dd>
-                </div>
-            </dl>
-        </div>
         <!-- Detail Antrean -->
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
             <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Detail Antrean</h2>
@@ -108,6 +76,38 @@
                 <div class="py-3 flex flex-col sm:flex-row sm:justify-between">
                     <dt class="font-medium text-gray-600 dark:text-gray-400">Keluhan</dt>
                     <dd class="text-gray-900 dark:text-white">{{ $antrean->keluhan }}</dd>
+                </div>
+            </dl>
+        </div>
+        <!-- Data Pasien -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 sm:p-6">
+            <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Data Pasien</h2>
+            <dl class="divide-y divide-gray-200 dark:divide-gray-700">
+                <div class="py-3 flex flex-col sm:flex-row sm:justify-between">
+                    <dt class="font-medium text-gray-600 dark:text-gray-400">NIK Pasien</dt>
+                    <dd class="text-gray-900 dark:text-white">{{ $antrean->nik_pasien }}</dd>
+                </div>
+                <div class="py-3 flex flex-col sm:flex-row sm:justify-between">
+                    <dt class="font-medium text-gray-600 dark:text-gray-400">Nama Pasien</dt>
+                    <dd class="text-gray-900 dark:text-white">{{ $antrean->nama_pasien }}</dd>
+                </div>
+                <div class="py-3 flex flex-col sm:flex-row sm:justify-between">
+                    <dt class="font-medium text-gray-600 dark:text-gray-400">Alamat</dt>
+                    <dd class="text-gray-900 dark:text-white">{{ $antrean->alamat_pasien }}</dd>
+                </div>
+                <div class="py-3 flex flex-col sm:flex-row sm:justify-between">
+                    <dt class="font-medium text-gray-600 dark:text-gray-400">Jenis Kelamin</dt>
+                    <dd class="text-gray-900 dark:text-white">
+                        {{ $antrean->jenis_kelamin === 'L' ? 'Laki-laki' : ($antrean->jenis_kelamin === 'P' ? 'Perempuan' : '-') }}
+                    </dd>
+                </div>
+                <div class="py-3 flex flex-col sm:flex-row sm:justify-between">
+                    <dt class="font-medium text-gray-600 dark:text-gray-400">Tanggal Lahir</dt>
+                    <dd class="text-gray-900 dark:text-white">{{ \Carbon\Carbon::parse($antrean->tanggal_lahir)->format('d M Y') }}</dd>
+                </div>
+                <div class="py-3 flex flex-col sm:flex-row sm:justify-between">
+                    <dt class="font-medium text-gray-600 dark:text-gray-400">Nomor WhatsApp</dt>
+                    <dd class="text-gray-900 dark:text-white">{{ $antrean->nomor_whatsapp }}</dd>
                 </div>
             </dl>
         </div>

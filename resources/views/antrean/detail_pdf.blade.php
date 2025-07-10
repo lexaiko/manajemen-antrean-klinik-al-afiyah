@@ -44,6 +44,29 @@
             {{ $antrean->nomor_antrian }}
         </div>
         <div class="section">
+            <div class="section-title">Detail Kunjungan</div>
+            <div class="row">
+                <div class="label">Tanggal Kunjungan:</div>
+                <div class="value">{{ \Carbon\Carbon::parse($antrean->tanggal_kunjungan)->format('d M Y') }}</div>
+            </div>
+            <div class="row">
+                <div class="label">Status:</div>
+                <div class="value">{{ ucfirst($antrean->status) }}</div>
+            </div>
+            <div class="row">
+                <div class="label">Pembayaran:</div>
+                <div class="value">{{ ucfirst($antrean->pembayaran) }}</div>
+            </div>
+            <div class="row">
+                <div class="label">Poli:</div>
+                <div class="value">{{ $antrean->polis->nama_poli ?? '-' }}</div>
+            </div>
+            <div class="row">
+                <div class="label">Keluhan:</div>
+                <div class="value">{{ $antrean->keluhan }}</div>
+            </div>
+        </div>
+        <div class="section">
             <div class="section-title">Data Pasien</div>
             <div class="row">
                 <div class="label">NIK Pasien:</div>
@@ -68,29 +91,6 @@
             <div class="row">
                 <div class="label">Nomor WhatsApp:</div>
                 <div class="value">{{ $antrean->nomor_whatsapp }}</div>
-            </div>
-        </div>
-        <div class="section">
-            <div class="section-title">Detail Kunjungan</div>
-            <div class="row">
-                <div class="label">Tanggal Kunjungan:</div>
-                <div class="value">{{ \Carbon\Carbon::parse($antrean->tanggal_kunjungan)->format('d M Y') }}</div>
-            </div>
-            <div class="row">
-                <div class="label">Status:</div>
-                <div class="value">{{ ucfirst($antrean->status) }}</div>
-            </div>
-            <div class="row">
-                <div class="label">Pembayaran:</div>
-                <div class="value">{{ ucfirst($antrean->pembayaran) }}</div>
-            </div>
-            <div class="row">
-                <div class="label">Poli:</div>
-                <div class="value">{{ $antrean->polis->nama_poli ?? '-' }}</div>
-            </div>
-            <div class="row">
-                <div class="label">Keluhan:</div>
-                <div class="value">{{ $antrean->keluhan }}</div>
             </div>
         </div>
     </div>

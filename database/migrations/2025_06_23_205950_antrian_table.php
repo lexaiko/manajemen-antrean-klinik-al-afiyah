@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('antrians', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('nik_pasien', 16);
             $table->date('tanggal_kunjungan');
             $table->string('nomor_antrian');
