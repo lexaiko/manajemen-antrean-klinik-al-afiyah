@@ -328,7 +328,7 @@ public function berandaDetail($id)
         ]);
 
         $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
-    'secret' => '0x4AAAAAABkhqXT6UOYcb2o6R-hRnpEEpto', // Ganti dengan Secret Key kamu
+    'secret' => env('TURNSTILE_SECRET'), // Ganti dengan Secret Key kamu
     'response' => $request->input('cf-turnstile-response'),
     'remoteip' => $request->ip(),
 ]);
