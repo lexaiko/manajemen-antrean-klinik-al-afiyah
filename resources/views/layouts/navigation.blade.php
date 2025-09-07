@@ -61,18 +61,92 @@
             </x-responsive-nav-link>
         </div>
 
+        <!-- Tambahkan menu sidebar di bawah ini -->
+        <div class="pt-2 pb-3 space-y-1">
+            <!-- Master Data Dropdown -->
+            <details class="group" {{ request()->is('admin/user*') || request()->is('admin/role*') || request()->is('admin/poli*') ? 'open' : '' }}>
+                <summary class="flex items-center px-4 py-2 cursor-pointer font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                    <span class="flex-1">Master Data</span>
+                    <svg class="w-4 h-4 ml-2 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </summary>
+                <div class="pl-6">
+                    <a href="{{ url('admin/user') }}" class="block py-2 {{ request()->is('admin/user*') ? 'text-green-600 font-bold' : 'text-gray-700' }}">Pegawai</a>
+                    @role('admin klinik')
+                    <a href="{{ url('admin/role') }}" class="block py-2 {{ request()->is('admin/role*') ? 'text-green-600 font-bold' : 'text-gray-700' }}">Peran</a>
+                    @endrole
+                    <a href="{{ url('admin/poli') }}" class="block py-2 {{ request()->is('admin/poli*') ? 'text-green-600 font-bold' : 'text-gray-700' }}">Poli</a>
+                </div>
+            </details>
+            <!-- Manajemen Antrean Dropdown -->
+            <details class="group" {{ request()->is('admin/monitoring*') || request()->is('admin/antrean*') ? 'open' : '' }}>
+                <summary class="flex items-center px-4 py-2 cursor-pointer font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                    <span class="flex-1">Manajemen Antrean</span>
+                    <svg class="w-4 h-4 ml-2 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </summary>
+                <div class="pl-6">
+                    @role('admin klinik')
+                    <a href="{{ route('admin.monitoring') }}" class="block py-2 {{ request()->is('admin/monitoring') ? 'text-green-600 font-bold' : 'text-gray-700' }}">Monitoring Antrean</a>
+                    <a href="{{ route('admin.antrean.control.index') }}" class="block py-2 {{ request()->is('admin/antrean/control*') ? 'text-green-600 font-bold' : 'text-gray-700' }}">Kontrol Antrean</a>
+                    @endrole
+                    <a href="{{ route('admin.antrian.index') }}" class="block py-2 {{ request()->is('admin/antrean') ? 'text-green-600 font-bold' : 'text-gray-700' }}">List Antrean</a>
+                    <a href="{{ route('admin.antrian.riwayat') }}" class="block py-2 {{ request()->is('admin/antrean/riwayat') ? 'text-green-600 font-bold' : 'text-gray-700' }}">Riwayat Antrean</a>
+                </div>
+            </details>
+            <!-- Manajemen Jadwal Dropdown -->
+            <details class="group" {{ request()->is('admin/jadwal*') || request()->is('admin/kategori*') ? 'open' : '' }}>
+                <summary class="flex items-center px-4 py-2 cursor-pointer font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                    <span class="flex-1">Manajemen Jadwal</span>
+                    <svg class="w-4 h-4 ml-2 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </summary>
+                <div class="pl-6">
+                    <a href="{{ url('admin/jadwal') }}" class="block py-2 {{ request()->is('admin/jadwal') ? 'text-green-600 font-bold' : 'text-gray-700' }}">Jadwal Pegawai</a>
+                </div>
+            </details>
+            <!-- Manajemen Berita Dropdown -->
+            @role('admin klinik')
+            <details class="group" {{ request()->is('admin/berita*') ? 'open' : '' }}>
+                <summary class="flex items-center px-4 py-2 cursor-pointer font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                    <span class="flex-1">Manajemen Berita</span>
+                    <svg class="w-4 h-4 ml-2 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </summary>
+                <div class="pl-6">
+                    <a href="{{ url('admin/berita') }}" class="block py-2 {{ request()->is('admin/berita*') ? 'text-green-600 font-bold' : 'text-gray-700' }}">Kelola Berita</a>
+                </div>
+            </details>
+            @endrole
+            <!-- Manajemen Laporan Dropdown -->
+            <details class="group" {{ request()->is('admin/laporan*') ? 'open' : '' }}>
+                <summary class="flex items-center px-4 py-2 cursor-pointer font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                    <span class="flex-1">Laporan</span>
+                    <svg class="w-4 h-4 ml-2 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </summary>
+                <div class="pl-6">
+                    <a href="{{ route('admin.laporan.antrean') }}" class="block py-2 {{ request()->is('admin/laporan/antrean*') ? 'text-green-600 font-bold' : 'text-gray-700' }}">Laporan Antrean</a>
+                </div>
+            </details>
+        </div>
+        <!-- End menu sidebar mobile -->
+
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
-
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')" class="nav-link">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
-
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -84,7 +158,6 @@
         </div>
     </div>
 </nav>
-
 <style>
     .sticky-nav {
         position: sticky;
