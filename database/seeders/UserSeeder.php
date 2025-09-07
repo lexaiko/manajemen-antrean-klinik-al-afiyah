@@ -2,64 +2,73 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
+use App\Models\User;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
- DB::table('users')->insert([
+        // Roles
+        $roles = [
+            'admin klinik',
+            'dokter umum',
+            'dokter gigi',
+            'perawat',
+            'bidan'
+        ];
+
+        foreach ($roles as $role) {
+            Role::firstOrCreate([
+                'name' => $role,
+                'guard_name' => 'web'
+            ]);
+        }
+
+        // Users + role
+        $users = [
             [
                 'name' => 'Eko Bagus Susanto',
                 'email' => 'kaguyachi@outlook.com',
+                'jenis_kelamin' => 'L',
                 'role' => 'admin klinik',
-                'email_verified_at' => now(),
-                'password' => Hash::make('admin123'), // ganti dengan password aman
-                'remember_token' => Str::random(10),
-                'jenis_kelamin' => 'L', // atau 'P'
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'Farhan',
                 'email' => 'farhan@gmail.com',
+                'jenis_kelamin' => 'L',
                 'role' => 'dokter umum',
-                'email_verified_at' => now(),
-                'password' => Hash::make('admin123'), // ganti dengan password aman
-                'remember_token' => Str::random(10),
-                'jenis_kelamin' => 'L', // atau 'P'
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'Ilham',
                 'email' => 'ilham@gmail.com',
+                'jenis_kelamin' => 'L',
                 'role' => 'dokter gigi',
-                'email_verified_at' => now(),
-                'password' => Hash::make('admin123'), // ganti dengan password aman
-                'remember_token' => Str::random(10),
-                'jenis_kelamin' => 'L', // atau 'P'
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'name' => 'Zila',
                 'email' => 'zila@gmail.com',
-                'role' => 'perawat',
-                'email_verified_at' => now(),
-                'password' => Hash::make('admin123'), // ganti dengan password aman
-                'remember_token' => Str::random(10),
-                'jenis_kelamin' => 'P', // atau 'L'
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
-        ]);
+                'jenis_kelamin' => 'P',
+                'role' => 'bidan',
+            ],
+        ];
+
+        foreach ($users as $u) {
+            $user = User::firstOrCreate(
+                ['email' => $u['email']], // biar ga duplikat
+                [
+                    'name' => $u['name'],
+                    'email_verified_at' => now(),
+                    'password' => Hash::make('admin123'),
+                    'remember_token' => Str::random(10),
+                    'jenis_kelamin' => $u['jenis_kelamin'],
+                ]
+            );
+
+            $user->assignRole($u['role']);
+        }
     }
 }
