@@ -288,5 +288,48 @@
                 <hr class="border-gray-200 dark:border-gray-700">
             @endrole
 
+            <button type="button"
+                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group {{ request()->is('admin/laporan*') ? 'bg-green-600 text-white' : '' }}"
+                aria-controls="manajemen-laporan"
+                aria-expanded="{{ request()->is('admin/laporan*') ? 'true' : 'false' }}"
+                data-collapse-toggle="manajemen-laporan">
+                <!-- Icon SVG Laporan -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="{{ request()->is('admin/laporan*') ? 'white' : 'black' }}"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-file-bar-chart-icon lucide-file-bar-chart">
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                    <path d="M8 18v-2"/>
+                    <path d="M12 18v-4"/>
+                    <path d="M16 18v-6"/>
+                </svg>
+                <!-- Teks Laporan -->
+                <span class="flex-1 text-base font-medium ml-3 text-left whitespace-nowrap">Laporan</span>
+                <!-- Icon Dropdown -->
+                <svg class="w-3 h-3 {{ request()->is('admin/laporan*') ? 'text-white' : 'text-gray-800' }}"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 4 4 4-4" />
+                </svg>
+            </button>
+            <ul id="manajemen-laporan" class="{{ request()->is('admin/laporan*') ? '' : 'hidden' }} py-2 space-y-2">
+                <li>
+                    <a href="{{ route('admin.laporan.antrean') }}"
+                        class="flex items-center w-full p-2 text-base font-medium {{ request()->is('admin/laporan/antrean*') ? 'bg-green-600 text-white hover:bg-green-600 hover:text-white' : 'text-gray-900 hover:bg-gray-100' }} rounded-lg pl-2 group dark:text-white dark:hover:bg-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="{{ request()->is('admin/laporan/antrean*') ? 'white' : 'black' }}"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-clipboard-list-icon lucide-clipboard-list">
+                            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                            <path d="m9 14 2 2 4-4"/>
+                        </svg>
+                        <span class="ml-3">Laporan Antrean</span>
+                    </a>
+                </li>
+            </ul>
+            <hr class="border-gray-200 dark:border-gray-700">
+
     </div>
 </aside>

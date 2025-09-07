@@ -11,6 +11,7 @@ use App\Http\Controllers\AntrianController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PoliController;
+use App\Http\Controllers\LaporanController;
 
 Route::get('/antrean/list', [AntrianController::class, 'antreanIndex'])->name('antrean.index');
 Route::get('/', [BeritaController::class, 'beranda'])->name('beranda');
@@ -25,15 +26,20 @@ Route::post('/antrean/daftar', [AntrianController::class, 'registrasiStore'])->n
 
 Route::group(['middleware' => ['role:admin klinik|dokter umum|dokter gigi|bidan|perawat']], function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/admin/antrean', [AntrianController::class, 'index'])->name('admin.antrian.index');
-Route::get('/admin/antrean/riwayat', [AntrianController::class, 'riwayat'])->name('admin.antrian.riwayat');
-Route::get('/admin/antrean/detail', [AntrianController::class, 'detail'])->name('admin.antrian.detail');
+    Route::get('/admin/antrean', [AntrianController::class, 'index'])->name('admin.antrian.index');
+    Route::get('/admin/antrean/riwayat', [AntrianController::class, 'riwayat'])->name('admin.antrian.riwayat');
+    Route::get('/admin/antrean/detail', [AntrianController::class, 'detail'])->name('admin.antrian.detail');
     Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/admin/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/admin/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user.index');
-Route::get('/admin/jadwal', [JadwalPegawaiController::class, 'index'])->name('admin.jadwal.index');
-Route::get('/admin/poli', [PoliController::class, 'index'])->name('admin.poli');
+    Route::get('/admin/jadwal', [JadwalPegawaiController::class, 'index'])->name('admin.jadwal.index');
+    Route::get('/admin/poli', [PoliController::class, 'index'])->name('admin.poli');
+
+    // Laporan routes
+    Route::get('/admin/laporan/antrean', [LaporanController::class, 'antrean'])->name('admin.laporan.antrean');
+    Route::get('/admin/laporan/antrean/pdf', [LaporanController::class, 'antreanPdf'])->name('admin.laporan.antrean.pdf');
+
     // + semua route create/update/delete lainnya
 });
 
