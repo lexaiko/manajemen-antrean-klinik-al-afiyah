@@ -30,7 +30,7 @@ class LaporanController extends Controller
 
         // Filter berdasarkan poli
         if ($request->filled('poli_id')) {
-            $query->where('polis_id', $request->poli_id);
+            $query->where('poli_id', $request->poli_id);
         }
 
         $antrian = $query->orderBy('tanggal_kunjungan', 'desc')
@@ -72,7 +72,7 @@ class LaporanController extends Controller
 
         // Filter berdasarkan poli
         if ($request->filled('poli_id')) {
-            $query->where('polis_id', $request->poli_id);
+            $query->where('poli_id', $request->poli_id);
         }
 
         $antrian = $query->orderBy('tanggal_kunjungan', 'desc')
