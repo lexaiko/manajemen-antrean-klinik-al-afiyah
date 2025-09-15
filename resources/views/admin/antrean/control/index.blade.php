@@ -43,6 +43,31 @@
                                 Lewati Pasien Selanjutnya
                             </button>
                         </form>
+
+                        <button type="button"
+                            onclick="panggil('{{ $dilayani->nomor_antrian ?? '-' }}', '{{ $poli->nama_poli }}')"
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded mt-2">
+                            Panggil Nomor
+                        </button>
+
+                        <script>
+                            function panggil(nomor, poli) {
+                                if (!nomor || nomor === '-') {
+                                    alert("Tidak ada nomor antrean yang sedang dilayani.");
+                                    return;
+                                }
+
+                                const text = `Nomor antrian ${nomor}, silakan menuju kasir.`;
+
+                                // Web Speech API
+                                const utterance = new SpeechSynthesisUtterance(text);
+                                utterance.lang = "id-ID"; // Bahasa Indonesia
+                                utterance.rate = 0.9; // kecepatan bicara
+                                utterance.pitch = 1; // nada suara
+                                window.speechSynthesis.speak(utterance);
+                            }
+                        </script>
+                        
                         @if ($skips->count())
                             <div class="mt-4 border-t pt-4">
                                 <p class="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">Antrian Dilewati:</p>

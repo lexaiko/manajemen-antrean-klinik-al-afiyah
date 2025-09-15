@@ -17,9 +17,7 @@ return new class extends Migration
             $table->date('tanggal_kunjungan');
             $table->string('nomor_antrian');
             $table->string('nama_pasien');
-            $table->text('alamat_pasien');
             $table->char('jenis_kelamin');
-            $table->date('tanggal_lahir');
             $table->string('nomor_whatsapp');
             $table->string('status')->default('antri');
             $table->string('pembayaran')->default('umum');

@@ -80,16 +80,7 @@
                         <div class="invalid-feedback text-red-500">{{ $message }}</div>
                     @enderror
                 </div>
-                <div>
-                    <label for="alamat" class="block mb-2 text-sm font-medium text-gray-900">Alamat
-                        Pasien</label>
-                    <input type="text" name="alamat_pasien" id="alamat" placeholder="Masukkan alamat pasien"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 @error('alamat') is-invalid @enderror"
-                        value="{{ old('alamat') }}" required>
-                    @error('alamat')
-                        <div class="invalid-feedback text-red-500">{{ $message }}</div>
-                    @enderror
-                </div>
+                
                 <div>
                     <label for="jeniskelamin" class="block mb-2 text-sm font-medium text-gray-900">Jenis
                         Kelamin</label>
@@ -103,21 +94,7 @@
                         <div class="invalid-feedback text-red-500">{{ $message }}</div>
                     @enderror
                 </div>
-                <div>
-                    @php
-                        $kemarin = \Carbon\Carbon::yesterday()->format('Y-m-d');
-                    @endphp
-                    <label for="tanggallahir" class="block mb-2 text-sm font-medium text-gray-900">
-                        Tanggal Lahir
-                    </label>
-                    <input type="date" name="tanggal_lahir" id="tanggallahir" max="{{ $kemarin }}"
-                        placeholder="Pilih tanggal lahir"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 @error('tanggallahir') is-invalid @enderror"
-                        value="{{ old('tanggallahir') }}" required>
-                    @error('tanggallahir')
-                        <div class="invalid-feedback text-red-500">{{ $message }}</div>
-                    @enderror
-                </div>
+                
                 <div>
                     <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Status</label>
                     <select id="status" name="status"

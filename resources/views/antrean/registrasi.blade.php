@@ -72,17 +72,7 @@
                                 @enderror
                             </div>
 
-                            <div class="flex flex-col mt-5">
-                                <label for="alamat_pasien" class="mb-2">
-                                    Alamat
-                                </label>
-                                <input type="text" name="alamat_pasien" id="alamat_pasien" placeholder="Masukkan alamat"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 @error('alamat_pasien') is-invalid @enderror"
-                                    value="{{ old('alamat_pasien') }}" required>
-                                @error('alamat_pasien')
-                                    <div class="invalid-feedback text-red-500">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            
 
                             <div class="flex flex-col mt-5">
                                 <label for="nomor_whatsapp" class="mb-2">
@@ -97,17 +87,7 @@
                                 @enderror
                             </div>
 
-                            <div class="flex flex-col mt-5">
-                                <label for="tanggal_lahir" class="mb-2">
-                                    Tanggal Lahir
-                                </label>
-                                <input type="date" name="tanggal_lahir" id="tanggal_lahir" max="{{ $kemarin }}"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 @error('tanggal_lahir') is-invalid @enderror"
-                                    value="{{ old('tanggal_lahir') }}" required placeholder="Pilih tanggal lahir">
-                                @error('tanggal_lahir')
-                                    <div class="invalid-feedback text-red-500">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            
 
                             <div class="flex flex-col mt-5">
                                 <label for="jenis_kelamin" class='mb-2 text-sm font-medium text-gray-900'>
