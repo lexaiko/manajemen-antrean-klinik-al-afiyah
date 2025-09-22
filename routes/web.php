@@ -14,6 +14,7 @@ use App\Http\Controllers\PoliController;
 use App\Http\Controllers\LaporanController;
 
 Route::get('/antrean/list', [AntrianController::class, 'antreanIndex'])->name('antrean.index');
+
 Route::get('/', [BeritaController::class, 'beranda'])->name('beranda');
 Route::get('/berita/{slug}', [BeritaController::class, 'showBeranda'])->name('berita.detail');
 Route::get('/berita', [BeritaController::class, 'indexBeranda'])->name('berita.index');
@@ -47,13 +48,13 @@ Route::group(['middleware' => ['role:admin klinik']], function () {
 
     Route::get('/admin/antrean/detail/{id}', [AntrianController::class, 'showDetail'])->name('admin.antrean.show');
 
-Route::prefix('admin/antrean/control')->name('admin.antrean.control.')->group(function () {
-    Route::get('/', [AntrianController::class, 'controlIndex'])->name('index');
-    Route::post('/next/{poli}', [AntrianController::class, 'next'])->name('next');
-    Route::post('/{poli}/skip', [AntrianController::class, 'controlSkip'])->name('skip');
-    Route::post('/restore/{id}', [AntrianController::class, 'controlRestore'])->name('restore');
-    Route::post('/tangguhkan/{id}', [AntrianController::class, 'controlTangguhkan'])->name('tangguhkan');
-});
+    Route::prefix('admin/antrean/control')->name('admin.antrean.control.')->group(function () {
+        Route::get('/', [AntrianController::class, 'controlIndex'])->name('index');
+        Route::post('/next/{poli}', [AntrianController::class, 'next'])->name('next');
+        Route::post('/{poli}/skip', [AntrianController::class, 'controlSkip'])->name('skip');
+        Route::post('/restore/{id}', [AntrianController::class, 'controlRestore'])->name('restore');
+        Route::post('/tangguhkan/{id}', [AntrianController::class, 'controlTangguhkan'])->name('tangguhkan');
+    });
 
 
     Route::get('/admin/antrean/monitoring/data', [AntrianController::class, 'adminMonitoringData'])->name('admin.antrean.monitoring.data');
@@ -101,7 +102,7 @@ Route::prefix('admin/antrean/control')->name('admin.antrean.control.')->group(fu
     Route::get('/admin/jadwal/{id}/edit', [JadwalPegawaiController::class, 'edit'])->name('admin.jadwal.edit');
     Route::post('admin/jadwal', [JadwalPegawaiController::class, 'store'])->name('admin.jadwal.store');
     Route::delete('admin/jadwal/{id}', [JadwalPegawaiController::class, 'destroy'])->name('admin.jadwal.destroy');
-        //berita
+    //berita
     Route::get('admin/berita', [BeritaController::class, 'index'])->name('admin.berita.index');
     Route::get('admin/berita/create', [BeritaController::class, 'create'])->name('admin.berita.create');
     Route::post('admin/berita', [BeritaController::class, 'store'])->name('admin.berita.store');

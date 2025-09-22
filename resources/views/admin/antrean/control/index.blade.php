@@ -57,7 +57,7 @@
                                     return;
                                 }
 
-                                const text = `Nomor antrian ${nomor}, silakan menuju kasir.`;
+                                const text = `Nomor antrian ${nomor}, silakan menuju admin.`;
 
                                 // Web Speech API
                                 const utterance = new SpeechSynthesisUtterance(text);
