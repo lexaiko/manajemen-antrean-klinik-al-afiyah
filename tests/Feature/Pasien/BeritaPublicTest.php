@@ -32,6 +32,7 @@ class BeritaPublicTest extends TestCase
             'konten' => 'Konten berita kesehatan yang bermanfaat',
             'gambar' => 'sample-image.jpg',
             'nama_published' => $this->adminUser->name,
+            'tgl_published' => now()->setMonth(10), // Oktober
         ]);
     }
 
