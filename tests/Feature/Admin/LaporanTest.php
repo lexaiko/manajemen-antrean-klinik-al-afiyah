@@ -429,5 +429,28 @@ class LaporanTest extends TestCase
         // Verifikasi content disposition header untuk nama file
         $this->assertNotNull($response->headers->get('Content-Disposition'));
     }
+
+    /**
+     * Test admin dapat export PDF dengan semua filter sekaligus
+     */
+    public function test_admin_can_export_pdf_with_all_filters_combined(): void
+    {
+        $poli = Poli::factory()->create();
+        Antrian::factory()->count(3)->create([
+            'poli_id' => $poli->id,
+            'status' => 'selesai',
+            'tanggal_kunjungan' => now()->format('Y-m-d'),
+        ]);
+
+        $response = $this->actingAs($this->admin)->get('/admin/laporan/antrean/pdf?' . http_build_query([
+            'tanggal_mulai' => now()->format('Y-m-d'),
+            'tanggal_akhir' => now()->format('Y-m-d'),
+            'status' => 'selesai',
+            'poli_id' => $poli->id,
+        ]));
+
+        $response->assertStatus(200);
+        $response->assertHeader('content-type', 'application/pdf');
+    }
 }
 

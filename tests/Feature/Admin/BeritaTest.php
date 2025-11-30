@@ -495,5 +495,24 @@ class BeritaTest extends TestCase
             'nama_published' => 'Admin Test',
         ]);
     }
+
+    /**
+     * Test admin dapat search berita dengan query
+     */
+    public function test_admin_can_search_berita_with_specific_query(): void
+    {
+        Berita::factory()->create(['judul' => 'Kesehatan Mental']);
+        Berita::factory()->create(['judul' => 'Kesehatan Fisik']);
+        Berita::factory()->create(['judul' => 'Olahraga Rutin']);
+
+        $response = $this->actingAs($this->admin)->get('/admin/berita?query=Kesehatan');
+
+        $response->assertStatus(200);
+        $response->assertViewIs('admin.berita.index');
+        $response->assertViewHas('beritas');
+        $response->assertViewHas('query', 'Kesehatan');
+    }
+
+
 }
 

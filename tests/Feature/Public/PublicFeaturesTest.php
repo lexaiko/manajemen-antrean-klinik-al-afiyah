@@ -355,5 +355,52 @@ class PublicFeaturesTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    /**
+     * Test guest dapat mengakses jadwal beranda
+     */
+    public function test_guest_can_access_public_jadwal_beranda(): void
+    {
+        $user = User::factory()->create();
+        $dokterRole = Role::firstOrCreate(['name' => 'dokter umum']);
+        $user->assignRole($dokterRole);
+
+        JadwalPegawai::factory()->pagi()->create(['pegawai_id' => $user->id]);
+
+        $response = $this->get('/jadwal');
+
+        $response->assertStatus(200);
+        $response->assertViewIs('jadwal.index');
+        $response->assertViewHas('jadwals');
+        $response->assertViewHas('roles');
+    }
+
+    /**
+     * Test guest dapat filter jadwal beranda by role
+     */
+    public function test_guest_can_filter_public_jadwal_by_role(): void
+    {
+        $dokter = User::factory()->create();
+        $dokterRole = Role::firstOrCreate(['name' => 'dokter umum']);
+        $dokter->assignRole($dokterRole);
+
+        JadwalPegawai::factory()->pagi()->create(['pegawai_id' => $dokter->id]);
+
+        $response = $this->get('/jadwal?role=dokter umum');
+
+        $response->assertStatus(200);
+        $response->assertViewIs('jadwal.index');
+        $response->assertViewHas('roleAlias', 'dokter umum');
+    }
+
+    /**
+     * Test jadwal beranda dengan role invalid returns 404
+     */
+    public function test_public_jadwal_with_invalid_role_returns_404(): void
+    {
+        $response = $this->get('/jadwal?role=invalid-role-name');
+
+        $response->assertStatus(404);
+    }
 }
 

@@ -4,6 +4,7 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\RateLimiter;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
@@ -333,5 +334,138 @@ class AuthenticationTest extends TestCase
 
         // Verifikasi role masih ada
         $this->assertTrue(auth()->user()->hasRole('admin klinik'));
+    }
+
+    /**
+     * Test login throttling after multiple failed attempts
+     */
+    public function test_login_is_throttled_after_multiple_failed_attempts(): void
+    {
+        $user = User::factory()->create([
+            'email' => 'throttle@test.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        // Make 5 failed login attempts
+        for ($i = 0; $i < 5; $i++) {
+            $this->post('/login', [
+                'email' => 'throttle@test.com',
+                'password' => 'wrong-password',
+            ]);
+        }
+
+        // The 6th attempt should be throttled
+        $response = $this->post('/login', [
+            'email' => 'throttle@test.com',
+            'password' => 'wrong-password',
+        ]);
+
+        $response->assertSessionHasErrors('email');
+
+        // Clear rate limiter for next tests
+        RateLimiter::clear('throttle@test.com|127.0.0.1');
+    }
+
+    /**
+     * Test throttle key is generated correctly
+     */
+    public function test_login_throttle_key_is_generated_correctly(): void
+    {
+        User::factory()->create([
+            'email' => 'test@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $response = $this->post('/login', [
+            'email' => 'Test@Example.com', // Mixed case
+            'password' => 'wrong-password',
+        ]);
+
+        $response->assertSessionHasErrors('email');
+
+        // Throttle key should be lowercase email + IP
+        $throttleKey = 'test@example.com|127.0.0.1';
+        $this->assertEquals(1, RateLimiter::attempts($throttleKey));
+
+        // Clear rate limiter
+        RateLimiter::clear($throttleKey);
+    }
+
+    /**
+     * Test rate limiter is cleared after successful login
+     */
+    public function test_rate_limiter_cleared_after_successful_login(): void
+    {
+        User::factory()->create([
+            'email' => 'clear@test.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        // Make a failed attempt first
+        $this->post('/login', [
+            'email' => 'clear@test.com',
+            'password' => 'wrong-password',
+        ]);
+
+        $throttleKey = 'clear@test.com|127.0.0.1';
+        $this->assertEquals(1, RateLimiter::attempts($throttleKey));
+
+        // Now login successfully
+        $response = $this->post('/login', [
+            'email' => 'clear@test.com',
+            'password' => 'password',
+        ]);
+
+        $response->assertRedirect('/admin/dashboard');
+
+        // Rate limiter should be cleared
+        $this->assertEquals(0, RateLimiter::attempts($throttleKey));
+    }
+
+    /**
+     * Test remember me functionality
+     */
+    public function test_remember_me_functionality(): void
+    {
+        $user = User::factory()->create([
+            'email' => 'remember@test.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $response = $this->post('/login', [
+            'email' => 'remember@test.com',
+            'password' => 'password',
+            'remember' => true,
+        ]);
+
+        $response->assertRedirect('/admin/dashboard');
+        $this->assertAuthenticatedAs($user);
+    }
+
+    /**
+     * Test User model casts email_verified_at
+     */
+    public function test_user_model_casts_email_verified_at(): void
+    {
+        $user = User::factory()->create([
+            'email_verified_at' => now(),
+        ]);
+
+        $this->assertInstanceOf(\Illuminate\Support\Carbon::class, $user->email_verified_at);
+    }
+
+    /**
+     * Test User model password is hashed on set
+     */
+    public function test_user_model_password_is_hashed_on_set(): void
+    {
+        $user = new User();
+        $user->name = 'Test';
+        $user->email = 'testset@test.com';
+        $user->password = 'plain-password';
+        $user->jenis_kelamin = 'L';
+        $user->save();
+
+        $this->assertTrue(\Hash::check('plain-password', $user->password));
     }
 }

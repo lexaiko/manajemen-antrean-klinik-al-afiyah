@@ -362,6 +362,21 @@ class AntrianAdminTest extends TestCase
             ]
         ]);
     }
+
+    /**
+     * Test admin dapat mengakses halaman show antrian detail
+     */
+    public function test_admin_can_access_antrian_show_detail(): void
+    {
+        $poli = Poli::factory()->create();
+        $antrian = Antrian::factory()->create(['poli_id' => $poli->id]);
+
+        $response = $this->actingAs($this->admin)->get("/admin/antrean/detail/{$antrian->id}");
+
+        $response->assertStatus(200);
+        $response->assertViewIs('admin.antrean.show');
+        $response->assertViewHas('antrean');
+    }
 }
 
 

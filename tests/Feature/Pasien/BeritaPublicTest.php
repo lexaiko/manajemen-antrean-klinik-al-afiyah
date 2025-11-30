@@ -172,4 +172,49 @@ class BeritaPublicTest extends TestCase
         $response->assertSee($this->berita->judul);
         $response->assertSee($this->berita->konten);
     }
+
+    /**
+     * Test guest dapat mengakses beranda (welcome page) dengan berita
+     */
+    public function test_guest_can_access_beranda_with_beritas(): void
+    {
+        Berita::factory()->count(3)->create();
+
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertViewIs('welcome');
+        $response->assertViewHas('beritas');
+    }
+
+    /**
+     * Test guest dapat mengakses berita detail by slug
+     */
+    public function test_guest_can_access_berita_by_slug(): void
+    {
+        $berita = Berita::factory()->create([
+            'slug' => 'test-berita-slug-unique',
+        ]);
+
+        $response = $this->get("/berita/{$berita->slug}");
+
+        $response->assertStatus(200);
+        $response->assertViewIs('berita.detail');
+        $response->assertViewHas('berita');
+        $response->assertSee($berita->judul);
+    }
+
+    /**
+     * Test guest dapat mengakses index berita dengan pagination
+     */
+    public function test_guest_can_access_berita_index_paginated(): void
+    {
+        Berita::factory()->count(10)->create();
+
+        $response = $this->get('/berita');
+
+        $response->assertStatus(200);
+        $response->assertViewIs('berita.index');
+        $response->assertViewHas('beritas');
+    }
 }
